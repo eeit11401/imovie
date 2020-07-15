@@ -49,7 +49,7 @@
 				var rooms = JSON.parse(xhr.responseText);
 				console.log("rooms:" + rooms);
 				for (var i = 0; i < rooms.length; i++) {
-					content += "<div class='col-4 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;'>"
+					content += "<div class='col-3 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;margin: 10px;'>"
 							+ "<div>"
 							+ "<img width='100%' height='100%' "
 							+ " src='"

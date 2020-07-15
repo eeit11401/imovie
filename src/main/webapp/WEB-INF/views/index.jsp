@@ -97,11 +97,11 @@
 <body>
 	<c:set var="funcName" value="Home" scope="session" />
 	<jsp:include page="Navigation.jsp"/>
-	<section class="p-top-mv is-active" style="height: 400px;">
+	<section class="p-top-mv is-active">
 		<div class="p-top-mv__movie">
 			<video id="js-top-mv-video" loop="true" autoplay="autoplay"
 				preload="auto" muted="true" src="img/玩命關頭9.mp4"
-				style="width: 1200px; height: 600px;"></video>
+				style="width: 100%;"></video>
 		</div>
 	</section>
 	<section class="p-top-issue js-enter is-active" id="js-top-issue">
@@ -330,6 +330,8 @@
 		window.jQuery
 				|| document
 						.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
+	      $("#ticket-component").load('./ticket.jsp');	
+		console.log('AAAAAAA')
 	</script>
 </body>
 
