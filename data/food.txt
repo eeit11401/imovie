@@ -1,0 +1,12 @@
+餃子|Dumplings.jpg|data/img/食物/Dumplings.jpg|70|主食|1
+野菇干貝義大利麵|pasta.jpg|data/img/食物/pasta.jpg|80|主食|1
+啤酒|beer.jpg|data/img/食物/beer.jpg|60|飲品|2
+照燒雞腿堡|hamburger.jpg|data/img/食物/hamburger.jpg|75|主食|1
+可樂|coke.jpg|data/img/食物/coke.jpg|40|飲品|2
+爆米花|popcorn.jpg|data/img/食物/popcorn.jpg|60|點心|3
+熱狗|hotdog.jpg|data/img/食物/hotdog.jpg|80|主食|1
+檸檬冰茶|icetea.jpg|data/img/食物/icetea.jpg|50|飲品|2
+墨西哥玉米片|chips.jpg|data/img/食物/chips.jpg|80|點心|3
+馬鈴薯脆片|potatochip.jpg|data/img/食物/potatochip.jpg|70|點心|3
+燻雞潛艇堡|sandwitch.jpg|data/img/食物/sandwitch.jpg|160|主食|1
+奶香吉拿棒|Churrosc.jpg|data/img/食物/Churrosc.jpg|60|點心|3
