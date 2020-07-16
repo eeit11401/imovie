@@ -1,6 +1,8 @@
 package com.web.store.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -38,7 +40,7 @@ public class CartConfirmController {
 	ProductServiec service;
 	
 	@PostMapping("/confirm")
-	protected String buyFood(Model model, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected String buyFood(Model model, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException {
 //      判定是否有登入，晚點再說
 //		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 //		if (memberBean == null) {
@@ -59,6 +61,8 @@ public class CartConfirmController {
 		
 		String movieIdStr 	= request.getParameter("movieId");
 		int movieId          = Integer.parseInt(movieIdStr.trim());
+
+		//-----------------------日期--------------------------		  
 		
 		RoomBean rBean = service.getProductById2(roomId);
 		MovieBean mBean = service.getProductById1(movieId);
@@ -67,17 +71,22 @@ public class CartConfirmController {
 		System.out.println(mBean); //觀察用
 		
 		String memberId = null; //測試用，沒意義。
-		String aa = null; //測試用，沒意義。
-		String bb = null; //測試用，沒意義。
-		String cc = null; //測試用，沒意義。
+//		String aa = null; //測試用，沒意義。
+//		String bb = null; //測試用，沒意義。
+//		String cc = null; //測試用，沒意義。
+		String date = request.getParameter("TimeDate");
+		String start = request.getParameter("timeStart");
+		String end = request.getParameter("timeEnd");
 		Set<CartOrderFood> items = null;
 		int roomPrice = Integer.parseInt(rBean.getRoomPrice());
 		int foodAllPrice = 0;
 		int total = 0;
-		CartOrderBean orderC = new CartOrderBean(null,rBean,mBean,roomId,movieId,memberId,total,cc,aa,bb,null);
-		if(foodCart!=null) {
+		CartOrderBean orderC = new CartOrderBean(null,rBean,mBean,roomId,movieId,memberId,total,date,start,end,null);
+			
 			Map<Integer, CartOrderFood> content = new HashMap<>();
 			//CartOrderBean orderC = new CartOrderBean(null,rBean,mBean,roomId,movieId,memberId,total,aa,bb,null);
+		if(foodCart!=null) {
+			
 			content = foodCart.getContent();
 			items = new LinkedHashSet<>();
 //-------------------------------------------------------------
@@ -96,8 +105,7 @@ public class CartConfirmController {
 			
 			orderC.setOrderFood(items);
 			orderC.setTotalAmount(total);
-		
-		System.out.println("*************** = "+total);
+		System.out.println("*************** = "+orderC.getOrderDate());
 
 		model.addAttribute("OrderCart", orderC);
 		System.out.println("房間ID = "+orderC.getRoomId());

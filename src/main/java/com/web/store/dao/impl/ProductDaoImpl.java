@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.LinkedList;
@@ -41,8 +42,8 @@ public class ProductDaoImpl implements ProductDao {
 	
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     String url = "jdbc:sqlserver://localhost:1433;DatabaseName=Imovie";
-    String userid = "sa";
-    String passwd = "sa123456";
+    String userid = "watcher";
+    String passwd = "p@ssw0rd";
 	
     private static final String SELECT_all_foodTypes = "Select Distinct b.foodType , b.foodTypeId From Food b";
     private static final String SELECT_foods = "Select * From Food where foodTypeId=?";
@@ -591,6 +592,65 @@ public class ProductDaoImpl implements ProductDao {
 	public void cartToDB(CartOrderBean cob) {
 		Session session = factory.getCurrentSession();
         session.save(cob);
+	}
+	
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Boolean checkOrderTime(int orderRoomId, String checkDay, String checkStart, String checkEnd) throws ParseException{
+		Session session = factory.getCurrentSession();
+		String hqlStr ="FROM CartOrderBean cob WHERE cob.roomId = :rId and cob.orderDate = :rDate";
+
+		List<CartOrderBean> listbean = session.createQuery(hqlStr).setParameter("rId", orderRoomId).setParameter("rDate", checkDay).getResultList();
+		System.out.println("********listDate = "+listbean.size());
+		
+//		String[] forStart
+		int testDB = 0;
+		if(listbean.size() == 0) {
+			return true;  //代表此房型在該天無任何訂單
+		}
+		
+		for(CartOrderBean cob : listbean) {
+			
+			if(compareTime(checkStart,checkEnd,cob.getOrderDateStart(),cob.getOrderDateEnd())) {
+				;
+			}else {
+				testDB++;
+			}
+		}
+		if(testDB == 0) {
+			return true;
+		}else {
+			return false;
+		}
+			
+		
+	}
+	public static boolean compareTime(String myStart,String myEnd,String dbStart,String dbEnd) throws ParseException {
+		
+		String[] mysList = myStart.split(":");
+		int mys = Integer.parseInt(mysList[0])*60+Integer.parseInt(mysList[1]);
+		
+		String[] myeList = myEnd.split(":");
+		int mye = Integer.parseInt(myeList[0])*60+Integer.parseInt(myeList[1]);
+		
+		String[] dbsList = dbStart.split(":");
+		int dbs = Integer.parseInt(dbsList[0])*60+Integer.parseInt(dbsList[1]);
+		
+		String[] dbeList = dbEnd.split(":");
+		int dbe = Integer.parseInt(dbeList[0])*60+Integer.parseInt(dbeList[1]);
+	
+		if(mye-dbs<0) {
+			System.out.println("***完全在前面哦 = "+(mye-dbs));
+			return true;
+		}else if(mys-dbe>0) {
+			System.out.println("***完全在後面哦 = "+(mys-dbe));
+			return true;
+		}else {
+			return false;
+		}
+	
 	}
 
 }

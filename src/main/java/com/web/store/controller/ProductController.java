@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.web.store.model.CartOrderBean;
 import com.web.store.model.FoodBean;
 import com.web.store.model.FoodBeanWithImageData;
 import com.web.store.model.MovieBean;
@@ -56,12 +57,6 @@ public class ProductController {
 	
 	private static void initial(){
 		all = new AllInOne("");
-	}
-	
-	@GetMapping("/test")
-	public String test() {
-		
-		return "rearEnd/後端控制台";
 	}
 	
 	@GetMapping("/allFoods")
@@ -193,6 +188,9 @@ public class ProductController {
 		model.addAttribute("movie", Moviebeans);
 		List<FoodBean> Foodbeans = service.getAllProducts();
 		model.addAttribute("Food", Foodbeans);
+		
+		List<MovieBean> list = service.getSelectmovieTypes(); //電影類型
+		model.addAttribute("categoryList", list);
 		
 		
 		model.addAttribute("allFood",Foodbeans);
@@ -519,18 +517,18 @@ public class ProductController {
 		//綠界測試
 		@RequestMapping("/opay")
 		public void opay(HttpServletResponse response,String merchantTradeNo, String tradeDesc,String itemName,String totalAmount) throws UnsupportedEncodingException {
-
+			
 			initial();
 			try {
 				AioCheckOutALL obj = new AioCheckOutALL();
 				SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 				Date date = new Date();
 				String strDate = sdFormat.format(date);
-				obj.setMerchantTradeNo(merchantTradeNo);
-				obj.setMerchantTradeDate(strDate);
-				obj.setTotalAmount(totalAmount);
-				obj.setTradeDesc(tradeDesc);
-				obj.setItemName(itemName);
+				obj.setMerchantTradeNo("123");
+				obj.setMerchantTradeDate("123");
+				obj.setTotalAmount("12000");
+				obj.setTradeDesc("nothing");
+				obj.setItemName("my");
 				obj.setReturnURL("http://211.23.128.214:5000");
 				obj.setClientBackURL("http://localhost:8080/Imovie/");
 				obj.setNeedExtraPaidInfo("N");

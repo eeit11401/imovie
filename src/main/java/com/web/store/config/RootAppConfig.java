@@ -21,8 +21,8 @@ public class RootAppConfig {
 	@Bean
 	public DataSource dataSource() {
 		ComboPooledDataSource ds = new ComboPooledDataSource();
-		ds.setUser("sa");
-		ds.setPassword("sa123456");
+		ds.setUser("watcher");
+		ds.setPassword("p@ssw0rd");
 		try {
 			ds.setDriverClass("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		} catch (PropertyVetoException e) {
@@ -38,7 +38,7 @@ public class RootAppConfig {
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean factory = new LocalSessionFactoryBean();
 		factory.setDataSource(dataSource());
-		factory.setPackagesToScan(new String[] { "com.web.store.model","_02_login.mode", "_01_register.model","_00_init" });
+		factory.setPackagesToScan(new String[] { "com.web.store.model","_02_login.model", "_01_register.model","_00_init" });
 		factory.setHibernateProperties(additionalProperties());
 		return factory;
 	}

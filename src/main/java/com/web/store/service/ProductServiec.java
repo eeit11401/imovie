@@ -1,5 +1,6 @@
 package com.web.store.service;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -44,5 +45,6 @@ public interface ProductServiec {
 	List<RoomBean> getSelectroomTypes();
 	//新增的---------------
 	void cartToDB(CartOrderBean cob);
+	public boolean checkOrderTime(int orderRoomId,String checkDay,String checkStart,String checkEnd)throws ParseException;
 
 }

@@ -188,7 +188,6 @@
 
  .p-top-issue {
     position: relative;
-    margin-top: 180px;
     width: 100%;
 }
 .p-top-issue__title {
@@ -352,7 +351,7 @@
     left: 0;
     right: 0;
     margin: calc(5px + 3.3%) auto 0;
-    font-family: "Noto Sans JP",YuGothic,"ヒラギノ角ゴ ProN W3","Hiragino Kaku Gothic ProN","メイリオ",Meiryo,sans-serif;
+    font-family: "Noto Sans JP",YuGothic,"������ ProN W3","Hiragino Kaku Gothic ProN","����",Meiryo,sans-serif;
     font-feature-settings: 'palt';
     font-weight: 500;
     font-size: calc(14px + .2vw);
@@ -381,7 +380,7 @@
 
 .issueCard__bottoms__category {
     order: 3;
-    font-family: "Noto Sans JP",YuGothic,"ヒラギノ角ゴ ProN W3","Hiragino Kaku Gothic ProN","メイリオ",Meiryo,sans-serif;
+    font-family: "Noto Sans JP",YuGothic,"������ ProN W3","Hiragino Kaku Gothic ProN","����",Meiryo,sans-serif;
     font-feature-settings: 'palt';
     font-weight: 700;
     font-size: 14.7px;
@@ -393,7 +392,7 @@
 }
 .issueCard__bottoms__date {
     order: 1;
-    font-family: "Prata","Noto Sans JP","游ゴシック",YuGothic,serif;
+    font-family: "Prata","Noto Sans JP","皜詻���",YuGothic,serif;
     font-feature-settings: 'palt';
     font-weight: 700;
     font-size: 12px;
@@ -611,11 +610,32 @@ a, button, input, textarea {
     width: 100vw;
     height: 106px;
     z-index: 304;
-    background-color: black;
+    background-color: transparent;
     transition-property: background-color, opacity, transform;
     transition-duration: 0.5s, 0.3s, 0.5s;
     transition-delay: 0s, 0s, 0.2s;
     transition-timing-function: cubic-bezier(0.79, 0.17, 0.15, 0.96), cubic-bezier(0.79, 0.17, 0.15, 0.96), cubic-bezier(0.79, 0.17, 0.15, 0.96);
     margin: auto;
     overflow: hidden;
+}
+
+.p-top-mv{
+	position: relative;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    background-color: black;
+    overflow: hidden;
+}
+#js-top-mv-video{
+	width: 100%;
+    position: absolute;
+    top: 39%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    /* opacity: 0; */
+    z-index: 1;
+}
+}
 }
