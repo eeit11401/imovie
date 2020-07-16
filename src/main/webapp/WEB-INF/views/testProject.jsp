@@ -21,6 +21,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+
 <link
 	href="https://fonts.googleapis.com/css2?family=Nunito:ital@1&display=swap"
 	rel="stylesheet">
@@ -224,6 +225,14 @@ font-family: 'Nunito', sans-serif;
 font-weight: 600;
 
 }
+#warning{
+color:red;
+margin-left: 15px;
+}
+#timeOkk{
+color:blue;
+margin-left: 17px;
+}
 
 /* --------------------food-----------------------------     */
 .foodtype { /* 食物分類 */
@@ -274,6 +283,8 @@ font-weight: 600;
 
 .tabs-3,tabs-4 {
 	width: 100%;
+	margin-left: 15px;
+	
 }
 
 
@@ -288,6 +299,7 @@ font-weight: 600;
 .foodtip { /*   食物新增項目       */
 	margin-left: 15px;
 	margin-bottom: 15px;
+	font-size: 20px;
 }
 
 #totalprice,#total { /*   購物車合計       */
@@ -377,18 +389,18 @@ margin-bottom: 20px;
 			</div>
 			<!-------------------------------movie ---------------------------------------->
 			<div id="tabs-2" class="tagContext">
-			
+			<br>
 			<div>
 		電影類型: <select id='publish' onchange="Movies()">
 			<c:forEach var='category' items='${categoryList}'>
 				<option value='${category.movieTypeId}'>${category.movieGenre1}</option>
 			</c:forEach>
-		</select>
-			</div>
-			
-			
+			</select>
+		</div>
+			<br>
+			    <div id="timeOkk">////
 				<c:forEach var='product1' items='${movie}'>
-					<div class="movsp" id="${product1.movieId}">
+					<div class="movsp hiTime" id="${product1.movieId}">
 						<img class=movieimg
 							src="<c:url value='/getPicture1/${product1.movieId}' />" />
 							<div>
@@ -430,14 +442,14 @@ margin-bottom: 20px;
 			<!-------------------------------time ---------------------------------------->
 			<div id="tabs-4" class="tagContext">
 			<div class="date_time">  
-                       <p style="font-weight: bolder;font-size: 25px">選擇日期： <input type="text" name="fname" id="datepicker" class="" value="" autocomplete="off"></p>
+                       <p style="font-weight: bolder;font-size: 25px">選擇日期： <input type="text" name="fname" id="datepicker" class="hiTime" value="" autocomplete="off"></p>
                        <p style="font-size:20px">預約日期限制為三天以內</p>
                         <p style="font-size:20px">可預約時間為每三十分鐘，預約時間如在三十分鐘內不開放預約</p><br>
                        <span style="font-size:20px">目前時間：</span > <span  id="now" style="font-size:20px"></span ><br>
                        <span style="font-size:20px">目前最近可預約時間為：</span > <span  id="booknow" style="font-size:20px"></span ><br>
                        <span  id="lastendtime" style="font-size:20px"></span ><br>
                       <div class="tagRoomContent" id="tagRoom">
-						<div class="ampm">
+						<div class="ampm hiTime">
 							<div>
 							  <img  class="roomImg" src="img/cart\morning.jpg"/><br>
 							  							
@@ -454,7 +466,7 @@ margin-bottom: 20px;
                          </select>
 							</div>
 						</div>
-						<div class="ampm">
+						<div class="ampm hiTime">
 							<div>
 								 <img  class="roomImg" src="img\cart\afternoon.jpg"/><br>
 								<h3 class="timetext">下午</h3>
@@ -474,7 +486,7 @@ margin-bottom: 20px;
                          </select>
 							</div>
 						</div>
-						<div class="ampm">
+						<div class="ampm hiTime">
 							<div>
 								 <img  class="roomImg" src="img\cart\night.jpg"/><br>
 								<h3 class="timetext">晚上</h3>
@@ -641,14 +653,9 @@ margin-bottom: 20px;
 				</c:forEach>
 				
 				<!-------------------------------隱藏參數-------------------------------------->
-<!-- 							<Input id='hiddFoodId' type='hidden' name='foodId' value='0'> -->
-<!-- 			                <Input id='hiddFoodPrice' type='hidden' name='foodPrice' value='0'> -->
-			                	<Input id='hiddRoomPrice' type='hidden' name='roomPrice' value='0'>	 	                
-  			                    <Input id='hiddTimeStart' type='hidden' name='timeStart' value='0'>
-			                    <Input id='hiddTimeEnd' type='hidden' name='timeEnd' value='0'>  
-			                    <Input id='hiddTimeDate' type='hidden' name='TimeDate' value='0'>       
-			                    <Input id='hiddMovieLen' type='hidden' name='movieLen' value='0'>                  
-			                
+					  
+			    	<Input id='hiddRoomPrice' type='hidden' name='roomPrice' value='0'>	 	                
+			         <Input id='hiddMovieLen' type='hidden' name='movieLen' value='0'>                  
 
 			</div>
 		</div>
@@ -714,6 +721,7 @@ margin-bottom: 20px;
 			<tr>
 				<td>
 					<span id="checktime"></span><span id="cartendtime"></span>
+					<div id='warning'></div> <div id="timeOkk"></div>
 					<hr>
 				</td>
 			</tr>
@@ -745,12 +753,16 @@ margin-bottom: 20px;
 						<Input id='hiddRoodId' type='hidden' name='roodId' value='0'>
 			            <Input id='hiddMovieId' type='hidden' name='movieId' value='0'>
 			            <Input id='hiddTotal' type='hidden' name='total' value='0'>
+			            <Input id='hiddTimeStart' type='hidden' name='timeStart' value='0'>
+			            <Input id='hiddTimeEnd' type='hidden' name='timeEnd' value='0'>  
+			            <Input id='hiddTimeDate' type='hidden' name='TimeDate' value='0'>  
 						<Input  id='hi' type='submit' class="btn btn-secondary" name='send' value='確認'>		
 					</FORM>
 				<FORM  style="display:inline-block" action="<c:url value='/reset.do' />" method="GET">
 					<Input type="submit" class="btn btn-secondary" id="reset" value='重新選擇'>
 				</FORM>
 					<Input type="hidden"   id="oldPrice" value='0'>
+					<Input type="hidden"   id="checkForDB" value='0'>
 				</td>
 			</tr>
 			<tr>
@@ -763,7 +775,7 @@ margin-bottom: 20px;
 		<!-------------------------------------------Script--------------------------------------->
 
 		<script>
-// 		 let total9=0;
+		
 	 <!------------------------ ------- 包廂放入 購物車  ----------------------------------->   
 		$(".roomPer").click(function() {
 
@@ -779,7 +791,7 @@ margin-bottom: 20px;
 	    	let val = $(this).attr("id").substr(5);
 	        $("#hiddRoodId").val(val);
 	        console.log("RoomId="+$("#hiddRoodId").val());  //console顯示用
-		
+	        calltimecheck();
 		
 		 <!----------------計算總和----------------->	
 		 	var totalHi = document.getElementById("total");
@@ -798,19 +810,9 @@ margin-bottom: 20px;
 //              console.log("hiddTotal="+$("#hiddTotal").val());
 		
 // 		     document.getElementById("total").innerHTML = $("#hiddTotal").val();
-		
-			
+
 		})
 
-		
-// 			
-							
-
-// 			$("#ampm").change(function() {
-// 				var k = $(this).val();
-// 				$(this).siblings().not(mydate).not().removeClass("times");
-// 			})
- 
  <!-- --------------------------- 電影放入購物車    ------------------------------------->
 			$(".movsp").click(function() {
 
@@ -825,25 +827,26 @@ margin-bottom: 20px;
 		        $("#hiddMovieLen").val(len);//放入電影長度
 		        console.log("MovieId="+$("#hiddMovieId").val());  //console顯示用
 		        console.log("MovieLen="+$("#hiddMovieLen").val());  //console顯示用
+		        if($("#hiddTimeStart").val()!=0)  calculation();calltimecheck();//若有先點選時間，則計算結束時間	
+		        
 			})
  <!------------------------------ -時間放入購物車--------- -------------------------->
 			$("#datepicker").change(function() {
 				let day1 = $(this).val();
 				console.log(day1);
 				document.getElementById("checkday").innerHTML = day1;
-				$("#hiddTimeDate").val(day1); //////////////////////////
-				console.log("TimeDate="+$("#hiddTimeDate").val());  //console顯示用	//////
+				$("#hiddTimeDate").val(day1); 
+				console.log("TimeDate="+$("#hiddTimeDate").val());  //console顯示用	
+				calltimecheck();
 			})
 			
 			$(".ampm").click(function() {
+			
 				let day2 = $(this).find("div h3").text();
 				let time = $(this).find("div select").val();
 				console.log(day2+time);
 				document.getElementById("checktime").innerHTML =day2+" "+time;
 				$("#hiddTimeStart").val(time);//放入預約時間
-
-				
-				 
 				console.log("TimeStart="+$("#hiddTimeStart").val());  //console顯示用				
 							
 			})
@@ -901,12 +904,17 @@ margin-bottom: 20px;
 				$(this).css("background", "#B3D9D9");
 			})
 			$(".ampm").click(function() {
+				
+// 				if($("#hiddTimeDate").val()==0){
+// 					alert("請先選擇日期");
+// 				}else{
+				
+			
 				$(this).css("background", "#edbf37");
 				$(this).find("select").removeClass("miss");
 				$(this).siblings().find("select").addClass("miss");
 								
-// 			$($('table > tbody > tr')[11]).after("<tr><td><span class='foodtip'>"+$(this).siblings('.fontBold')
-// 					.text()+"</span></td></tr>");				
+				
 			
   
 	<!------------------判定允許預約的時間------------------------------>	
@@ -933,8 +941,13 @@ margin-bottom: 20px;
 					document.getElementById("booknow").innerHTML="目前無法預約";
 				}
 			}
+			calculation();
+// 			}
+			})
+			
 			
 			//由 開始預約時間+電影長度 算出結束時間
+			function calculation(){
 			var v = parseInt($("#hiddMovieLen").val());
 			var hour1 = parseInt(($("#hiddTimeStart").val()).substr(0,2));
 			var min = parseInt(($("#hiddTimeStart").val()).substr(3));
@@ -953,21 +966,12 @@ margin-bottom: 20px;
 			
 			document.getElementById("lastendtime").innerHTML="您選擇的時間："+$("#hiddTimeStart").val()+"  電影長度："+v+"分"+"  結束時間："+$("#hiddTimeEnd").val();
 			document.getElementById("cartendtime").innerHTML=" 結束時間："+$("#hiddTimeEnd").val();
-			})
- 
+			
+ 			}
 <!--------------------------清空購物車---------------------------------------->
 			$("#reset").click(function() {
-				document.getElementById("moviename").innerHTML = "";
-				document.getElementById("movieEname").innerHTML = "";
-				document.getElementById("movieLength").innerHTML = "";
-				document.getElementById("roomchoose").innerHTML = "";
-				document.getElementById("roommoney").innerHTML = "";
-				document.getElementById("checkday").innerHTML = "";
-				document.getElementById("checktime").innerHTML = "";
-				document.getElementById("total").innerHTML = "";
-				clearfood();
-				
-	  <!----------------------清空隱藏參數------------------------>
+	
+	  <!---------------清空隱藏參數----------------->
 				$("#hiddFoodId").val(0);
 				$("#hiddFoodPrice").val(0);
 				$("#hiddRoomPrice").val(0);
@@ -987,7 +991,7 @@ $("#hi").mouseover(function() {
 	  //判斷是否有值
 	  if(
 	  $("#hiddRoodId").val() !=0 && $("#hiddRoomPrice").val()!=0 && $("#hiddTimeDate").val() !=0 && $("#hiddTimeStart").val() !=0 &&  $("#hiddTimeEnd").val() !=0 
-	  && $("#hiddMovieId").val() !=0 &&  $("#hiddMovieLen").val() !=0 && $("#hiddTotal").val()!=0   
+	  && $("#hiddMovieId").val() !=0 &&  $("#hiddMovieLen").val() !=0 && $("#hiddTotal").val()!=0  && $("#checkForDB").val()!=0 
 	  ){					 
 	   $("#hi").addClass("btn-primary");//藍色可送出 ****
 	   $("#hi").removeClass("btn-secondary");  
@@ -1087,7 +1091,7 @@ $(function(){
 	                        	
 // 	                        	);
 	                        	totalp.innerHTML = obj.foodTotal; 
-	                        	thisText.innerHTML = "<tr><td><h5 class='foodtip'>"+obj.foodName+"</h5></td></tr><br>" 
+	                        	thisText.innerHTML = "<tr><td><h5 class='foodtip'>"+obj.foodName+"</h5></td></tr>" 
 	                        	 +"<tr><td><h5 class='foodtip'>NT. "+ obj.foodP +" x "+obj.foodQty+" = "+(obj.foodP*obj.foodQty)+"</h5></td></tr>"
 	
 	//                            result.innerHTML = "<font color='red'>" + obj.foodName + 
@@ -1104,9 +1108,72 @@ $(function(){
 	        }
 	   	
 	});
+ 	
+ 	$(".hiTime").click(function() {
+ 		calltimecheck();
+	});
+ 	
 });
 
 
+ 	function calltimecheck() {
+ 		
+ 		if(
+ 		$("#hiddTimeDate").val() !=0 && $("#hiddTimeStart").val() !=0 &&  $("#hiddTimeEnd").val() !=0  
+ 		 && $("#hiddMovieId").val() !=0 &&  $("#hiddMovieLen").val()!=0//
+			){
+ 			var start = document.getElementById("hiddTimeStart").value;
+	 		var end = document.getElementById("hiddTimeEnd").value;
+	 		var date = document.getElementById("hiddTimeDate").value;
+	 		var idRoom = document.getElementById("hiddRoodId").value;
+ 		console.log("TimeStart="+start);
+ 		console.log("hiddTimeEnd="+end);
+ 		console.log("hiddTimeDate="+date);
+ 		console.log("roomId = "+ idRoom);
+ 		var warning = document.getElementById("warning");
+ 		var timeOkk = document.getElementById("timeOkk");
+ 		
+//	 		var checkForDB = document.getElementById("checkForDB");
+ 		
+ 		var xhr2 = new XMLHttpRequest();
+        xhr2.open("POST","<c:url value='checkOrder' />",true);
+        xhr2.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xhr2.send("tStart=" + start + "&tEnd=" + end + "&tDate=" + date + "&roomID=" + idRoom);
+
+        xhr2.onreadystatechange = function(){
+        	if(xhr2.readyState === 4){
+                if(xhr2.status === 200){
+                    var type2 = xhr2.getResponseHeader("Content-Type");
+                    
+                    if(type2.indexOf("application/json") === 0){
+                        var obj2 = JSON.parse(xhr2.responseText);
+                        if(obj2.OK){
+                        	console.log("hiOK");
+                        	timeOkk.innerHTML = obj2.OK;
+                        	warning.innerHTML = "";
+                        	$("#checkForDB").val(1);
+                        	console.log("check的值 = "+$("#checkForDB").val())
+                        	console.log($("#warning").text());
+//	                        	totalp.innerHTML = obj.foodTotal; 
+//	                        	thisText.innerHTML = "<tr><td><h5 class='foodtip'>"+obj.foodName+"</h5></td></tr><br>" 
+//	                        	 +"<tr><td><h5 class='foodtip'>NT. "+ obj.foodP +" x "+obj.foodQty+" = "+(obj.foodP*obj.foodQty)+"</h5></td></tr>"
+
+                        }else if(obj2.warning){
+                        	warning.innerHTML = obj2.warning;
+                        	timeOkk.innerHTML = "";
+                        	$("#checkForDB").val(0);
+                        	console.log("check的值 = "+$("#checkForDB").val())
+                        }else{
+                        	console.log("這行應該不可能發生 !!");
+                        }
+                    }else{
+                    	alert("發生錯誤type : "+xhr2.status + ", "+xhr2.responseText);
+                    }
+                }
+            }
+        }
+		}
+};
 
 function Movies() {
 	var movieTypeId = document.getElementById('publish').value;
@@ -1128,19 +1195,19 @@ function Movies() {
 						+ movies[i].movieFileName
 						+ "'>"
 						+ "</div>"
-						+ "<p class='card-text'>電影名稱:"
+						+ "<p class='card-text'>電影名稱 : "
 						+ movies[i].movieName
 						+ "</p>"
-						+ "<p class='card-text'>電影英文名稱:"
+						+ "<p class='card-text'>電影英文名稱 : "
 						+ movies[i].movieEName
 						+ "</p>"
-						+ "<p class='card-text'>級數:"
+						+ "<p class='card-text'>級數 : "
 						+ movies[i].movieRated
 						+ "</p>"
-						+ "<p class='card-text'>介紹:"
+						+ "<p class='card-text'>介紹 : "
 						+ movies[i].movieNote
 						+ "</p>"
-						+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>片長:"
+						+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>片長 : "
 						+ movies[i].movieLength
 						+ "</small></div>"
 						+ "</div>"
@@ -1151,6 +1218,8 @@ function Movies() {
 		}
 	}
 }
+
+
 </script>
 	</body>
 
