@@ -13,6 +13,8 @@ import com.web.store.model.CartOrderBean;
 import com.web.store.model.FoodShoppingCart;
 import com.web.store.service.ProductServiec;
 
+import ecpay.payment.integration.AllInOne;
+
 @Controller
 @SessionAttributes({"OrderCart","FoodCart"})
 public class insertCartToDB {

@@ -17,20 +17,29 @@
 <link rel='stylesheet' href='js/bootstrap.bundle.js' type="text/js" />
 <link rel='stylesheet' href='css/bootstrap.css' type="text/css" />
 <title>menu</title>
+<style>
+p {
+	color: white;
+	font-style: italic;
+}
+
+div {
+	color: white;
+}
+</style>
+
 </head>
 
 <body>
-	<c:set var="funcName" value="menu" scope="session" />	
+	<c:set var="funcName" value="menu" scope="session" />
 	<jsp:include page="Navigation.jsp" />
 	<jsp:include page="FoodClass.jsp" />
 	<div class='c1'>
-	<main role="main">
-		<div  class="container">
-				<div  class="row" id='food'>
-					
-				</div>			
-		</div>
-	</main>
+		<main role="main">
+			<div class="container">
+				<div class="row" id='food'></div>
+			</div>
+		</main>
 	</div>
 	<script>
 		var xhr = new XMLHttpRequest();
@@ -41,20 +50,21 @@
 				var content = "";
 				var foods = JSON.parse(xhr.responseText);
 				for (var i = 0; i < foods.length; i++) {
-					content += 
-							"<div class='col-4 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;'>"
+					content += "<div class='col-4 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;'>"
 							+ "<div>"
-							+ "<img width='100%' height='100%' "   
-					        + " src='" + foods[i].imageData + "'>"
-					        + "</div>"
-							+"<p class='card-text'>"
+							+ "<img width='100%' height='100%' "
+							+ " src='"
+							+ foods[i].imageData
+							+ "'>"
+							+ "</div>"
+							+ "<p class='card-text'> 餐點名稱 : "
 							+ foods[i].bean.foodName
 							+ "</p>"
-							+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>"
+							+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>價錢 : "
 							+ foods[i].bean.foodPrice
-							+ "元</small></div>"
+							+ " 元 </small></div>"
 							+ "</div>"
-							content += "</div>";	
+					content += "</div>";
 				}
 				var divs = document.getElementById("food");
 				divs.innerHTML = content;
@@ -62,7 +72,7 @@
 
 		}
 	</script>
-	
+
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 		crossorigin="anonymous"></script>

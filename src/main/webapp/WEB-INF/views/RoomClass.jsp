@@ -48,13 +48,13 @@
 								+ rooms[i].roomFileName
 								+ "'>"
 								+ "</div>"
-								+ "<p class='card-text'>包廂類型:"
+								+ "<p class='card-text'>包廂類型 : "
 								+ rooms[i].roomName
 								+ "</p>"
-								+ "<p class='card-text'>人數:"
+								+ "<p class='card-text'>人數 : "
 								+ rooms[i].roomSize
 								+ "</p>"
-								+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>價錢:"
+								+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>價錢 : "
 								+ rooms[i].roomPrice
 								+ "元</small></div>"
 								+ "</div>"

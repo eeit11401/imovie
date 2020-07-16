@@ -24,12 +24,19 @@
 	type="text/css" />
 <title>Room</title>
 <style>
+p {
+	color: white;
+	font-style: italic;
+}
 
+div {
+	color: white;
+}
 </style>
 </head>
 <body>
-	<c:set var="funcName" value="Room" scope="session" />	
-		<jsp:include page="Navigation.jsp" />
+	<c:set var="funcName" value="Room" scope="session" />
+	<jsp:include page="Navigation.jsp" />
 	<jsp:include page="RoomClass.jsp" />
 
 	<div class='c1'>
@@ -56,13 +63,13 @@
 							+ rooms[i].imageData
 							+ "'>"
 							+ "</div>"
-							+ "<p class='card-text'>包廂類型:"
+							+ "<p class='card-text'>包廂類型 : "
 							+ rooms[i].bean.roomName
 							+ "</p>"
-							+ "<p class='card-text'>人數:"
+							+ "<p class='card-text'>人數 : "
 							+ rooms[i].bean.roomSize
 							+ "</p>"
-							+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>價錢:"
+							+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>價錢 : "
 							+ rooms[i].bean.roomPrice
 							+ "元</small></div>"
 							+ "</div>"

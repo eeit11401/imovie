@@ -5,9 +5,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -37,17 +41,28 @@ import com.web.store.model.RoomBean;
 import com.web.store.model.RoomBeanWithImageData;
 import com.web.store.service.ProductServiec;
 
+import ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.domain.AioCheckOutALL;
+
 @Controller
 @SessionAttributes({"FoodCart","allFood","room","movie","main","dessert","drink","packa"})
 public class ProductController {
-
+	public static AllInOne all;
 	@Autowired
 	ProductServiec service;
 
 	@Autowired
 	ServletContext context;
 	
-
+	private static void initial(){
+		all = new AllInOne("");
+	}
+	
+	@GetMapping("/test")
+	public String test() {
+		
+		return "rearEnd/後端控制台";
+	}
 	
 	@GetMapping("/allFoods")
 	public ResponseEntity<List<FoodBeanWithImageData>>  allFoodsWithImageData()  {
@@ -501,4 +516,40 @@ public class ProductController {
 			}
 			return b;
 		}
+		//綠界測試
+		@RequestMapping("/opay")
+		public void opay(HttpServletResponse response,String merchantTradeNo, String tradeDesc,String itemName,String totalAmount) throws UnsupportedEncodingException {
+
+			initial();
+			try {
+				AioCheckOutALL obj = new AioCheckOutALL();
+				SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+				Date date = new Date();
+				String strDate = sdFormat.format(date);
+				obj.setMerchantTradeNo(merchantTradeNo);
+				obj.setMerchantTradeDate(strDate);
+				obj.setTotalAmount(totalAmount);
+				obj.setTradeDesc(tradeDesc);
+				obj.setItemName(itemName);
+				obj.setReturnURL("http://211.23.128.214:5000");
+				obj.setClientBackURL("http://localhost:8080/Imovie/");
+				obj.setNeedExtraPaidInfo("N");
+				
+			String form = all.aioCheckOut(obj, null);
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out =response.getWriter();
+			
+			out.print("<html>");
+			out.print("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
+			out.print("<title>oPay</title>");
+			out.print("<body>");
+			out.print(form);
+			out.print("</body>");
+			out.print("</html>");
+			out.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 }

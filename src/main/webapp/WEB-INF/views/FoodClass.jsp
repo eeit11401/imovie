@@ -47,10 +47,10 @@
 								+ foods[i].foodFileName
 								+ "'>"
 								+ "</div>"
-								+ "<p class='card-text'>"
+								+ "<p class='card-text'>餐點名稱 : "
 								+ foods[i].foodName
 								+ "</p>"
-								+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>"
+								+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>價錢 : "
 								+ foods[i].foodPrice
 								+ "元</small></div>"
 								+ "</div>"

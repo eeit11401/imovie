@@ -47,19 +47,19 @@
 								+ movies[i].movieFileName
 								+ "'>"
 								+ "</div>"
-								+ "<p class='card-text'>電影名稱:"
+								+ "<p class='card-text'>電影名稱 : "
 								+ movies[i].movieName
 								+ "</p>"
-								+ "<p class='card-text'>電影英文名稱:"
+								+ "<p class='card-text'>電影英文名稱 : "
 								+ movies[i].movieEName
 								+ "</p>"
-								+ "<p class='card-text'>級數:"
+								+ "<p class='card-text'>級數 : "
 								+ movies[i].movieRated
 								+ "</p>"
-								+ "<p class='card-text'>介紹:"
+								+ "<p class='card-text'>介紹 : "
 								+ movies[i].movieNote
 								+ "</p>"
-								+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>片長:"
+								+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>片長 : "
 								+ movies[i].movieLength
 								+ "</small></div>"
 								+ "</div>"

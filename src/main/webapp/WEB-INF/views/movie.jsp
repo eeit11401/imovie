@@ -23,18 +23,30 @@
 <title>Movie</title>
 
 <style>
+p {
+	color: white;
+	font-style: italic;
+}
+
+div {
+	color: white;
+}
+
+small {
+	color: white;
+}
 </style>
 </head>
 <body>
-	<c:set var="funcName" value="Movie" scope="session" />	
-		<jsp:include page="Navigation.jsp" />
-		<jsp:include page="MovieClass.jsp" />
+	<c:set var="funcName" value="Movie" scope="session" />
+	<jsp:include page="Navigation.jsp" />
+	<jsp:include page="MovieClass.jsp" />
 	<div class='c1'>
-	<main role="main">
-		<div class="container">
-			<div class="row" id='movie'></div>
-		</div>
-	</main>
+		<main role="main">
+			<div class="container">
+				<div class="row" id='movie'></div>
+			</div>
+		</main>
 	</div>
 	<script>
 		var xhr = new XMLHttpRequest();
@@ -52,19 +64,19 @@
 							+ movies[i].imageData
 							+ "'>"
 							+ "</div>"
-							+ "<p class='card-text'>電影名稱:"
+							+ "<p class='card-text'>電影名稱 : "
 							+ movies[i].bean.movieName
 							+ "</p>"
-							+ "<p class='card-text'>電影英文名稱:"
+							+ "<p class='card-text'>電影英文名稱 : "
 							+ movies[i].bean.movieEName
 							+ "</p>"
-							+ "<p class='card-text'>級數:"
+							+ "<p class='card-text'>級數 : "
 							+ movies[i].bean.movieRated
 							+ "</p>"
-							+ "<p class='card-text'>介紹:"
+							+ "<p class='card-text'>介紹 : "
 							+ movies[i].bean.movieNote
 							+ "</p>"
-							+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>片長:"
+							+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>片長 : "
 							+ movies[i].bean.movieLength
 							+ "</small></div>"
 							+ "</div>"
