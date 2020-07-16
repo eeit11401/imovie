@@ -51,7 +51,7 @@
 		     <td>5.電影分類：${OrderCart.movie.movieGenre1}</td>
 		</tr>
 		<tr>
-			 <td>6.日期：  &nbsp;&nbsp;&nbsp;&nbsp;開始時間：  &nbsp;&nbsp;&nbsp;&nbsp;結束時間： </td>
+			 <td>6.日期：${OrderCart.orderDate}&nbsp;&nbsp;開始時間：${OrderCart.orderDateStart}&nbsp;&nbsp;結束時間：${OrderCart.orderDateEnd} </td>
 		</tr>
 		<tr>
 			 <td>7.餐點：</td>
@@ -73,11 +73,9 @@
 		<FORM style="display:inline-block" action="<c:url value='/insert.do' />" method="GET">
 			<Input type='submit' class="btn btn-danger"  value='確認'>
 		</FORM>
-		<span style="display:inline-block">
 		<FORM style="display:inline-block" action="<c:url value='/reset.do'/>"  method="GET">
 			<Input type="submit" class="btn btn-default" id="re" value='回上一步'>
 		</FORM>
-		</span>
 		</td>
 		</tr>
 		
