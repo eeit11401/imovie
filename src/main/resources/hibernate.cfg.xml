@@ -31,5 +31,6 @@
 		<mapping class="com.web.store.model.RoomBean"></mapping>
 		<mapping class="com.web.store.model.Movie_Genre"></mapping>		
 		<mapping class="com.web.store.model.Food_Genre"></mapping>		
+		<mapping class="com.web.store.model.HomeBean"></mapping>		
 	</session-factory>
 </hibernate-configuration>
