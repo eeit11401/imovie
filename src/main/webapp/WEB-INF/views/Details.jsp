@@ -37,7 +37,7 @@
 
 <body class="c1">
 	<header>
-		<form method="post" action="/login.do" name="loginName">
+		<form method="POST" action="/login.do" name="loginName">
 			<div class="modal fade" id="Box">
 				<div class="modal-dialog">
 					<div class="modal-content">

@@ -1,5 +1,6 @@
 package com.web.store.dao;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -49,4 +50,5 @@ public interface ProductDao {
 	List<RoomBean> getSelectroomTypes();
 	//新加的---------
 	void cartToDB(CartOrderBean cob);
+	Boolean checkOrderTime(int orderRoomId,String checkDay,String checkStart,String checkEnd)throws ParseException;
 }

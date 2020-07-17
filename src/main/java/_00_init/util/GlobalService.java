@@ -1,5 +1,6 @@
 package _00_init.util;
 
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -285,6 +286,8 @@ public class GlobalService {
 		return decryptedString;
 	}
 	
+	
+	
 	public static Blob fileToBlob(String imageFileName) throws IOException, SQLException {
 		File imageFile = new File(imageFileName);
 		long size = imageFile.length();
@@ -332,4 +335,6 @@ public class GlobalService {
 		sb = new SerialBlob(b);
 		return sb;
 	}
+	
+	
 }

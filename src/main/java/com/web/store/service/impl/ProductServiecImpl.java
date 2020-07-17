@@ -1,5 +1,6 @@
 package com.web.store.service.impl;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -151,5 +152,12 @@ public class ProductServiecImpl implements ProductServiec {
 		productDao.cartToDB(cob);	
 	}
 	
+	@Transactional
+	@Override
+	public boolean checkOrderTime(int orderRoomId, String checkDay, String checkStart, String checkEnd)
+			throws ParseException {
+		
+		return productDao.checkOrderTime(orderRoomId,checkDay,checkStart,checkEnd);
+	}
 
 }

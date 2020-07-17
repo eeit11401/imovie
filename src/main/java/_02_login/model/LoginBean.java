@@ -1,5 +1,7 @@
 package _02_login.model;
 
+
+
 public class LoginBean {
 	String userId; 
 	String password;

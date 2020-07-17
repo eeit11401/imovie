@@ -330,6 +330,8 @@
 		window.jQuery
 				|| document
 						.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
+	      $("#ticket-component").load('./ticket.jsp');	
+		console.log('AAAAAAA')
 	</script>
 </body>
 

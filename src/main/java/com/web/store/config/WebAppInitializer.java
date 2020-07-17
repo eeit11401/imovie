@@ -1,14 +1,13 @@
 package com.web.store.config;
-import javax.servlet.Filter;
 
-import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[] {RootAppConfig.class};
+		
+		return new Class<?>[]{RootAppConfig.class};
 	}
 
 	@Override
@@ -16,19 +15,10 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 		return new Class<?>[] {WebAppConfig.class};
 	}
 
-	@Override //唯一的servlet
+	@Override
 	protected String[] getServletMappings() {
+		
 		return new String[] {"/"};
 	}
-	
-//  ↓ ""alt+ /"" 選getServletFilters() Filter[]
-	@Override
-	protected Filter[] getServletFilters() {
-		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-		characterEncodingFilter.setEncoding("UTF-8");
-		return new Filter[] {characterEncodingFilter};
-	}
-	
-	
 
 }
