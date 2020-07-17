@@ -10,8 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/4.5/examples/carousel/">
-<link rel='stylesheet'
-	href='${pageContext.request.contextPath}/css/main.css' type="text/css" />
+
 <link rel='stylesheet'
 	href='${pageContext.request.contextPath}/css/index.css' type="text/css" />
 
@@ -159,7 +158,7 @@ font-size: 60px;
 							<video id="js-top-mv-video" loop="true" autoplay="autoplay"
 								preload="auto" muted="true" src="img/女鬼橋.mp4" style="width: 600px; height: 400px"></video>
 						</div>
-						<div class="issueCard__imgFrame" style="height: 300px;"></div>
+						<div class="issueCard__imgFrame" style="height: 350px;"></div>
 						<h1 class="issueCard__txtarea">女鬼橋</h1>
 						<div class="issueCard__bottoms">
 							<div class="issueCard__bottoms__linkArrowCover">
@@ -202,7 +201,7 @@ font-size: 60px;
 							<video id="js-top-mv-video" loop="true" autoplay="autoplay"
 								preload="auto" muted="true" src="img/軍艦島.mp4" style="width: 600px; height: 400px"></video>
 						</div>
-						<div class="issueCard__imgFrame" style="height: 300px;"></div>
+						<div class="issueCard__imgFrame" style="height: 350px;"></div>
 						<h1 class="issueCard__txtarea">軍艦島</h1>
 						<div class="issueCard__bottoms">
 							<div class="issueCard__bottoms__linkArrowCover">
@@ -245,7 +244,7 @@ font-size: 60px;
 							<video id="js-top-mv-video" loop="true" autoplay="autoplay"
 								preload="auto" muted="true" src="img/捍衛任務3.mp4" style="width: 600px; height: 400px"></video>
 						</div>
-						<div class="issueCard__imgFrame" style="height: 300px;"></div>
+						<div class="issueCard__imgFrame" style="height: 350px;"></div>
 						<h1 class="issueCard__txtarea">捍衛任務3
 						</h1>
 						<div class="issueCard__bottoms">
@@ -289,7 +288,7 @@ font-size: 60px;
 							<video id="js-top-mv-video" loop="true" autoplay="autoplay"
 								preload="auto" muted="true" src="img/惡夜救援.mp4" style="width: 600px; height: 400px"></video>
 						</div>
-						<div class="issueCard__imgFrame" style="height: 300px;"></div>
+						<div class="issueCard__imgFrame" style="height: 350px;"></div>
 						<h1 class="issueCard__txtarea">惡夜救援</h1>
 						<div class="issueCard__bottoms">
 							<div class="issueCard__bottoms__linkArrowCover">
@@ -333,11 +332,8 @@ font-size: 60px;
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 		crossorigin="anonymous"></script>
 	<script>
-		window.jQuery
-				|| document
-						.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
-	      $("#ticket-component").load('./ticket.jsp');	
-		console.log('AAAAAAA')
+
+	
 	</script>
 </body>
 

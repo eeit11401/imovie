@@ -304,10 +304,10 @@
 .issueCard__imgFrame {
     box-sizing: content-box;
     position: absolute;
-    width: 90%;
+    width: 95%;
     left: 0;
     right: 0;
-    top: calc(6.5%);
+    top: calc(8.5%);
     margin: auto;
     border: solid 1px #fff;
     z-index: 2;

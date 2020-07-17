@@ -57,7 +57,7 @@ div {
 				console.log("rooms:" + rooms);
 				for (var i = 0; i < rooms.length; i++) {
 					content += "<div class='col-3 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;margin: 10px;'>"
-							+ "<div>"
+							+ "<div style='width:250px;height:168px;'>"
 							+ "<img width='100%' height='100%' "
 							+ " src='"
 							+ rooms[i].imageData
