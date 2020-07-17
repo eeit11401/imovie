@@ -4,8 +4,8 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-		<property name="hibernate.connection.username">watcher</property>
-		<property name="hibernate.connection.password">p@ssw0rd</property>
+		<property name="hibernate.connection.username">sa</property>
+		<property name="hibernate.connection.password">sa123456</property>
 		<property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=Imovie</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.SQLServer2012Dialect</property>
 

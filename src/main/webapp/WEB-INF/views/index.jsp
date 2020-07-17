@@ -92,6 +92,11 @@
 	stroke-width: 1px;
 	opacity: 0.5;
 }
+h3{
+text-align: center;
+color: red;
+font-size: 60px;
+}
 </style>
 </head>
 <body>
@@ -139,6 +144,7 @@
 			</div>
 		</h2>
 		<div class="p-top-issue__marginBox"></div>
+		<h3>近期更新的電影</h3>
 		<div class="p-top-issue__moduleArea"
 			style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
 
