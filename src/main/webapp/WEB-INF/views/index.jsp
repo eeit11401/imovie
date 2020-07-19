@@ -13,7 +13,8 @@
 
 <link rel='stylesheet'
 	href='${pageContext.request.contextPath}/css/index.css' type="text/css" />
-
+<link rel='stylesheet' href='js/bootstrap.bundle.js' type="text/js" />
+<link rel='stylesheet' href='${pageContext.request.contextPath}/css/bootstrap.css' type="text/css" />
 <style>
 * {
 	padding: 0;
@@ -91,21 +92,30 @@
 	stroke-width: 1px;
 	opacity: 0.5;
 }
-h3{
-text-align: center;
-color: red;
-font-size: 60px;
+
+h3 {
+	text-align: center;
+	color: red;
+	font-size: 60px;
+}
+
+p {
+	color: white;
+	font-style: italic;
+}
+
+div {
+	color: white;
 }
 </style>
 </head>
 <body>
 	<c:set var="funcName" value="Home" scope="session" />
-	<jsp:include page="Navigation.jsp"/>
+	<jsp:include page="Navigation.jsp" />
 	<section class="p-top-mv is-active">
 		<div class="p-top-mv__movie">
 			<video id="js-top-mv-video" loop="true" autoplay="autoplay"
-				preload="auto" muted="true" src="img/玩命關頭9.mp4"
-				style="width: 100%;"></video>
+				preload="auto" muted="true" src="img/玩命關頭9.mp4" style="width: 100%;"></video>
 		</div>
 	</section>
 	<section class="p-top-issue js-enter is-active" id="js-top-issue">
@@ -144,197 +154,46 @@ font-size: 60px;
 		</h2>
 		<div class="p-top-issue__marginBox"></div>
 		<h3>近期更新的電影</h3>
-		<div class="p-top-issue__moduleArea"
-			style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
-
-			<div class="p-top-issue__moduleArea__slider"
-				style="transform: matrix(1, 0, 0, 1, 0, 0);">
-				<article class="issueCard js-enter sliderTop is-active">
-					<a href="">
-						<div class="issueCard__topLine"></div>
-						<div class="issueCard__leftLine"></div>
-						<div class="issueCard__rightLine"></div>
-						<div class="issueCard__img">
-							<video id="js-top-mv-video" loop="true" autoplay="autoplay"
-								preload="auto" muted="true" src="img/女鬼橋.mp4" style="width: 600px; height: 400px"></video>
-						</div>
-						<div class="issueCard__imgFrame" style="height: 350px;"></div>
-						<h1 class="issueCard__txtarea">女鬼橋</h1>
-						<div class="issueCard__bottoms">
-							<div class="issueCard__bottoms__linkArrowCover">
-								<div class="linkArrow-blk__line1"></div>
-								<div class="linkArrow-blk__line2"></div>
-								<div class="linkArrow-blk__line2Cover">
-									<div class="linkArrow-blk__line2Cover__line2"></div>
-								</div>
-								<div class="linkArrow-blk__arrow">
-									<svg viewBox="0 0 4.38 6.76">
-                                        <path id="arrowRight.svg"
-											class="arrow-right-1"
-											d="M1182.5,4279.86l4.36-3.36-4.36-3.36v6.72Z"
-											transform="translate(-1182.5 -4273.12)"></path>
-                                    </svg>
-								</div>
-							</div>
-							<div class="issueCard__bottoms__icon">
-								<svg viewBox="0 0 17 20">
-                                    <circle id="icon"
-										class="issue-bottom-icon-1" cx="8" cy="10" r="2"></circle>
-                                    <path id="icon-2" data-name="icon"
-										class="issue-bottom-icon-2" d="M1113,5902l-10-9,10-10h6"
-										transform="translate(-1102.5 -5882.5)"></path>
-                                </svg>
-							</div>
-							<div class="issueCard__bottoms__category">EVENT</div>
-							<div class="issueCard__bottoms__line"></div>
-							<div class="issueCard__bottoms__date">2020.06.24</div>
-
-						</div>
-					</a>
-				</article>
-				<article class="issueCard js-enter is-active">
-					<a href="">
-						<div class="issueCard__topLine"></div>
-						<div class="issueCard__leftLine"></div>
-						<div class="issueCard__rightLine"></div>
-						<div class="issueCard__img">
-							<video id="js-top-mv-video" loop="true" autoplay="autoplay"
-								preload="auto" muted="true" src="img/軍艦島.mp4" style="width: 600px; height: 400px"></video>
-						</div>
-						<div class="issueCard__imgFrame" style="height: 350px;"></div>
-						<h1 class="issueCard__txtarea">軍艦島</h1>
-						<div class="issueCard__bottoms">
-							<div class="issueCard__bottoms__linkArrowCover">
-								<div class="linkArrow-blk__line1"></div>
-								<div class="linkArrow-blk__line2"></div>
-								<div class="linkArrow-blk__line2Cover">
-									<div class="linkArrow-blk__line2Cover__line2"></div>
-								</div>
-								<div class="linkArrow-blk__arrow">
-									<svg viewBox="0 0 4.38 6.76">
-                                        <path id="arrowRight.svg"
-											class="arrow-right-1"
-											d="M1182.5,4279.86l4.36-3.36-4.36-3.36v6.72Z"
-											transform="translate(-1182.5 -4273.12)"></path>
-                                    </svg>
-								</div>
-							</div>
-							<div class="issueCard__bottoms__icon">
-								<svg viewBox="0 0 17 20">
-                                    <circle id="icon"
-										class="issue-bottom-icon-1" cx="8" cy="10" r="2"></circle>
-                                    <path id="icon-2" data-name="icon"
-										class="issue-bottom-icon-2" d="M1113,5902l-10-9,10-10h6"
-										transform="translate(-1102.5 -5882.5)"></path>
-                                </svg>
-							</div>
-							<div class="issueCard__bottoms__category">EVENT</div>
-							<div class="issueCard__bottoms__line"></div>
-							<div class="issueCard__bottoms__date">2020.06.24</div>
-
-						</div>
-					</a>
-				</article>
-				<article class="issueCard js-enter is-active">
-					<a href="">
-						<div class="issueCard__topLine"></div>
-						<div class="issueCard__leftLine"></div>
-						<div class="issueCard__rightLine"></div>
-						<div class="issueCard__img">
-							<video id="js-top-mv-video" loop="true" autoplay="autoplay"
-								preload="auto" muted="true" src="img/捍衛任務3.mp4" style="width: 600px; height: 400px"></video>
-						</div>
-						<div class="issueCard__imgFrame" style="height: 350px;"></div>
-						<h1 class="issueCard__txtarea">捍衛任務3
-						</h1>
-						<div class="issueCard__bottoms">
-							<div class="issueCard__bottoms__linkArrowCover">
-								<div class="linkArrow-blk__line1"></div>
-								<div class="linkArrow-blk__line2"></div>
-								<div class="linkArrow-blk__line2Cover">
-									<div class="linkArrow-blk__line2Cover__line2"></div>
-								</div>
-								<div class="linkArrow-blk__arrow">
-									<svg viewBox="0 0 4.38 6.76">
-                                        <path id="arrowRight.svg"
-											class="arrow-right-1"
-											d="M1182.5,4279.86l4.36-3.36-4.36-3.36v6.72Z"
-											transform="translate(-1182.5 -4273.12)"></path>
-                                    </svg>
-								</div>
-							</div>
-							<div class="issueCard__bottoms__icon">
-								<svg viewBox="0 0 17 20">
-                                    <circle id="icon"
-										class="issue-bottom-icon-1" cx="8" cy="10" r="2"></circle>
-                                    <path id="icon-2" data-name="icon"
-										class="issue-bottom-icon-2" d="M1113,5902l-10-9,10-10h6"
-										transform="translate(-1102.5 -5882.5)"></path>
-                                </svg>
-							</div>
-							<div class="issueCard__bottoms__category">EVENT</div>
-							<div class="issueCard__bottoms__line"></div>
-							<div class="issueCard__bottoms__date">2020.06.13</div>
-
-						</div>
-					</a>
-				</article>
-				<article class="issueCard js-enter is-active">
-					<a href="">
-						<div class="issueCard__topLine"></div>
-						<div class="issueCard__leftLine"></div>
-						<div class="issueCard__rightLine"></div>
-						<div class="issueCard__img">
-							<video id="js-top-mv-video" loop="true" autoplay="autoplay"
-								preload="auto" muted="true" src="img/惡夜救援.mp4" style="width: 600px; height: 400px"></video>
-						</div>
-						<div class="issueCard__imgFrame" style="height: 350px;"></div>
-						<h1 class="issueCard__txtarea">惡夜救援</h1>
-						<div class="issueCard__bottoms">
-							<div class="issueCard__bottoms__linkArrowCover">
-								<div class="linkArrow-blk__line1"></div>
-								<div class="linkArrow-blk__line2"></div>
-								<div class="linkArrow-blk__line2Cover">
-									<div class="linkArrow-blk__line2Cover__line2"></div>
-								</div>
-								<div class="linkArrow-blk__arrow">
-									<svg viewBox="0 0 4.38 6.76">
-                                        <defs>
-                                           
-                                        </defs>
-                                        <path id="arrowRight.svg"
-											class="arrow-right-1"
-											d="M1182.5,4279.86l4.36-3.36-4.36-3.36v6.72Z"
-											transform="translate(-1182.5 -4273.12)"></path>
-                                    </svg>
-								</div>
-							</div>
-							<div class="issueCard__bottoms__icon">
-								<svg viewBox="0 0 17 20">
-                                    <circle id="icon"
-										class="issue-bottom-icon-1" cx="8" cy="10" r="2"></circle>
-                                    <path id="icon-2" data-name="icon"
-										class="issue-bottom-icon-2" d="M1113,5902l-10-9,10-10h6"
-										transform="translate(-1102.5 -5882.5)"></path>
-                                </svg>
-							</div>
-							<div class="issueCard__bottoms__category">EVENT</div>
-							<div class="issueCard__bottoms__line"></div>
-							<div class="issueCard__bottoms__date">2020.07.08</div>
-
-						</div>
-					</a>
-				</article>
+		<div>
+		<main role="main">
+			<div class="container">
+				<div class="row" id='home'></div>
 			</div>
-		</div>
+		</main>
+	</div>
 	</section>
+	<script>
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "<c:url value='/allHomes' />", true);
+		xhr.send();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var content = "";
+				var homes = JSON.parse(xhr.responseText);
+				for (var i = 0; i < homes.length; i++) {
+					content += "<div class='col-4 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;'>"
+						+ "<div>"
+						+ "<img width='100%' height='100%' "
+						+ " src='"
+						+ homes[i].imageData
+						+ "'>"
+						+ "</div>"
+						+ "<p class='card-text'> 電影名稱 : "
+						+ homes[i].bean.homeName
+						+ "</p>"
+						+ "</div>"
+				content += "</div>";
+				}
+				var divs = document.getElementById("home");
+				divs.innerHTML = content;
+			}
+
+		}
+	</script>
+
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 		crossorigin="anonymous"></script>
-	<script>
-
-	
-	</script>
 </body>
 
 </html>

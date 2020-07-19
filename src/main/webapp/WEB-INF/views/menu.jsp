@@ -34,7 +34,7 @@ div {
 	<c:set var="funcName" value="menu" scope="session" />
 	<jsp:include page="Navigation.jsp" />
 	<jsp:include page="FoodClass.jsp" />
-	<div class='c1'>
+	<div>
 		<main role="main">
 			<div class="container">
 				<div class="row" id='food'></div>

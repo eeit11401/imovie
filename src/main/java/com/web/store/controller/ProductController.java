@@ -33,9 +33,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.web.store.model.CartOrderBean;
 import com.web.store.model.FoodBean;
 import com.web.store.model.FoodBeanWithImageData;
+import com.web.store.model.HomeBeanWithImageData;
 import com.web.store.model.MovieBean;
 import com.web.store.model.MovieBeanWithImageData;
 import com.web.store.model.RoomBean;
@@ -58,7 +58,16 @@ public class ProductController {
 	private static void initial(){
 		all = new AllInOne("");
 	}
+	//Home Ajax分類顯示
+		@GetMapping("/allHomes")
+		public ResponseEntity<List<HomeBeanWithImageData>>  allHomesWithImageData()  {
+			System.out.println("A----------------------");
+			List<HomeBeanWithImageData> list = service.getAllHomesWithImageData();
+			ResponseEntity<List<HomeBeanWithImageData>> he = new ResponseEntity<>(list, HttpStatus.OK);
+			return he;
+		}
 	
+	//Food Ajax分類顯示
 	@GetMapping("/allFoods")
 	public ResponseEntity<List<FoodBeanWithImageData>>  allFoodsWithImageData()  {
 		System.out.println("A----------------------");
@@ -66,6 +75,8 @@ public class ProductController {
 		ResponseEntity<List<FoodBeanWithImageData>> re = new ResponseEntity<>(list, HttpStatus.OK);
 		return re;
 	}
+	
+	//Movie Ajax顯示
 	@GetMapping("/allMovies")
 	public ResponseEntity<List<MovieBeanWithImageData>>  allMoviesWithImageData()  {
 		System.out.println("Z----------------------");
@@ -73,6 +84,8 @@ public class ProductController {
 		ResponseEntity<List<MovieBeanWithImageData>> re = new ResponseEntity<>(list, HttpStatus.OK);
 		return re;
 	}
+	
+	//Room Ajax顯示
 	@GetMapping("/allRooms")
 	public ResponseEntity<List<RoomBeanWithImageData>>  allRoomsWithImageData()  {
 		System.out.println("Z----------------------");
@@ -80,6 +93,9 @@ public class ProductController {
 		ResponseEntity<List<RoomBeanWithImageData>> re = new ResponseEntity<>(list, HttpStatus.OK);
 		return re;
 	}
+	
+	
+	
 	//Food Ajax分類顯示	
 	@RequestMapping(value ="/allFood",method = RequestMethod.GET)
 	public ResponseEntity<List<FoodBean>>  allFoodPublishers(@RequestParam Integer foodTypeId, Model model)  {		
@@ -115,31 +131,8 @@ public class ProductController {
 		return "menu";
 
 	}
-	//測試
-//	@RequestMapping("/opay")
-//	public void opay(HttpServletRequest request,HttpServletResponse response) throws IOException {
-//		SampleCode same = new SampleCode();
-//		String testtextString = same.sampleAioALL();
-//	    response.setContentType("text/html; charset=UTF-8");
-//	    PrintWriter pw =response.getWriter();
-//
-//	        pw.print("<html>");
-//	        pw.print("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-//	        pw.print("<title>oPay</title>");
-//	        pw.print("<body>");
-//	        pw.print(testtextString);
-//	        pw.print("</body>");
-//	        pw.print("</html>");
-//	        pw.close();
-//		
-//	}
 		
-	// 單筆查詢
-	@GetMapping("/product")
-	public String getProductById(@RequestParam Integer id, Model model) {
-		model.addAttribute("product", service.getProductById(id));
-		return "product";
-	}
+
 	
 	// movie方法
 		@RequestMapping("/movie")
@@ -151,12 +144,7 @@ public class ProductController {
 			return "movie";
 		}
 
-	// 單筆查詢
-	@GetMapping("/product1")
-	public String getProductById1(@RequestParam Integer id, Model model) {
-		model.addAttribute("product1", service.getProductById1(id));
-		return "product1";
-	}
+
 
 	// room方法
 	@RequestMapping("/room")
@@ -169,12 +157,7 @@ public class ProductController {
 
 	}
 
-	// 單筆查詢
-	@GetMapping("/product2")
-	public String getProductById2(@RequestParam Integer id, Model model) {
-		model.addAttribute("product2", service.getProductById2(id));
-		return "product2";
-	}
+
 
 //-----------------------測試購物車0704、0705------------------------
 

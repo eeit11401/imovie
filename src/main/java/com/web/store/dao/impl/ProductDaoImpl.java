@@ -23,6 +23,8 @@ import com.web.store.dao.ProductDao;
 import com.web.store.model.CartOrderBean;
 import com.web.store.model.FoodBean;
 import com.web.store.model.FoodBeanWithImageData;
+import com.web.store.model.HomeBean;
+import com.web.store.model.HomeBeanWithImageData;
 import com.web.store.model.MovieBean;
 import com.web.store.model.MovieBeanWithImageData;
 import com.web.store.model.RoomBean;
@@ -42,8 +44,8 @@ public class ProductDaoImpl implements ProductDao {
 	
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     String url = "jdbc:sqlserver://localhost:1433;DatabaseName=Imovie";
-    String userid = "watcher";
-    String passwd = "p@ssw0rd";
+    String userid = "sa";
+    String passwd = "sa123456";
 	
     private static final String SELECT_all_foodTypes = "Select Distinct b.foodType , b.foodTypeId From Food b";
     private static final String SELECT_foods = "Select * From Food where foodTypeId=?";
@@ -78,6 +80,44 @@ public class ProductDaoImpl implements ProductDao {
 
 	public void setMovieId(Integer movieId) {
 		this.movieId = movieId;
+	}
+	//首頁 顯示
+	@Override
+	public List<HomeBeanWithImageData> getAllHomesWithImageData() {
+		List<HomeBean> listSource = getAllHomesJson();
+		List<HomeBeanWithImageData> listTarget = new ArrayList<>();
+		for(HomeBean bean : listSource) {
+			listTarget.add(addImageData(bean));
+		}
+		return listTarget;
+	}
+	
+	private HomeBeanWithImageData addImageData(HomeBean bean) {
+		HomeBeanWithImageData bbwid = null;
+		try {
+			StringBuffer sb = new StringBuffer();
+			String fileName = bean.getHomeFileName();
+			String mimeType = ctx.getMimeType(fileName);
+			Blob blob = bean.getHomeImg();
+			byte[] bytes = blob.getBytes(1, (int) blob.length());
+			String prefix = "data:" + mimeType + ";base64,";
+			sb.append(prefix);
+			Base64.Encoder be = Base64.getEncoder();
+			String str = new String(be.encode(bytes));
+			sb.append(str);
+			String iamgeData = sb.toString();
+			bbwid = new HomeBeanWithImageData(bean, iamgeData);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		return bbwid;		
+	}
+
+	private List<HomeBean> getAllHomesJson() {
+		String hql = "FROM HomeBean";
+		Session session = factory.getCurrentSession();
+		List<HomeBean> list = session.createQuery(hql).getResultList();
+		return list;
 	}
 
 	//Food的方法
@@ -588,6 +628,10 @@ public class ProductDaoImpl implements ProductDao {
 		return list;
 	}
 
+	
+
+	
+	
 	@Override
 	public void cartToDB(CartOrderBean cob) {
 		Session session = factory.getCurrentSession();
@@ -652,5 +696,7 @@ public class ProductDaoImpl implements ProductDao {
 		}
 	
 	}
+
+
 
 }

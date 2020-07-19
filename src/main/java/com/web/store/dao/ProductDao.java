@@ -7,6 +7,7 @@ import java.util.Map;
 import com.web.store.model.CartOrderBean;
 import com.web.store.model.FoodBean;
 import com.web.store.model.FoodBeanWithImageData;
+import com.web.store.model.HomeBeanWithImageData;
 import com.web.store.model.MovieBean;
 import com.web.store.model.MovieBeanWithImageData;
 import com.web.store.model.RoomBean;
@@ -51,4 +52,5 @@ public interface ProductDao {
 	//新加的---------
 	void cartToDB(CartOrderBean cob);
 	Boolean checkOrderTime(int orderRoomId,String checkDay,String checkStart,String checkEnd)throws ParseException;
+	List<HomeBeanWithImageData> getAllHomesWithImageData();
 }

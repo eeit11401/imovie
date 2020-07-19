@@ -12,6 +12,7 @@ import com.web.store.dao.ProductDao;
 import com.web.store.model.CartOrderBean;
 import com.web.store.model.FoodBean;
 import com.web.store.model.FoodBeanWithImageData;
+import com.web.store.model.HomeBeanWithImageData;
 import com.web.store.model.MovieBean;
 import com.web.store.model.MovieBeanWithImageData;
 import com.web.store.model.RoomBean;
@@ -139,7 +140,7 @@ public class ProductServiecImpl implements ProductServiec {
 		
 		return productDao.getSelectrooms(roomNameId);
 	}
-
+	@Transactional
 	@Override
 	public List<RoomBean> getSelectroomTypes() {
 		
@@ -158,6 +159,11 @@ public class ProductServiecImpl implements ProductServiec {
 			throws ParseException {
 		
 		return productDao.checkOrderTime(orderRoomId,checkDay,checkStart,checkEnd);
+	}
+	@Transactional
+	@Override
+	public List<HomeBeanWithImageData> getAllHomesWithImageData() {
+		return productDao.getAllHomesWithImageData();
 	}
 
 }
