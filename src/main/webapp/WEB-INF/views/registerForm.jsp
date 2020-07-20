@@ -1,330 +1,135 @@
-1<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <head>
 <meta charset="UTF-8">
-<title>加入會員</title>
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<style type="text/css">
-/* span.error { */
-/* 	color: red; */
-/* 	display: inline-block; */
-/* 	font-size: 10pt; */
-/* } */
+<title>login</title>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/css/login.css' type="text/css" />
+<style>
+	.animate form{
+	position: absolute;
+	top: 0px;
+	width: 88%;	
+	padding: 18px 6% 60px 6%;
+	margin:0  35px;
+	background: rgb(247, 247, 247);
+	border: 1px solid rgba(147, 184, 189,0.8);
+	-webkit-box-shadow: 0pt 2px 5px rgba(105, 108, 109,  0.7),	0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+	   -moz-box-shadow: 0pt 2px 5px rgba(105, 108, 109,  0.7),	0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+	        box-shadow: 0pt 2px 5px rgba(105, 108, 109,  0.7),	0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+	-webkit-box-shadow: 5px;
+	-moz-border-radius: 5px;
+		 border-radius: 5px;
 
-/* .error { */
-/* 	color: red; */
-/* 	display: inline-block; */
-/* 	font-size: 10pt; */
-/* } */
+	}
 
-/* input[type=text]{ */
-/* 	font-size: 12pt; */
-/* } */
-
-/* body { */
-/* 	background-attachment: fixed; */
-/* 	background-color: #EBFFEB; */
-/* 	background-repeat: no-repeat; */
-/* 	background-position: 20px 50px; */
-/* } */
-
-/* h1 { */
-/* 	font-family: "標楷體", "新細明體", sans-serif; */
-/* 	font-size: 24px; */
-/* } */
-/* .formBkgnd { */
-/* 	color: #FFFFFF; */
-/* 	background-color: #666666; */
-/* } */
-/* label { */
-/* 	float:left; */
-/* 	width:8em; */
-/* 	font-weight:bold; */
-/* 	color:#000000; */
-/* 	margin-top:10px; */
-/* 	margin-bottom:2px; */
-/* 	margin-right:10px; */
-/* 	text-align: right; */
-/* } */
-
-/* br { */
-/* 	clear:both; */
-/* } */
-/* .fieldWidth { */
-/*     margin-top:10px; */
-/* 	margin-bottom: 2px; */
-/* 	width: 200px; */
-/* 	background:#F6E497; */
-/* 	font-size:1.1em; */
-/* } */
-/* /* 設定字體大小 */
-*
-/
-/* .fontSize { */
-/* 	font-size:1.1em; */
-/* } */
-
-/* #main { */
-/*     position:relative; */
-/* 	left:70px; */
-/* 	width:600px; */
-/* 	height:543px;	 */
-/* 	top: 0px; */
-/* 	z-index:2; */
-/* 	font-size:0.9em;  */
-/* } */
-/* /* 設定傳送鈕的樣式 */
-
-
-
- 
-
-
-
-*
-/
-/* #submit { */
-/* 	width:64px; */
-/* 	height:30px; */
-/* 	font-size:1.2em */
-/* 	color:#FFFFFF; */
-/* 	margin-right:1.5em; */
-/* 	border-width:2px; */
-/* 	border-color: #FFEDAF #B2A268 #B2A268 #FFEDAF; */
-/* 	background:#A9A9A9; */
-/* } */
-/* /* 設定取消鈕的樣式 */
-
-
-
- 
-
-
-
-*
-/
-/* #cancel { */
-/* 	width:64px; */
-/* 	height:30px; */
-/* 	font-size:1.2em */
-/* 	color:#ffffff; */
-/* 	border-width:2px; */
-/* 	border-color: #FFEDAF #B2A268 #B2A268 #FFEDAF; */
-/* 	background:#a9a9a9; */
-/* } */
 </style>
-
 </head>
 <body>
-	<c:set var="funcName" value="REG" scope="session" />
-	<!-- 引入共同的頁首 -->
-<!-- 	<div align='center' id="content"> -->
-	<jsp:include page="Navigation.jsp" />
+	<c:set var="funcName" value="LOG" scope="session" />
+	<c:set var="msg" value="登入" />
+	<c:if test="${ ! empty sessionScope.timeOut }">
+		<c:set var="msg"
+			value="<font color='red'>${sessionScope.timeOut}</font>" />
+	</c:if>
+        <div class="container">
+           
+            <header>
+                <h1>IMovie會員登入系統</h1>
+				
+            </header>
+            <section>				
+                <div id="container_demo" >
+                    <a class="hiddenanchor" id="toregister"></a>
+                    <a class="hiddenanchor" id="tologin"></a>
+                    <div id="wrapper">
+<!--                         <div id="login" class="animate form"> -->
+<%-- 							<form:form method="POST" modelAttribute="loginBean"> --%>
+<!--                                 <h1>登入</h1>  -->
+<!--                                 <p>  -->
+<!--                                     <label for="username" class="uname" > 帳號 </label> -->
+<%--                                     <form:input path="userId" id="username" name="username" required="required" type="text" placeholder="請輸入您的登入帳號"/> --%>
+<!--                                 </p> -->
+<!--                                 <p>  -->
+<!--                                     <label for="password" class="youpasswd"> 密碼 </label> -->
+<%--                                     <form:input  path="password" id="password" name="password" required="required" type="password" placeholder="請輸入您的登入密碼" />  --%>
+<!--                                 </p> -->
+<!--                                 <p class="keeplogin">  -->
+<%-- 									<form:checkbox path="rememberMe"  name="loginkeeping" id="loginkeeping" value="loginkeeping" />  --%>
+<!-- 									<label for="loginkeeping">記住密碼</label> -->
+<!-- 								</p> -->
+<!--                                 <p class="login button">  -->
+<%--                                 <form:errors path="invalidCredentials" class="error" /> --%>
+<!--                                		<input type="submit" data-dismiss="modal" value="login" > -->
+<!--                                    <a href="http://cookingfoodsworld.blogspot.in/" target="_blank" ></a> -->
+<!-- 								</p> -->
 
-		<%--   <c:url var='post_url' value='/_01_register/register' /><br> --%>
-		<%--   action="${post_url}" --%>
-<%-- 		<form:form method="POST" modelAttribute="memberBean" --%>
-<%-- 			enctype='multipart/form-data'> --%>
+<!--                                 <p class="change_link"> -->
+<!-- 									還不是會員? -->
+<!-- 									<a href="#toregister" class="to_register">加入我們</a> -->
+<!-- 								</p> -->
+<%--                             </form:form> --%>
+<!--                         </div> -->
+<!--                         <div id="register" class="animate form"> -->
 
-<!-- 			<Table -->
-<!-- 				style="width: 900px; background-color: #E7CDFF; cellspacing: 0; border: 2px solid black;"> -->
-<!-- 				<tr height="40"> -->
-<!-- 					<td colspan='4' style="text-align: center; vertical-align: middle;"> -->
-<%-- 						<Font color="#006600" size='6' face="標楷體">${AppName}</Font> --%>
-<!-- 					</td> -->
-<!-- 				</tr> -->
-<!-- 				<tr height="36"> -->
-
-<!-- 					<td colspan='4' style="text-align: center; vertical-align: middle;"> -->
-<!-- 						<Font color="#006600" size='5' face="標楷體">加入會員</Font> -->
-<!-- 					</td> -->
-<!-- 				</tr> -->
-<!-- 				<tr height="16"> -->
-<!-- 					<td colspan='4' style="text-align: center; vertical-align: middle;"> -->
-<%-- 						<div class="error">${errorSaveData}<br> --%>
-<!-- 						</div> -->
-<!-- 					</td> -->
-<!-- 				</tr> -->
-
-<!-- 				<tr height="52"> -->
-<!-- 					<td style="width: 90px;"><label class="fontSize">帳號：</label><br>&nbsp; -->
-<!-- 					</td> -->
-<%-- 					<td style="width: 290px;"><form:input path='memberId' --%>
-<%-- 							class="fieldWidth" style="width: 200px;" /><br>&nbsp; <form:errors --%>
-<%-- 							path="memberId" cssClass="error" /></td> --%>
-<!-- 					<td><label class="fontSize">姓名：</label><br>&nbsp;</td> -->
-<%-- 					<td><form:input path='name' class="fieldWidth" --%>
-<%-- 							style="width: 200px;" /><br>&nbsp; <form:errors path="name" --%>
-<%-- 							cssClass="error" /></td> --%>
-<!-- 				<tr height="52"> -->
-<!-- 					<td><label class="fontSize">密碼：</label><br>&nbsp;</td> -->
-<%-- 					<td><form:input path='password' class="fieldWidth" --%>
-<%-- 							style="width: 200px;" /><br>&nbsp; <form:errors --%>
-<%-- 							path="password" cssClass="error" /></td> --%>
-<!-- 					<td><label class="fontSize">密碼確認：</label><br>&nbsp;</td> -->
-<%-- 					<td><form:input path='password1' class="fieldWidth" --%>
-<%-- 							style="width: 200px;" /><br>&nbsp; <form:errors --%>
-<%-- 							path="password1" cssClass="error" /></td> --%>
-
-<!-- 				</tr> -->
-<!-- 				<tr height="52"> -->
-<!-- 					<td><label class="fontSize">地址：</label><br>&nbsp;</td> -->
-<%-- 					<td><form:input path='address' class="fieldWidth" --%>
-<%-- 							style="width: 200px;" /><br>&nbsp; <form:errors --%>
-<%-- 							path="address" cssClass="error" /></td> --%>
-<!-- 					<td><label class="fontSize">電話：</label><br>&nbsp;</td> -->
-<%-- 					<td><form:input type='text' path='tel' class="fieldWidth" --%>
-<%-- 							style="width: 200px;" /><br>&nbsp; <form:errors path="tel" --%>
-<%-- 							cssClass="error" /></td> --%>
-<!-- 				</tr> -->
-<!-- 				<tr height="52"> -->
-<!-- 					<td><label class="fontSize">電子郵件：</label><br>&nbsp;</td> -->
-<%-- 					<td><form:input type='text' path='email' class="fieldWidth" --%>
-<%-- 							style="width: 200px;" /><br>&nbsp; <form:errors --%>
-<%-- 							path="email" cssClass="error" /></td> --%>
-<!-- 					<td><label class="fontSize">照片：</label><br>&nbsp;</td> -->
-<%-- 					<td><form:input path="memberMultipartFile" type='file' /><br>&nbsp; --%>
-<%-- 						<form:errors path="memberMultipartFile" cssClass="error" /></td> --%>
-<!-- 				</tr> -->
-<!-- 				<tr height="42"> -->
-<!-- 					<td colspan='4'> -->
-<!-- 						<div id="btnArea" align="center"> -->
-<!-- 							<input type="submit" name="submit" id="submit" value="儲存" /> <input -->
-<!-- 								type="reset" name="cancel" id="cancel" value="重填"> -->
-<!-- 						</div> -->
-<!-- 					</td> -->
-<!-- 				</tr> -->
-<!-- 			</Table> -->
-<%-- 		</form:form> --%>
-<!-- 	</div> -->
-
-
-
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-8">
-				<div class="card">
-					<div class="card-header">
-						<h1>註冊</h1>
-					</div>
-					<div class="card-body">
+                        <div  class="animate form">
 						<form:form method="POST" modelAttribute="memberBean"
-							enctype='multipart/form-data'>
-							<div class="form-group">
+  							enctype='multipart/form-data'>							  
+							<h1> 註冊 </h1> 
+                               		 <p> 
 								<label for="memberId" class="cols-sm-2 control-label">帳號</label>
-								<div class="cols-sm-10">
-									<div class="input-group">
-										<span class="input-group-addon"><i
-											class="fa fa-user fa" aria-hidden="true"></i></span>
-										<form:input path='memberId' class="form-control"
-											placeholder="請輸入您的帳號" />
-										<form:errors path="memberId" />
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="name" class="cols-sm-2 control-label">姓名</label>
-								<div class="cols-sm-10">
-									<div class="input-group">
-										<span class="input-group-addon"><i
-											class="fa fa-user fa" aria-hidden="true"></i></span>
-										<form:input path='name' class="form-control"
-											placeholder="請輸入您的姓名" />
-										<form:errors path="name" />
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="email" class="cols-sm-2 control-label">Email</label>
-								<div class="cols-sm-10">
-									<div class="input-group">
-										<span class="input-group-addon"><i
-											class="fa fa-envelope fa" aria-hidden="true"></i></span>
-										<form:input type='text' path='email' class="form-control"
-											placeholder="請輸入您的Email" />
-										<form:errors path="email" />
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="password" class="cols-sm-2 control-label">密碼</label>
-								<div class="cols-sm-10">
-									<div class="input-group">
-										<span class="input-group-addon"><i
-											class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-										<form:input path='password' type="password"
-											class="form-control" name="password" id="password"
-											placeholder="請輸入您的密碼" />
-										<form:errors path="password" />
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="password" class="cols-sm-2 control-label">確認密碼</label>
-								<div class="cols-sm-10">
-									<div class="input-group">
-										<span class="input-group-addon"><i
-											class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-										<form:input path='password1' type="password"
-											class="form-control" placeholder="再次確認您的密碼" />
-										<form:errors path="password1" />
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="address" class="cols-sm-2 control-label">地址</label>
-								<div class="cols-sm-10">
-									<div class="input-group">
-										<span class="input-group-addon"><i
-											class="fa fa-envelope fa" aria-hidden="true"></i></span>
-										<form:input path='address' class="form-control"
-											placeholder="請輸入您的地址" />
-										<form:errors path="address" />
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="tel" class="cols-sm-2 control-label">電話</label>
-								<div class="cols-sm-10">
-									<div class="input-group">
-										<span class="input-group-addon"><i
-											class="fa fa-envelope fa" aria-hidden="true"></i></span>
-										<form:input type='text' path='tel' class="form-control"
-											placeholder="請輸入您的電話" />
-										<form:errors path="tel" />
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="tel" class="cols-sm-2 control-label">照片上傳</label>
-								<form:input path="memberMultipartFile" type='file' />
-								<form:errors path="memberMultipartFile" />
-							</div>
-							<div id="btnArea" align="center">
-								<input type="submit" name="submit" id="submit" value="儲存" /> <input
-									type="reset" name="cancel" id="cancel" value="重填">
-							</div>
-							<div class="login-register">
-											<a href="<c:url value='/_02_login/login' />">已經有帳號?</a>
-							</div>
-						</form:form>
-					</div>
-
-				</div>
-			</div>
-		</div>
-	</div>
-
+										<form:input path='memberId' placeholder="請輸入您的帳號" />		 
+											</p>
+                                <p> 
+                                    <label for="usernamesignup" class="uname" >Your username</label>
+                                    <form:input path="name" id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="輸入您的姓名" />
+                                </p>
+                                <p> 
+                                    <label for="emailsignup" class="youmail"  > Your email</label>
+                                    <form:input path='email' id="emailsignup" name="emailsignup" required="required" type="email" placeholder="輸入您的Email"/> 
+                                </p>
+                                <p> 
+                                    <label for="passwordsignup" class="" >Your password </label>
+                                    <form:input path='password' id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="輸入您的密碼"/>
+                                </p>
+                                <p> 
+                                    <label for="passwordsignup_confirm" class="youpasswd" >Please confirm your password </label>
+                                    <form:input path='password1' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="再次確認您的密碼"/>
+                                </p>
+                                <p> 
+                                    <label for="address" class="youaddr" >address </label>
+                                    <form:input path='address' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="text" placeholder="address"/>
+                                </p>
+                                <p> 
+                                    <label for="tel" class="youpasswd" >text </label>
+                                    <form:input path='tel' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="text" placeholder="再次確認您的密碼"/>
+                                </p>
+                                <p>
+                                    <label for="file" class="youfile" >照片 </label>
+                                	<form:input path="memberMultipartFile" type='file' />
+                                </p>
+                                <p class="signin button"> 
+									<input type="submit" value="送出"/> 
+								</p>
+                                <p class="change_link">  
+									已有帳號 ?
+									<a href="<c:url value='/_02_login/login' />" class="to_register"> 回到登入畫面 </a>
+								</p>
+                            </form:form>
+                        </div>
+						
+                    </div>
+                </div>  
+            </section>
+        </div>
 </body>
 </html>
