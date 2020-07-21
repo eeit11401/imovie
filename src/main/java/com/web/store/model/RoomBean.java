@@ -32,13 +32,14 @@ public class RoomBean implements Serializable{
 	private String roomNote= null;
 	@Transient
 	private String roomState = null;
+	private String roomPopulation;
 	
 	
 	public RoomBean() {
 		super();
 	}
 	public RoomBean(Integer roomId, String roomName, String roomSize, String roomFileName, String roomPrice,
-			Blob roomImg, String roomNote, String roomState,Integer roomNameId) {
+			Blob roomImg, String roomNote, String roomState,Integer roomNameId,String roomPopulation) {
 		super();
 		this.roomId = roomId;
 		this.roomName = roomName;
@@ -49,6 +50,7 @@ public class RoomBean implements Serializable{
 		this.roomImg = roomImg;
 		this.roomNote = roomNote;
 		this.roomState = roomState;
+		this.roomPopulation = roomPopulation;
 	}
 	
 	
@@ -106,6 +108,11 @@ public class RoomBean implements Serializable{
 	public void setRoomState(String roomState) {
 		this.roomState = roomState;
 	}
-	
+	public String getRoomPopulation() {
+		return roomPopulation;
+	}
+	public void setRoomPopulation(String roomPopulation) {
+		this.roomPopulation = roomPopulation;
+	}
 }
 	

@@ -21,8 +21,7 @@ public class CartOrderBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer orderNo;
+	private String orderNo;
 	
 	@Transient
 	private RoomBean room;
@@ -48,7 +47,7 @@ public class CartOrderBean implements Serializable{
 	}
 	
 
-	public CartOrderBean(Integer orderNo, RoomBean room, MovieBean movie, Integer roomId, Integer movieId,
+	public CartOrderBean(String orderNo, RoomBean room, MovieBean movie, Integer roomId, Integer movieId,
 			String memberId, Integer totalAmount, String orderDate, String orderDateStart, String orderDateEnd,
 			Set<CartOrderFood> orderFood) {
 		super();
@@ -66,11 +65,11 @@ public class CartOrderBean implements Serializable{
 	}
 
 
-	public Integer getOrderNo() {
+	public String getOrderNo() {
 		return orderNo;
 	}
 
-	public void setOrderNo(Integer orderNo) {
+	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
 	}
 

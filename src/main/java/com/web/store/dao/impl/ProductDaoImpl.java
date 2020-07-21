@@ -23,10 +23,12 @@ import com.web.store.dao.ProductDao;
 import com.web.store.model.CartOrderBean;
 import com.web.store.model.FoodBean;
 import com.web.store.model.FoodBeanWithImageData;
+import com.web.store.model.Food_Genre;
 import com.web.store.model.HomeBean;
 import com.web.store.model.HomeBeanWithImageData;
 import com.web.store.model.MovieBean;
 import com.web.store.model.MovieBeanWithImageData;
+import com.web.store.model.Movie_Genre;
 import com.web.store.model.RoomBean;
 import com.web.store.model.RoomBeanWithImageData;
 
@@ -695,6 +697,146 @@ public class ProductDaoImpl implements ProductDao {
 			return false;
 		}
 	
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Boolean checkOrderNo(String checkNum) {
+		Session session = factory.getCurrentSession();
+		String hqlStr ="FROM CartOrderBean cob WHERE cob.orderNo = :Num";
+		List<String> listNum = session.createQuery(hqlStr).setParameter("Num", checkNum).getResultList();
+		if(listNum.size() == 0) {
+			System.out.println("此編號還沒被使用");
+			return true; 
+		}else {
+			System.out.println("編號被使用");
+			return false;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Movie_Genre> getAllMovieType() {
+		Session session = factory.getCurrentSession();
+		String hqlStr ="FROM Movie_Genre mg";
+		List<Movie_Genre> movieGenre = session.createQuery(hqlStr).getResultList();
+		
+		return movieGenre;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<MovieBean> getMovieByString(String movieType) {
+		Session session = factory.getCurrentSession();
+		String hqlStr ="FROM MovieBean mb WHERE mb.movieGenre1 like :type";
+//		String hqlStr2 ="FROM MovieBean mb WHERE mb.movieGenre2 = :type2";
+		List<MovieBean> listMovie = session.createQuery(hqlStr).setParameter("type", "%"+movieType+"%").getResultList();
+//		List<MovieBean> listMovie2 = session.createQuery(hqlStr).setParameter("type2", movieType).getResultList();
+//		for(MovieBean bean:listMovie2) {
+//			listMovie.add(bean);
+//		}
+		String hqlStrAll ="FROM MovieBean";
+		List<MovieBean> allMovie = session.createQuery(hqlStrAll).getResultList();
+		System.out.println(allMovie.size());
+		System.out.println(movieType);
+		if(movieType.equals("全部")) {
+			System.out.println(movieType);
+			return allMovie;
+		}else {
+			return listMovie;			
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<Integer> getBookedList() { //至今為止全部訂單，不考慮不同月份
+		Session session = factory.getCurrentSession();
+		String hqlStr ="Select Distinct roomId From CartOrderBean";
+		List<Integer> room = session.createQuery(hqlStr).getResultList();
+//		System.out.println(room);
+//		System.out.println(room.toString());
+		ArrayList<Integer> roomIds = new ArrayList<Integer>();
+		for(Integer beans:room) {
+			roomIds.add(beans);
+		}
+		return roomIds;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public double getRate(int roomId) {
+		Session session = factory.getCurrentSession();
+		String hqlAll ="FROM CartOrderBean";
+		List<CartOrderBean> allRoom = session.createQuery(hqlAll).getResultList();
+		double allOrderSize = allRoom.size();
+		System.out.println("共幾筆訂單 = "+allOrderSize);
+		String hqlThis ="FROM CartOrderBean cob WHERE cob.roomId = :rId";
+		List<CartOrderBean> room = session.createQuery(hqlThis).setParameter("rId", roomId).getResultList();
+		double thisSize = room.size();
+		System.out.println("此ID訂單  = "+thisSize);
+		double bookRate = thisSize/allOrderSize;
+		System.out.println(bookRate);
+		return bookRate;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Food_Genre> getAllFoodType() {
+		Session session = factory.getCurrentSession();
+		String hqlStr ="FROM Food_Genre";
+		List<Food_Genre> foodGenre = session.createQuery(hqlStr).getResultList();
+		
+		return foodGenre;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<FoodBean> getFoodByString(String foodType) {
+		Session session = factory.getCurrentSession();
+		String hqlStr ="FROM FoodBean fb WHERE fb.foodType like :type";
+
+		List<FoodBean> listFood = session.createQuery(hqlStr).setParameter("type", "%"+foodType+"%").getResultList();
+
+		String hqlStrAll ="FROM FoodBean";
+		List<FoodBean> allFood = session.createQuery(hqlStrAll).getResultList();
+		System.out.println(allFood.size());
+		System.out.println(foodType);
+		if(foodType.equals("全部")) {
+			System.out.println(foodType);
+			return allFood;
+		}else {
+			return listFood;			
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> getAllRoom() {
+		Session session = factory.getCurrentSession();
+		String hqlStr ="Select Distinct roomSize From RoomBean";
+		List<String> roomGenre = session.createQuery(hqlStr).getResultList();
+		
+		return roomGenre;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RoomBean> getRoomByString(String roomType) {
+		Session session = factory.getCurrentSession();
+		String hqlStr ="FROM RoomBean rb WHERE rb.roomSize like :type";
+
+		List<RoomBean> listRoom = session.createQuery(hqlStr).setParameter("type", "%"+roomType+"%").getResultList();
+
+		String hqlStrAll ="FROM RoomBean";
+		List<RoomBean> allRoom = session.createQuery(hqlStrAll).getResultList();
+		System.out.println(allRoom.size());
+		System.out.println(roomType);
+		if(roomType.equals("全部")) {
+			System.out.println(roomType);
+			return allRoom;
+		}else {
+			return listRoom;			
+		}
 	}
 
 

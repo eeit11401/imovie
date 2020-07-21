@@ -9,10 +9,13 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -28,16 +31,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.request.WebRequest;
 
+import com.web.store.model.CartOrderBean;
 import com.web.store.model.FoodBean;
 import com.web.store.model.FoodBeanWithImageData;
+import com.web.store.model.FoodShoppingCart;
+import com.web.store.model.Food_Genre;
 import com.web.store.model.HomeBeanWithImageData;
 import com.web.store.model.MovieBean;
 import com.web.store.model.MovieBeanWithImageData;
+import com.web.store.model.Movie_Genre;
 import com.web.store.model.RoomBean;
 import com.web.store.model.RoomBeanWithImageData;
 import com.web.store.service.ProductServiec;
@@ -46,7 +56,7 @@ import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
 
 @Controller
-@SessionAttributes({"FoodCart","allFood","room","movie","main","dessert","drink","packa"})
+@SessionAttributes({"FoodCart","allFood","room","movie","main","dessert","drink","packa","LoginOK","OrderCart","categoryList"})
 public class ProductController {
 	public static AllInOne all;
 	@Autowired
@@ -98,10 +108,10 @@ public class ProductController {
 	
 	//Food Ajax分類顯示	
 	@RequestMapping(value ="/allFood",method = RequestMethod.GET)
-	public ResponseEntity<List<FoodBean>>  allFoodPublishers(@RequestParam Integer foodTypeId, Model model)  {		
-		List<FoodBean> list = service.getSelectfoods(foodTypeId);
+	public ResponseEntity<List<FoodBean>>  allFoodPublishers(@RequestParam ("foodTypeStr") String foodTypeStr, Model model)  {		
+		List<FoodBean> list = service.getFoodByString(foodTypeStr);
 		ResponseEntity<List<FoodBean>> re = new ResponseEntity<>(list, HttpStatus.OK);
-		 System.out.println("F----------------------"+foodTypeId);
+//		 System.out.println("F----------------------"+foodTypeId);
 		return re;
 	}
 	//Movie Ajax分類顯示
@@ -114,17 +124,17 @@ public class ProductController {
 	}
 	//Room Ajax分類顯示
 	@RequestMapping(value ="/allRoom",method = RequestMethod.GET)
-	public ResponseEntity<List<RoomBean>>  allRoomPublishers(@RequestParam Integer roomNameId, Model model)  {		
-		List<RoomBean> list = service.getSelectrooms(roomNameId);
+	public ResponseEntity<List<RoomBean>>  allRoomPublishers(@RequestParam ("roomTypeStr")String TypeStr, Model model)  {		
+		List<RoomBean> list = service.getRoomByString(TypeStr);
 		ResponseEntity<List<RoomBean>> ro = new ResponseEntity<>(list, HttpStatus.OK);
-		 System.out.println("R----------------------"+roomNameId);
+//		 System.out.println("R----------------------"+roomNameId);
 		return ro;
 	}
 	
 	//Food 方法
 	@RequestMapping("/menu")
 	public String list(Model model, String type) {
-		List<FoodBean> list = service.getSelectfoodTypes();
+		List<Food_Genre> list = service.getAllFoodType ();
 		List<FoodBean> beans = service.getFoodByCategory(type);
 		model.addAttribute("categoryList", list);
 		model.addAttribute("menu", beans);
@@ -132,24 +142,34 @@ public class ProductController {
 
 	}
 		
-
+	@GetMapping("/product")
+	public String getProductById(@RequestParam Integer id, Model model) {
+		model.addAttribute("product", service.getProductById(id));
+		return "product";
+	}
 	
 	// movie方法
-		@RequestMapping("/movie")
-		public String list1(Model model, String type) {
-			List<MovieBean> list = service.getSelectmovieTypes();
-			List<MovieBean> beans = service.getProductsByCategory1(type);
-			model.addAttribute("categoryList", list);
-			model.addAttribute("movie", beans);			
-			return "movie";
-		}
-
-
+	@RequestMapping("/movie")
+	public String list1(Model model, String type) {
+//		List<MovieBean> list = service.getSelectmovieTypes();
+		List<MovieBean> beans = service.getProductsByCategory1(type);
+		List<Movie_Genre> movieTList = service.getAllMovieType ();
+		
+		model.addAttribute("categoryList", movieTList);
+		model.addAttribute("movie", beans);			
+		return "movie";
+	}
+	
+	@GetMapping("/product1")
+	public String getProductById1(@RequestParam Integer id, Model model) {
+		model.addAttribute("product1", service.getProductById1(id));
+		return "product1";
+	}
 
 	// room方法
 	@RequestMapping("/room")
 	public String list2(Model model,String type) {
-		List<RoomBean> list = service.getSelectroomTypes();
+		List<String> list = service.getAllRoom ();
 		List<RoomBean> beans = service.getProductsByCategory2(type);
 		model.addAttribute("categoryList", list);
 		model.addAttribute("room", beans);
@@ -157,7 +177,11 @@ public class ProductController {
 
 	}
 
-
+	@GetMapping("/product2")
+	public String getProductById2(@RequestParam Integer id, Model model) {
+		model.addAttribute("product2", service.getProductById2(id));
+		return "product2";
+	}
 
 //-----------------------測試購物車0704、0705------------------------
 
@@ -172,7 +196,7 @@ public class ProductController {
 		List<FoodBean> Foodbeans = service.getAllProducts();
 		model.addAttribute("Food", Foodbeans);
 		
-		List<MovieBean> list = service.getSelectmovieTypes(); //電影類型
+		List<Movie_Genre> list = service.getAllMovieType(); //電影類型
 		model.addAttribute("categoryList", list);
 		
 		
@@ -201,6 +225,7 @@ public class ProductController {
 					break;
 			}
 		}
+		
 		model.addAttribute("main",stapleFood);
 		model.addAttribute("dessert",dessert);
 		model.addAttribute("drink",drink);
@@ -499,19 +524,36 @@ public class ProductController {
 		}
 		//綠界測試
 		@RequestMapping("/opay")
-		public void opay(HttpServletResponse response,String merchantTradeNo, String tradeDesc,String itemName,String totalAmount) throws UnsupportedEncodingException {
+		public void opay(Model model,HttpServletResponse response, WebRequest webRequest, SessionStatus status,@RequestParam(name = "finalTotal") String totalAmount , 
+				@RequestParam(name = "orderDate")String orderDate , 
+				@RequestParam(name = "timeStart")String orderStart , 
+				@RequestParam(name = "timeEnd")String orderEnd , 
+				@RequestParam(name = "orderNum")String orderNo) throws UnsupportedEncodingException {
 			
+			CartOrderBean cob = (CartOrderBean) model.getAttribute("OrderCart");
+			FoodShoppingCart fsc = (FoodShoppingCart) model.getAttribute("FoodCart");
+			
+			System.out.println("TotalAmount = "+cob.getTotalAmount());
+			System.out.println("cobID = "+cob.getOrderNo());
+			System.out.println("fsc = "+fsc);
+			
+			service.cartToDB(cob);
+			status.setComplete();
+			webRequest.removeAttribute("FoodCart", WebRequest.SCOPE_SESSION);
+			webRequest.removeAttribute("OrderCart", WebRequest.SCOPE_SESSION);
 			initial();
 			try {
 				AioCheckOutALL obj = new AioCheckOutALL();
 				SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 				Date date = new Date();
 				String strDate = sdFormat.format(date);
-				obj.setMerchantTradeNo("123");
-				obj.setMerchantTradeDate("123");
-				obj.setTotalAmount("12000");
-				obj.setTradeDesc("nothing");
-				obj.setItemName("my");
+				obj.setMerchantTradeNo(orderNo);
+				
+				obj.setMerchantTradeDate(strDate);
+				obj.setTotalAmount(totalAmount);
+//				obj.setTradeDesc("請提早至少10分鐘到現場確認。如欲取消訂單，最晚預約前一天來電取消。");
+				obj.setTradeDesc("Imovie+%e9%9b%bb%e5%bd%b1%e9%a4%a8");
+				obj.setItemName("Imovie 預訂服務");
 				obj.setReturnURL("http://211.23.128.214:5000");
 				obj.setClientBackURL("http://localhost:8080/Imovie/");
 				obj.setNeedExtraPaidInfo("N");
@@ -532,5 +574,87 @@ public class ProductController {
 				e.printStackTrace();
 			}
 		}
+		
+		@PostMapping(value= "/searchMovieType", produces = {"application/json"})
+		protected ResponseEntity<List<MovieBean>> searchType(Model model, HttpServletRequest request, HttpServletResponse response , 
+				 @RequestParam (value = "typeStr") String movieTStr){
+			
+			List<MovieBean> typeMovie = service.getMovieByString(movieTStr);
+			ResponseEntity<List<MovieBean>> movies = new ResponseEntity<>(typeMovie,HttpStatus.OK);
+			
+			System.out.println("看到此行，分類已經到底囉");
+			return movies;
+		}
+		
+		@GetMapping(value= "/roomAnalysis", produces = {"application/json"})
+		protected ResponseEntity<Map<String,String>> toChart(Model model, HttpServletRequest req) {
+			Map<String,String> map = new HashMap<>();
+			ArrayList<Integer> bookedId = service.getBookedList();
+			System.out.println("?????東西呢");
+			DecimalFormat df = new DecimalFormat("##.00");
+			
+			
+			String nameStr = "";
+			String rateStr = "";
+//			ArrayList<String> roomName = new ArrayList<String>();
+//			ArrayList<String> roomRateStr = new ArrayList<String>();
+			int listSize = bookedId.size();
+			int test = 0;
+			for(Integer id : bookedId) {
+				
+				int roomId = (int)id;
+				System.out.println("getRate = "+service.getRate(roomId));
+				double rate = Double.parseDouble(df.format(service.getRate(roomId)*100));
+				String bookedRate = String.valueOf(rate);
+				System.out.println("轉換前double:"+rate+" ,轉換後:"+bookedRate);
+				String name = service.getProductById2(roomId).getRoomName();
+				
+				
+				test++;
+				if(test==listSize) {
+					nameStr += "'"+name+"'";
+					rateStr += bookedRate;
+				}else {
+					nameStr += "'"+name+"', ";
+					rateStr += bookedRate+", ";
+				}
+			}
+			map.put("roomName",nameStr);
+			map.put("roomRate",rateStr);
+			System.out.println("wtfwtfwtfwtfwtf");
+			ResponseEntity<Map<String,String>> re = new ResponseEntity<>(map,HttpStatus.OK);
+			return re;
+		}
+		@GetMapping("/myorder")
+		public String myorder(Model model, HttpServletRequest req) { 
+			return "MyOrder";
+		}
+
+//		@GetMapping("/draw")
+//		public String Draw(Model model, HttpServletRequest req) { 
+//			List<Integer> list = service.getMovieChose(); //取電影id
+//			model.addAttribute("MovieChose", list);	
+//			
+//
+//			for(Integer i:list) {
+//			//for (int i = 0; i < list.size(); i++) {
+//			System.out.println("++++++++++++++++++++++++++++"+i);	      
+//			List<MovieBean> list2 = service.getMovieTypeById(i);
+//			
+////			List<MovieBean> list2 = service.getMovieTypeById(11); 
+//			for(MovieBean W:list2) {
+//				System.out.println("============"+W);
+//			}
+//			
+//			model.addAttribute("MovieType", list2);		
+//		    }
+//						
+//			return "Draw";
+//		}
+		@GetMapping("/hihihi")
+		public String wtf(Model model, HttpServletRequest req) {
+			return "columnChart";
+		}
+		
 		
 }

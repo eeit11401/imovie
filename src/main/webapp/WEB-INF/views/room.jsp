@@ -12,11 +12,17 @@
 <meta name="author"
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Jekyll v4.0.1">
+<title></title>
+
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/4.5/examples/album/">
-<link rel='stylesheet' href='js/bootstrap.bundle.js' type="text/js" />
-<link rel='stylesheet' href='css/bootstrap.css' type="text/css" />
-<title>menu</title>
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/js/bootstrap.bundle.js'
+	type="text/js" />
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/css/bootstrap.css'
+	type="text/css" />
+<title>Room</title>
 <style>
 p {
 	color: white;
@@ -27,49 +33,51 @@ div {
 	color: white;
 }
 </style>
-
 </head>
-
 <body>
-	<c:set var="funcName" value="menu" scope="session" />
+	<c:set var="funcName" value="Room" scope="session" />
 	<jsp:include page="Navigation.jsp" />
-	<jsp:include page="FoodClass.jsp" />
+	<jsp:include page="RoomClass.jsp" />
+
 	<div class='c1'>
 		<main role="main">
 			<div class="container">
-				<div class="row" id='food'></div>
+				<div class="row" id='room'></div>
 			</div>
 		</main>
 	</div>
 	<script>
 		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "<c:url value='/allFoods' />", true);
+		xhr.open("GET", "<c:url value='/allRooms ' />", true);
 		xhr.send();
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				var content = "";
-				var foods = JSON.parse(xhr.responseText);
-				for (var i = 0; i < foods.length; i++) {
-					content += "<div class='col-4 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;'>"
+				var rooms = JSON.parse(xhr.responseText);
+				console.log("rooms:" + rooms);
+				for (var i = 0; i < rooms.length; i++) {
+					content += "<div class='col-3 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;margin: 10px;'>"
 							+ "<div>"
 							+ "<img width='100%' height='100%' "
 							+ " src='"
-							+ foods[i].imageData
+							+ rooms[i].imageData
 							+ "'>"
 							+ "</div>"
-							+ "<p class='card-text'> 餐點名稱 : "
-							+ foods[i].bean.foodName
+							+ "<p class='card-text'>包廂類型 : "
+							+ rooms[i].bean.roomName
+							+ "</p>"
+							+ "<p class='card-text'>人數 : "
+							+ rooms[i].bean.roomSize
 							+ "</p>"
 							+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>價錢 : "
-							+ foods[i].bean.foodPrice
-							+ " 元 </small></div>"
+							+ rooms[i].bean.roomPrice
+							+ "元</small></div>"
 							+ "</div>"
 					content += "</div>";
 				}
-				var divs = document.getElementById("food");
+				var divs = document.getElementById("room");
 				divs.innerHTML = content;
 			}
-
 		}
 	</script>
 
@@ -79,8 +87,9 @@ div {
 	<script>
 		window.jQuery
 				|| document
-						.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
+						.write('<script src="js/jquery.slim.min.js"><\/script>')
 	</script>
+	<script src="js/bootstrap.bundle.js"></script>
 </body>
 
 </html>

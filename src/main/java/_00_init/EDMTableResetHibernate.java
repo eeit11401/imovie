@@ -12,7 +12,6 @@ import org.hibernate.Transaction;
 
 import com.web.store.model.FoodBean;
 import com.web.store.model.Food_Genre;
-import com.web.store.model.HomeBean;
 import com.web.store.model.MovieBean;
 import com.web.store.model.Movie_Genre;
 import com.web.store.model.RoomBean;
@@ -113,13 +112,14 @@ public class EDMTableResetHibernate {
 				String[] token = line.split("\\|");
 				RoomBean room = new RoomBean();
 				room.setRoomName(token[0]);
-				room.setRoomNameId(Integer.parseInt(token[1].trim()));
-				room.setRoomFileName(SystemUtils2018.extractFileName(token[2].trim()));
+				room.setRoomFileName(SystemUtils2018.extractFileName(token[1].trim()));
 				// 讀取圖片檔
-				Blob blob = SystemUtils2018.fileToBlob(token[3].trim());
+				Blob blob = SystemUtils2018.fileToBlob(token[2].trim());
 				room.setRoomImg(blob);
-				room.setRoomSize(token[4]);
-				room.setRoomPrice(token[5]);
+				room.setRoomSize(token[3]);
+				room.setRoomPrice(token[4]);
+				room.setRoomPopulation(token[5]);
+				room.setRoomNameId(Integer.parseInt(token[6]));
 				session.save(room);
 				System.out.println("新增一筆room紀錄成功");
 			}
@@ -131,38 +131,9 @@ public class EDMTableResetHibernate {
 			e.printStackTrace();
 			tx.rollback();
 		}
-		
-		File file2 = new File("data/Home.txt");
-		try (FileInputStream fis = new FileInputStream(file2);
-				InputStreamReader isr = new InputStreamReader(fis, "UTF8");
-				BufferedReader br = new BufferedReader(isr);) {
-			while ((line = br.readLine()) != null) {
-				System.out.println("line=" + line);
-				// 去除 UTF8_BOM: \uFEFF
-				if (line.startsWith(UTF8_BOM)) {
-					line = line.substring(1);
-				}
-				String[] token = line.split("\\|");
-				HomeBean home = new HomeBean();
-				home.setHomeName(token[0]);
-				home.setHomeFileName(SystemUtils2018.extractFileName(token[1].trim()));
-				// 讀取圖片檔
-				Blob blob = SystemUtils2018.fileToBlob(token[2].trim());
-				home.setHomeImg(blob);
-				session.save(home);
-				System.out.println("新增一筆home紀錄成功");
-			}
-			// 印出資料新增成功的訊息
-			session.flush();
-			System.out.println("home資料新增成功");
-		} catch (Exception e) {
-			System.err.println("新建表格時發生例外: " + e.getMessage());
-			e.printStackTrace();
-			tx.rollback();
-		}
 //-------------------------------以下genre-------------------------------------
-		File file3 = new File("data/foodGenre.txt");
-		try (FileInputStream fis = new FileInputStream(file3);
+		File file2 = new File("data/foodGenre.txt");
+		try (FileInputStream fis = new FileInputStream(file2);
 				InputStreamReader isr = new InputStreamReader(fis, "UTF8");
 				BufferedReader br = new BufferedReader(isr);) {
 			while ((line = br.readLine()) != null) {
@@ -187,8 +158,8 @@ public class EDMTableResetHibernate {
 			tx.rollback();
 		}
 		
-		File file4 = new File("data/movieGenre.txt");
-		try (FileInputStream fis = new FileInputStream(file4);
+		File file3 = new File("data/movieGenre.txt");
+		try (FileInputStream fis = new FileInputStream(file3);
 				InputStreamReader isr = new InputStreamReader(fis, "UTF8");
 				BufferedReader br = new BufferedReader(isr);) {
 			while ((line = br.readLine()) != null) {

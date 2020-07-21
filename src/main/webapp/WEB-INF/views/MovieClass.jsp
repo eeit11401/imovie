@@ -20,18 +20,19 @@
 <body>
 	<div class='c2'>
 		電影類型: <select id='publish' onchange="Movies()">
+			<option value='全部'>全部</option>
 			<c:forEach var='category' items='${categoryList}'>
-				<option value='${category.movieTypeId}'>${category.movieGenre1}</option>
+				<option value='${category.mGenreName}'>${category.mGenreName}</option>
 			</c:forEach>
 		</select>
 	</div>
 
 	<script>
 		function Movies() {
-			var movieTypeId = document.getElementById('publish').value;
+			var movieTypeStr = document.getElementById('publish').value;
 			var xhr = new XMLHttpRequest();
-			xhr.open("GET", "<c:url value='/allMovie?movieTypeId="
-					+ movieTypeId + "'/>", true);
+			xhr.open("POST", "<c:url value='/searchMovieType?typeStr="
+					+ movieTypeStr + "'/>", true);
 			xhr.send();
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
@@ -43,7 +44,8 @@
 						content += "<div class='col-4 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;'>"
 								+ "<div>"
 								+ "<img width='100%' height='100%' "
-								+ " src='"
+								+ ' src="' + "<c:url value='/getPicture1/"+movies[i].movieId+"'/>" +'"/>'
+								
 								+ movies[i].movieFileName
 								+ "'>"
 								+ "</div>"

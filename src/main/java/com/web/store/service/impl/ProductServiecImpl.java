@@ -1,6 +1,7 @@
 package com.web.store.service.impl;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,9 +13,11 @@ import com.web.store.dao.ProductDao;
 import com.web.store.model.CartOrderBean;
 import com.web.store.model.FoodBean;
 import com.web.store.model.FoodBeanWithImageData;
+import com.web.store.model.Food_Genre;
 import com.web.store.model.HomeBeanWithImageData;
 import com.web.store.model.MovieBean;
 import com.web.store.model.MovieBeanWithImageData;
+import com.web.store.model.Movie_Genre;
 import com.web.store.model.RoomBean;
 import com.web.store.model.RoomBeanWithImageData;
 import com.web.store.service.ProductServiec;
@@ -164,6 +167,61 @@ public class ProductServiecImpl implements ProductServiec {
 	@Override
 	public List<HomeBeanWithImageData> getAllHomesWithImageData() {
 		return productDao.getAllHomesWithImageData();
+	}
+	
+	@Transactional
+	@Override
+	public Boolean checkOrderNo(String checkNum) {
+		return productDao.checkOrderNo(checkNum);
+	}
+	
+	
+	@Transactional
+	@Override
+	public List<Movie_Genre> getAllMovieType() {
+		return productDao.getAllMovieType();
+	}
+	
+	@Transactional
+	@Override
+	public List<MovieBean> getMovieByString(String movieType) {
+		return productDao.getMovieByString(movieType);
+	}
+
+	@Transactional
+	@Override
+	public ArrayList<Integer> getBookedList() {
+		return productDao.getBookedList();
+	}
+
+	@Transactional
+	@Override
+	public double getRate(int roomId) {
+		return productDao.getRate(roomId);
+	}
+	
+	@Transactional
+	@Override
+	public List<Food_Genre> getAllFoodType() {
+		return productDao.getAllFoodType();
+	}
+	
+	@Transactional
+	@Override
+	public List<FoodBean> getFoodByString(String foodType) {
+		return productDao.getFoodByString(foodType);
+	}
+	
+	@Transactional
+	@Override
+	public List<String> getAllRoom() {
+		return productDao.getAllRoom();
+	}
+	
+	@Transactional
+	@Override
+	public List<RoomBean> getRoomByString(String roomType) {
+		return productDao.getRoomByString(roomType);
 	}
 
 }

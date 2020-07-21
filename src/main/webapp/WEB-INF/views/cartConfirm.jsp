@@ -35,8 +35,11 @@
 		<tr>
 			<td id="title">您的訂單</td>
 		</tr>
+<!-- 		<tr> -->
+<%-- 			<td>1.訂單編號： ${OrderCart.orderNo}</td> --%>
+<!-- 		</tr> -->
 		<tr>
-			<td>1.訂單編號： ${OrderCart.orderNo}</td>
+			<td>1.會員ID :   ***${OrderCart.memberId}***</td>
 		</tr>
 		<tr>
 		    <td>2.包廂名稱：${OrderCart.room.roomName}&nbsp;&nbsp;&nbsp;&nbsp;NT. ${OrderCart.room.roomPrice}</td>
@@ -62,20 +65,32 @@
 				<td>&nbsp;&nbsp;&nbsp;&nbsp;${food.foodTitle}
 				<span style="text-align:right">&nbsp;&nbsp;&nbsp;&nbsp;
 					NT.${food.foodPrice}&nbsp;&nbsp;X&nbsp;&nbsp;${food.qty}&nbsp;&nbsp;=&nbsp;&nbsp;NT.${food.foodPrice*food.qty}</span></td>
-				 <c:set var="row_total" value="${row_total + (food.foodPrice*food.qty) }" />
+<%-- 				 <c:set var="row_total" value="${row_total + (food.foodPrice*food.qty) }" /> --%>
 				</tr>
 			</c:forEach>		
 		<tr>
-     		 <td style="text-align:center">總金額：NT. ${row_total+OrderCart.room.roomPrice}</td> 
+			
+     		 <td style="text-align:center">總金額：NT. ${OrderCart.totalAmount}</td> 
 		</tr>
 		<tr>
 		<td style="text-align:center">
-		<FORM style="display:inline-block" action="<c:url value='/insert.do' />" method="GET">
+<%-- 		<FORM style="display:inline-block" action="<c:url value='/insert.do' />" method="GET"> --%>
+		<FORM style="display:inline-block" action="<c:url value='/opay' />" method="GET">
+			<Input type='hidden' name='finalTotal' value='${OrderCart.totalAmount}'>
+			<Input type='hidden' name='orderDate' value='${OrderCart.orderDate}'>
+			<Input type='hidden' name='timeStart' value='${OrderCart.orderDateStart}'>
+			<Input type='hidden' name='timeEnd' value='${OrderCart.orderDateEnd}'>
+			<Input type='hidden' name='orderNum' value='${OrderCart.orderNo}'>
+
+			
 			<Input type='submit' class="btn btn-danger"  value='確認'>
 		</FORM>
 		<FORM style="display:inline-block" action="<c:url value='/reset.do'/>"  method="GET">
 			<Input type="submit" class="btn btn-default" id="re" value='回上一步'>
 		</FORM>
+<%-- 		<FORM style="display:inline-block" action="<c:url value='/opay' />" method="GET"> --%>
+<!-- 			<Input type='submit' class="btn btn-default"  value='綠界'> -->
+<!-- 		</FORM> -->
 		</td>
 		</tr>
 		

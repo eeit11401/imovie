@@ -20,44 +20,48 @@
 </style>
 </head>
 <body>
+	
 	<div class='c2'>
-		餐點類型: <select id='publish' onchange="Foods()">
-			<option value='全部'>全部</option>
-			<c:forEach var='category' items='${categoryList}'>
-				<option value='${category.fGenreName}'>${category.fGenreName}</option>
-			</c:forEach>
-		</select>
+	包廂類型:<select  id='publish' onchange="Rooms()">
+		<option value='全部'>全部</option>
+		<c:forEach var='category' items='${categoryList}'>
+			<option value='${category}'>${category}</option>
+		</c:forEach>
+	</select>
 	</div>
-
+	
 	<script>
-		function Foods() {
-			var foodTypeStr = document.getElementById('publish').value;
+		function Rooms() {
+			var roomTypeStr = document.getElementById('publish').value;
 			var xhr = new XMLHttpRequest();
-			xhr.open("GET", "<c:url value='/allFood?foodTypeStr=" + foodTypeStr
+			xhr.open("GET", "<c:url value='/allRoom?roomTypeStr=" + roomTypeStr
 					+ "'/>", true);
 			xhr.send();
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
-					var foods = JSON.parse(xhr.responseText);
+					var rooms = JSON.parse(xhr.responseText);
 					var content = "";
-					for (var i = 0; i < foods.length; i++) {
+					for (var i = 0; i < rooms.length; i++) {
 						content += "<div class='col-4 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;'>"
 								+ "<div>"
 								+ "<img width='100%' height='100%' "
-								+ ' src="' + "<c:url value='/getPicture/"+foods[i].foodId+"'/>" +'"/>'
-								+ foods[i].foodFileName
+								+ ' src="' + "<c:url value='/getPicture2/"+rooms[i].roomId+"'/>" +'"/>'
+								+ rooms[i].roomName
 								+ "'>"
 								+ "</div>"
-								+ "<p class='card-text'>餐點名稱 : "
-								+ foods[i].foodName
+								+ "<p class='card-text'>包廂類型 : "
+								+ rooms[i].roomSize
+								+ "</p>"
+								+ "<p class='card-text'>人數 : "
+								+ rooms[i].roomPopulation
 								+ "</p>"
 								+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>價錢 : "
-								+ foods[i].foodPrice
+								+ rooms[i].roomPrice
 								+ "元</small></div>"
 								+ "</div>"
 						content += "</div>";
 					}
-					var div = document.getElementById("food");
+					var div = document.getElementById("room");
 					div.innerHTML = content;
 				}
 			}

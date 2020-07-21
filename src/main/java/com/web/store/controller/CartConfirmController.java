@@ -27,11 +27,13 @@ import com.web.store.model.MovieBean;
 import com.web.store.model.RoomBean;
 import com.web.store.service.ProductServiec;
 
+import _01_register.model.MemberBean;
+
 
 
 @Controller
 //@RequestMapping("_03_listBooks") 有另外folder再訂
-@SessionAttributes({"OrderCart","FoodCart"}) //"LoginOK"
+@SessionAttributes({"OrderCart","FoodCart","LoginOK"}) //"LoginOK"
 public class CartConfirmController {
 	@Autowired
 	ServletContext context;
@@ -52,7 +54,26 @@ public class CartConfirmController {
 //			return "redirect: " + context.getContextPath() + "/_02_login/login";
 //		}
 		
-
+		int randomNo = 0;
+		boolean testNum = true;
+		String testDB = "";
+		
+		while(testNum) {
+			testDB = "";
+			randomNo = (int) (Math.random()*899990000 +100000000);
+			testDB = String.valueOf(randomNo);
+			testDB += "JhflgjfMGif";
+			if(service.checkOrderNo(testDB)) {
+				break;
+			}
+		}
+//		(int) (Math.random()*899999999 +100000000);
+		
+		
+		MemberBean mb = (MemberBean)model.getAttribute("LoginOK");
+		System.out.println(mb.getPkey());
+		String mbId = Integer.toString(mb.getPkey());
+		
 		
 		FoodShoppingCart foodCart = (FoodShoppingCart) model.getAttribute("FoodCart");
 
@@ -70,7 +91,7 @@ public class CartConfirmController {
 		System.out.println(rBean); //觀察用
 		System.out.println(mBean); //觀察用
 		
-		String memberId = null; //測試用，沒意義。
+//		String memberId = null; //測試用，沒意義。
 //		String aa = null; //測試用，沒意義。
 //		String bb = null; //測試用，沒意義。
 //		String cc = null; //測試用，沒意義。
@@ -81,7 +102,7 @@ public class CartConfirmController {
 		int roomPrice = Integer.parseInt(rBean.getRoomPrice());
 		int foodAllPrice = 0;
 		int total = 0;
-		CartOrderBean orderC = new CartOrderBean(null,rBean,mBean,roomId,movieId,memberId,total,date,start,end,null);
+		CartOrderBean orderC = new CartOrderBean(testDB,rBean,mBean,roomId,movieId,mbId,total,date,start,end,null);
 			
 			Map<Integer, CartOrderFood> content = new HashMap<>();
 			//CartOrderBean orderC = new CartOrderBean(null,rBean,mBean,roomId,movieId,memberId,total,aa,bb,null);

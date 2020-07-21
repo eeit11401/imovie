@@ -120,6 +120,8 @@ h3 {
 	</section>
 	<section class="p-top-issue js-enter is-active" id="js-top-issue">
 
+<a href="<c:url value='hihihi' />" ><h3>testChart</h3></a>
+
 		<h2 class="p-top-issue__title">
 			<div class="sectionTitle__line"></div>
 			<div class="sectionTitle__frame">
