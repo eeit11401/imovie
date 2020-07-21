@@ -99,12 +99,12 @@ h3 {
 	font-size: 60px;
 }
 
-p {
+#c2 {
 	color: white;
 	font-style: italic;
 }
 
-div {
+#c1 {
 	color: white;
 }
 </style>
@@ -153,7 +153,7 @@ div {
 			</div>
 		</h2>
 		<div class="p-top-issue__marginBox"></div>
-		<h3>近期更新的電影</h3>
+		<h3>熱門的電影</h3>
 		<div>
 		<main role="main">
 			<div class="container">
@@ -171,14 +171,14 @@ div {
 				var content = "";
 				var homes = JSON.parse(xhr.responseText);
 				for (var i = 0; i < homes.length; i++) {
-					content += "<div class='col-4 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;'>"
+					content += "<div id='c1' class='col-4 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;'>"
 						+ "<div>"
 						+ "<img width='100%' height='100%' "
 						+ " src='"
 						+ homes[i].imageData
 						+ "'>"
 						+ "</div>"
-						+ "<p class='card-text'> 電影名稱 : "
+						+ "<p id='c2' class='card-text'> 電影名稱 : "
 						+ homes[i].bean.homeName
 						+ "</p>"
 						+ "</div>"
