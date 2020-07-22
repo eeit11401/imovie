@@ -18,7 +18,7 @@
 </style>
 </head>
 <body>
-	<div class='c2'>
+	<div class='c2' >
 		電影類型: <select id='publish' onchange="Movies()">
 			<option value='全部'>全部</option>
 			<c:forEach var='category' items='${categoryList}'>
@@ -41,13 +41,10 @@
 					var content = "";
 					for (var i = 0; i < movies.length; i++) {
 						console.log(movies[i]);
-						content += "<div class='col-4 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;'>"
+						content += "<div class='col-4 shadow-sm'id='hot' style='border: 1px solid;padding-top: 10px;margin: 10px'>"
 								+ "<div>"
 								+ "<img width='100%' height='100%' "
 								+ ' src="' + "<c:url value='/getPicture1/"+movies[i].movieId+"'/>" +'"/>'
-								
-								+ movies[i].movieFileName
-								+ "'>"
 								+ "</div>"
 								+ "<p class='card-text'>電影名稱 : "
 								+ movies[i].movieName

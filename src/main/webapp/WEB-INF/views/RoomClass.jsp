@@ -7,15 +7,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-
 <style>
-* {
-	padding: 0;
-	margin: 0;
-}
-
 .c2 {
 	padding-top: 10%;
+}
+
+.roomImg {
+	height: 200px;
+	width: 200px;
+	
 }
 </style>
 </head>
@@ -42,18 +42,19 @@
 					var rooms = JSON.parse(xhr.responseText);
 					var content = "";
 					for (var i = 0; i < rooms.length; i++) {
-						content += "<div class='col-4 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;'>"
-								+ "<div>"
+						content += "<div class='col-4 shadow-sm'id='hot' style='border: 1px solid;padding-top: 10px;margin: 10px'>"
+								+ "<div class='roomImg'>"
 								+ "<img width='100%' height='100%' "
 								+ ' src="' + "<c:url value='/getPicture2/"+rooms[i].roomId+"'/>" +'"/>'
-								+ rooms[i].roomName
-								+ "'>"
 								+ "</div>"
+								+"<p class='card-text'>包廂名稱 : "
+								+ rooms[i].roomName
+								+ "</p>"
 								+ "<p class='card-text'>包廂類型 : "
-								+ rooms[i].roomSize
+								+ rooms[i].roomPopulation
 								+ "</p>"
 								+ "<p class='card-text'>人數 : "
-								+ rooms[i].roomPopulation
+								+ rooms[i].roomSize
 								+ "</p>"
 								+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>價錢 : "
 								+ rooms[i].roomPrice

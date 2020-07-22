@@ -41,7 +41,7 @@ small {
 	<c:set var="funcName" value="Movie" scope="session" />
 	<jsp:include page="Navigation.jsp" />
 	<jsp:include page="MovieClass.jsp" />
-	<div class='c1'>
+	<div class='c1' align="center">
 		<main role="main">
 			<div class="container">
 				<div class="row" id='movie'></div>
@@ -57,7 +57,7 @@ small {
 				var content = "";
 				var movies = JSON.parse(xhr.responseText);
 				for (var i = 0; i < movies.length; i++) {
-					content += "<div class='col-3 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;'>"
+					content += "<div class='col-3 shadow-sm'id='hot' style='border: 1px solid;padding-top: 10px;margin: 10px'>"
 							+ "<div>"
 							+ "<img width='100%' height='100%' "
 							+ " src='"

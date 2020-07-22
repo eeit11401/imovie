@@ -41,12 +41,10 @@
 					var foods = JSON.parse(xhr.responseText);
 					var content = "";
 					for (var i = 0; i < foods.length; i++) {
-						content += "<div class='col-4 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;'>"
+						content += "<div class='col-4 shadow-sm'id='hot' style='border: 1px solid;padding-top: 10px;margin: 10px'>"
 								+ "<div>"
 								+ "<img width='100%' height='100%' "
 								+ ' src="' + "<c:url value='/getPicture/"+foods[i].foodId+"'/>" +'"/>'
-								+ foods[i].foodFileName
-								+ "'>"
 								+ "</div>"
 								+ "<p class='card-text'>餐點名稱 : "
 								+ foods[i].foodName
