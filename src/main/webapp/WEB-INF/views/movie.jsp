@@ -57,7 +57,7 @@ small {
 				var content = "";
 				var movies = JSON.parse(xhr.responseText);
 				for (var i = 0; i < movies.length; i++) {
-					content += "<div class='col-3 shadow-sm'id='hot' style='border: 1px solid;padding-top: 10px;margin: 10px'>"
+					content += "<div class='col-3 shadow-sm'id='hot' style='border: 0px solid;padding-top: 10px;margin: 10px'>"
 							+ "<div>"
 							+ "<img width='100%' height='100%' "
 							+ " src='"
