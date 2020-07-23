@@ -2,6 +2,7 @@ package com.web.store.model;
 
 import java.io.Serializable;
 import java.sql.Blob;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -32,6 +35,12 @@ public class RoomBean implements Serializable{
 	private String roomNote= null;
 	@Transient
 	private String roomState = null;
+	private Date roomDate;
+	@Transient
+	private String roomDateString;
+	@JsonIgnore
+	@Transient
+	private MultipartFile productImage;
 	private String roomPopulation;
 	
 	
@@ -39,7 +48,7 @@ public class RoomBean implements Serializable{
 		super();
 	}
 	public RoomBean(Integer roomId, String roomName, String roomSize, String roomFileName, String roomPrice,
-			Blob roomImg, String roomNote, String roomState,Integer roomNameId,String roomPopulation) {
+			Blob roomImg, String roomNote, String roomState,Integer roomNameId) {
 		super();
 		this.roomId = roomId;
 		this.roomName = roomName;
@@ -50,7 +59,6 @@ public class RoomBean implements Serializable{
 		this.roomImg = roomImg;
 		this.roomNote = roomNote;
 		this.roomState = roomState;
-		this.roomPopulation = roomPopulation;
 	}
 	
 	
@@ -108,11 +116,30 @@ public class RoomBean implements Serializable{
 	public void setRoomState(String roomState) {
 		this.roomState = roomState;
 	}
+	public Date getRoomDate() {
+		return roomDate;
+	}
+	public void setRoomDate(Date roomDate) {
+		this.roomDate = roomDate;
+	}
+	public String getRoomDateString() {
+		return roomDateString;
+	}
+	public void setRoomDateString(String roomDateString) {
+		this.roomDateString = roomDateString;
+	}
+	public MultipartFile getProductImage() {
+		return productImage;
+	}
+	public void setProductImage(MultipartFile productImage) {
+		this.productImage = productImage;
+	}
 	public String getRoomPopulation() {
 		return roomPopulation;
 	}
 	public void setRoomPopulation(String roomPopulation) {
 		this.roomPopulation = roomPopulation;
 	}
+	
 }
 	

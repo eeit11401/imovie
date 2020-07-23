@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @EnableWebMvc
-@ComponentScan({"com.web.store","_02_login","_01_register","_00_init"})
+@ComponentScan({"com.web.store","_02_login","_01_register","_00_init","web"})
 public class WebAppConfig implements WebMvcConfigurer {
 
 	@Bean
@@ -39,6 +39,7 @@ public class WebAppConfig implements WebMvcConfigurer {
          .addResourceLocations("/WEB-INF/views/js/");
 	     registry.addResourceHandler("/img/**")
 	             .addResourceLocations("/WEB-INF/views/img/");
+	     registry.addResourceHandler("/assets/**").addResourceLocations("/WEB-INF/views/assets/");
 	}
 
 	@Override

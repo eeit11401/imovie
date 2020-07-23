@@ -2,6 +2,7 @@ package com.web.store.model;
 
 import java.io.Serializable;
 import java.sql.Blob;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -30,7 +34,12 @@ public class MovieBean implements Serializable{
 	private String movieEName;
 	@Column(updatable = true, name="movieNote", nullable = true, columnDefinition = "varchar(max)")
 	private String movieNote;
-
+	private Date movieDate;
+	@Transient
+	private String movieDateString;
+	@JsonIgnore
+	@Transient
+	private MultipartFile productImage;
 	
 	
 	public MovieBean() {
@@ -131,6 +140,30 @@ public class MovieBean implements Serializable{
 
 	public void setMovieNote(String movieNote) {
 		this.movieNote = movieNote;
+	}
+
+	public MultipartFile getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(MultipartFile productImage) {
+		this.productImage = productImage;
+	}
+
+	public Date getMovieDate() {
+		return movieDate;
+	}
+
+	public void setMovieDate(Date movieDate) {
+		this.movieDate = movieDate;
+	}
+
+	public String getMovieDateString() {
+		return movieDateString;
+	}
+
+	public void setMovieDateString(String movieDateString) {
+		this.movieDateString = movieDateString;
 	}
 	
 	

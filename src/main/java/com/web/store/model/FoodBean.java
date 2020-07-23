@@ -2,12 +2,16 @@
 
 import java.io.Serializable;
 import java.sql.Blob;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 // 本類別封裝單筆書籍資料
@@ -25,7 +29,12 @@ public class FoodBean implements Serializable {
 	private String foodType ;
 	private String foodFileName;
 	private Integer foodTypeId;
-	
+	private Date foodDate;
+	@Transient
+	private String foodDateString;
+	@JsonIgnore
+	@Transient
+	private MultipartFile productImage;
 	public FoodBean() {
 		super();
 	}
@@ -100,6 +109,30 @@ public class FoodBean implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public MultipartFile getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(MultipartFile productImage) {
+		this.productImage = productImage;
+	}
+
+	public Date getFoodDate() {
+		return foodDate;
+	}
+
+	public void setFoodDate(Date foodDate) {
+		this.foodDate = foodDate;
+	}
+
+	public String getFoodDateString() {
+		return foodDateString;
+	}
+
+	public void setFoodDateString(String foodDateString) {
+		this.foodDateString = foodDateString;
 	}
 	
 	

@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,6 +25,10 @@ public class HomeBean implements Serializable{
 	private String homeFileName;
 	@JsonIgnore
 	private Blob homeImg;
+	
+	@Transient
+	private MultipartFile productImage;  
+	
 	public HomeBean(Integer homeId, String homeName, String homeFileName, Blob homeImg) {
 		super();
 		this.homeId = homeId;
@@ -55,6 +62,16 @@ public class HomeBean implements Serializable{
 	}
 	public void setHomeImg(Blob homeImg) {
 		this.homeImg = homeImg;
+	}
+
+		
+	
+	public MultipartFile getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(MultipartFile productImage) {
+		this.productImage = productImage;
 	}
 
 	
