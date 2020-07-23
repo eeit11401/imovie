@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
 <style>
@@ -41,22 +42,22 @@
 					var foods = JSON.parse(xhr.responseText);
 					var content = "";
 					for (var i = 0; i < foods.length; i++) {
-						content += "<div class='col-4 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;'>"
+							content += "<div class='col-4 shadow-sm'id='hot' style='border-radius: 10px; margin:20px;padding-top: 20px;background:#E2F2F8'>"
 								+ "<div>"
 								+ "<img width='100%' height='100%' "
-								+ ' src="' + "<c:url value='/getPicture/"+foods[i].foodId+"'/>" +'"/>'
-								+ foods[i].foodFileName
-								+ "'>"
+								+ ' src="' + "<c:url value='/getPicture/"+foods[i].foodId+"'/>" +'"/>'  
 								+ "</div>"
-								+ "<p class='card-text'>餐點名稱 : "
+								+ "<div style='display:flex' class='setFlex'>"
+								+ "<div  style='margin-top:5px' class='card-text foodN'> "
 								+ foods[i].foodName
-								+ "</p>"
-								+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>價錢 : "
-								+ foods[i].foodPrice
-								+ "元</small></div>"
 								+ "</div>"
-						content += "</div>";
+								+ "<div style='margin-left:10px;text-align: right;float: right;font-weight: 600;font-size: 25px;color:#ED3131'>NT. "
+								+ foods[i].foodPrice
+								+ "</div>"
+								+ "</div>"
+							content += "</div>";
 					}
+					
 					var div = document.getElementById("food");
 					div.innerHTML = content;
 				}

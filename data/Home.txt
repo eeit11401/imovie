@@ -1,4 +1,3 @@
-貞子|貞子.jpg|data/img/Home/貞子.jpg
 古墓奇兵|古墓奇兵.jpg|data/img/Home/古墓奇兵.jpg
 玩命關頭特別任務|玩命關頭特別任務.jpg|data/img/Home/玩命關頭特別任務.jpg
 地域少女真人版|地域少女真人版.jpg|data/img/Home/地域少女真人版.jpg

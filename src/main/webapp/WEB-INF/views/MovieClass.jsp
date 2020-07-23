@@ -14,17 +14,21 @@
 }
 .c2 {
 	padding-top: 10%;
+	margin-botton: 20px;
+	text-align: center;
 }
+
 </style>
 </head>
 <body>
 	<div class='c2'>
-		電影類型: <select id='publish' onchange="Movies()">
+		<div id="my">電影類型： <select id='publish' onchange="Movies()">
 			<option value='全部'>全部</option>
 			<c:forEach var='category' items='${categoryList}'>
 				<option value='${category.mGenreName}'>${category.mGenreName}</option>
 			</c:forEach>
 		</select>
+		</div>
 	</div>
 
 	<script>
@@ -41,29 +45,40 @@
 					var content = "";
 					for (var i = 0; i < movies.length; i++) {
 						console.log(movies[i]);
-						content += "<div class='col-4 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;'>"
+						//content += "<div class='col-4 shadow-sm'id='hot' style='border: 0px solid; padding-top: 10px;'>"
+						content += "<div class='col-3 shadow-sm'id='hot' style='border: 0px solid; padding-top: 50px;'>"
+
 								+ "<div>"
-								+ "<img width='100%' height='100%' "
+								+ "<img width='245px' height='350px' "
 								+ ' src="' + "<c:url value='/getPicture1/"+movies[i].movieId+"'/>" +'"/>'
-								
-								+ movies[i].movieFileName
-								+ "'>"
 								+ "</div>"
-								+ "<p class='card-text'>電影名稱 : "
-								+ movies[i].movieName
-								+ "</p>"
-								+ "<p class='card-text'>電影英文名稱 : "
-								+ movies[i].movieEName
-								+ "</p>"
-								+ "<p class='card-text'>級數 : "
-								+ movies[i].movieRated
-								+ "</p>"
-								+ "<p class='card-text'>介紹 : "
-								+ movies[i].movieNote
-								+ "</p>"
-								+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>片長 : "
+								
+								switch(movies[i].movieRated){
+								case '普遍級':
+									content += '<p><strong class=" " style="background-color: #13ba45">'+movies[i].movieRated  +'</strong></p>';
+									break;
+								case '保護級6+':
+									content += '<p><strong class="card-text" style="background-color: #4179b0">'+movies[i].movieRated +'</strong></p>';
+									break;
+								case '輔12級':
+									content += '<p><strong class="card-text" style="background-color: #c7c708">'+movies[i].movieRated +'</strong></p>';
+									break;
+								case '輔15級':
+									content += '<p><strong class="card-text" style="background-color: #de8909">'+movies[i].movieRated +'</strong></p>';
+									break;
+								default:
+									content += '<p><strong class="card-text" style="background-color: #FF5151">'+movies[i].movieRated +'</strong></p>';
+									break;
+							}						
+						content += "<p class='card-text'>"
+								+ movies[i].movieName+"<br>"+movies[i].movieEName
+								+ "</p>";					
+						content += "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>片長 : "
 								+ movies[i].movieLength
-								+ "</small></div>"
+								+ "</small></div>";		
+						content += "<p class='card-text' style='text-align:justify;font-style:normal'>"
+								+ movies[i].movieNote
+								+ "</p>";
 								+ "</div>"
 						content += "</div>";
 					}
