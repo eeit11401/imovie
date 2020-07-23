@@ -7,7 +7,7 @@ public interface MemberService {
 	int saveMember(MemberBean mb);
 	MemberBean queryMember(String id);
 	MemberBean checkIdPassword(String userId, String password) ;
-	public void updateMember(MemberBean mb) ;
+	public void updateMember(MemberBean mb, long sizeInBytes) ;
 	MemberBean get(Integer pkey);
 
 }

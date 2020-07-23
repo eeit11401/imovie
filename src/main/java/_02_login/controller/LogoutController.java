@@ -26,7 +26,7 @@ public class LogoutController {
 		if (memberBean != null) {
 			name = memberBean.getName();
 		}
-		model.addAttribute("memberName", name);
+//		model.addAttribute("memberName", name);
 		status.setComplete();
 		session.invalidate();
 		return "redirect: " + req.getContextPath();

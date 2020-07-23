@@ -33,10 +33,18 @@ public class MemberDaoImpl_Hibernate implements MemberDao {
 		return n;
 	}
 	@Override
-	public void updateMember(MemberBean mb) {
-		if (mb != null && mb.getMemberId() != null) 	{
-			Session session = getSession();
-			session.saveOrUpdate(mb);
+	public void updateMember(MemberBean mb,long sizeInBytes) {
+		if (sizeInBytes == -1) { // 不修改圖片
+			MemberBean member = null;
+	        Session session = factory.getCurrentSession();
+	        member = session.get(MemberBean.class, mb.getPkey());
+	        mb.setMemberImage(member.getMemberImage());
+	        mb.setFileName(member.getFileName());
+	        session.evict(member);
+	        session.saveOrUpdate(mb);
+        }else {
+			 Session session = factory.getCurrentSession();
+			 session.saveOrUpdate(mb);
 		}
 	}
 	// 判斷參數id(會員帳號)是否已經被現有客戶使用，如果是，傳回true，表示此id不能使用，

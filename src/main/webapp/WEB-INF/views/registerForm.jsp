@@ -35,6 +35,9 @@
 	color:red;
 	font-size:30px;
 }
+.abc{
+float:left;
+}
 </style>
 </head>
 <body>
@@ -123,7 +126,11 @@
                                 <p class="signin button"> 
 									<input type="submit" value="送出"/> 
 								</p>
+<!-- 								<p class="change_linkb">   -->
+<!--                                 	<a href='#' class='abc'>1111</a> -->
+<!--                                 	</p> -->
                                 <p class="change_link">  
+                                	<a href=<c:url value='/' /> class='abc'>回首頁</a>
 									已有帳號 ?
 									<a href="<c:url value='/_02_login/login' />" class="to_register"> 回到登入畫面 </a>
 								</p>

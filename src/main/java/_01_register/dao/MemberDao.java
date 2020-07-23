@@ -16,7 +16,7 @@ public interface MemberDao {
 	
 	public void setConnection(Connection con);
 	
-	public void updateMember(MemberBean mb) ;
+	public void updateMember(MemberBean mb, long sizeInBytes) ;
 	MemberBean get(Integer pkey);
 
 }

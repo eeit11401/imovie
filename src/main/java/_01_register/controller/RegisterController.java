@@ -1,9 +1,9 @@
 package _01_register.controller;
 
 import java.io.File;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Timestamp;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.rowset.serial.SerialBlob;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +26,7 @@ import _01_register.validator.MemberBeanValidator;
 
 
 @Controller
-@RequestMapping("/_01_register")
+@RequestMapping
 
 public class RegisterController {
 	
@@ -38,7 +37,7 @@ public class RegisterController {
 	@Autowired
 	MemberService memberService;
 	
-	@GetMapping("/register")
+	@GetMapping("/_01_register/register")
 	public String sendingEmptyForm(Model model) {
 		MemberBean memberBean = new MemberBean();
 		memberBean.setName("" );
@@ -52,7 +51,7 @@ public class RegisterController {
 		return inputDataForm;
 	}
 
-	@PostMapping("/register")
+	@PostMapping("/_01_register/register")
 	public String processFormData(
 			@ModelAttribute("memberBean") MemberBean bean,
 			BindingResult result, Model model,
@@ -71,7 +70,7 @@ public class RegisterController {
 		
 		MultipartFile picture = bean.getMemberMultipartFile();
 		String originalFilename = picture.getOriginalFilename();
-		
+		System.out.println(picture+"===========================");
 		String ext = "";
 		if (originalFilename.lastIndexOf(".") > -1) {
 			ext = originalFilename.substring(originalFilename.lastIndexOf("."));
@@ -126,77 +125,52 @@ public class RegisterController {
 			e.printStackTrace();
 			throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 		}
-		return "redirect: " + request.getContextPath();
-		
+//		return "redirect: " + request.getContextPath();
+		return "redirect: ../_02_login/login";
 	}
 	@ModelAttribute
 	public MemberBean prepareMemberBean(HttpServletRequest req) {
 		MemberBean memberBean = new MemberBean();
 		return memberBean;
 	}
-	@GetMapping(value = "/mem/{pkey}")
+	@GetMapping(value = "/_01_register/mem/{pkey}")
 	public String showDataForm(@PathVariable("pkey") Integer pkey, Model model) {
 		MemberBean memberBean = memberService.get(pkey);
 		model.addAttribute(memberBean);
 		return inputDataForm2;
 	}
-	@PostMapping("/mem/{pkey}")
+	@PostMapping("/_01_register/mem/{pkey}")
 	// BindingResult 參數必須與@ModelAttribute修飾的參數連續編寫，中間不能夾其他參數
 	// 
 	public String modify(
-			@ModelAttribute("memberBean") MemberBean memberBean, 
+			@ModelAttribute("memberBean") MemberBean bean, 
 			BindingResult result, 
 			Model model,
 			@PathVariable Integer pkey, 
 			HttpServletRequest request) {
-//		MemberBeanValidator validator = new MemberBeanValidator();
-//		validator.validate(mb, result);
-//		if (result.hasErrors()) {
-//			System.out.println("result hasErrors(), member=" + mb);
-//			List<ObjectError> list = result.getAllErrors();
-//			for (ObjectError error : list) {
-//				System.out.println("有錯誤：" + error);
-//			}
-//			return inputDataForm2;
-//		}
-
-		// 找到對應的Hobby物件
-//		Hobby hobby = hobbyService.getHobby(member.getHobby().getId());
-//		member.setHobby(hobby);
+		long sizeInBytes = 0;
+		InputStream is = null;
+		MultipartFile productImage = bean.getMemberMultipartFile();
+		String originalFilename = productImage.getOriginalFilename();
+		bean.setFileName(originalFilename);
+		//  建立Blob物件，交由 Hibernate 寫入資料庫
+		if (productImage != null && !productImage.isEmpty() ) {
+			
+			try {
+				byte[] b = productImage.getBytes();
+				Blob blob = new SerialBlob(b);
+				bean.setMemberImage(blob);
+				sizeInBytes = 1;
+			} catch(Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
+		}else {
+			sizeInBytes = -1;
+		}
 //		
-//		// 找到對應的Category物件
-//		Category category = categoryService.getCategory(member.getCategory().getId());
-//		member.setCategory(category);
-//		Timestamp adminTime = new Timestamp(System.currentTimeMillis());
-//		member.setAdmissionTime(adminTime);
-//
-//		MultipartFile picture = member.getProductImage();
-//
-//		if (picture.getSize() == 0) {
-//			// 表示使用者並未挑選圖片
-////			Member original = memberService.get(id);
-////			member.setImage(original.getImage());
-//		} else {
-//			String originalFilename = picture.getOriginalFilename();
-//			if (originalFilename.length() > 0 && originalFilename.lastIndexOf(".") > -1) {
-//				member.setFileName(originalFilename);
-//			}
-//
-//			// 建立Blob物件
-//			if (picture != null && !picture.isEmpty()) {
-//				try {
-//					byte[] b = picture.getBytes();
-//					Blob blob = new SerialBlob(b);
-//					member.setImage(blob);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//					throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
-//				}
-//			}
-//		}
 		
-		
-		memberService.updateMember(memberBean);
+		memberService.updateMember(bean,sizeInBytes);
 		return "redirect:/_01_register/mem/{pkey}";
 	}
 	

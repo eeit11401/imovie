@@ -23,7 +23,7 @@ import _02_login.model.LoginBean;
 import _02_login.validate.LoginBeanValidator;
 
 @Controller
-@RequestMapping("/_02_login")
+@RequestMapping
 @SessionAttributes({"LoginOK"}) 
 public class LoginController {
 	
@@ -35,7 +35,7 @@ public class LoginController {
 	
 
 
-	@GetMapping("/login")
+	@GetMapping("/_02_login/login")
 	public String login00(HttpServletRequest request, Model model, 
 		@CookieValue(value="user", required = false) String user,
 		@CookieValue(value="password", required = false) String password, 
@@ -63,7 +63,7 @@ public class LoginController {
 		return loginForm;
 	}
 	
-	@PostMapping("/login")
+	@PostMapping("/_02_login/login")
 	public String checkAccount(
 			@ModelAttribute("loginBean") LoginBean bean,
 			BindingResult result, Model model,
