@@ -547,8 +547,7 @@ public class ProductController {
 				SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 				Date date = new Date();
 				String strDate = sdFormat.format(date);
-				obj.setMerchantTradeNo(orderNo);
-				
+				obj.setMerchantTradeNo(orderNo);				
 				obj.setMerchantTradeDate(strDate);
 				obj.setTotalAmount(totalAmount);
 //				obj.setTradeDesc("請提早至少10分鐘到現場確認。如欲取消訂單，最晚預約前一天來電取消。");

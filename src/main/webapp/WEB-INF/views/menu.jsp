@@ -16,16 +16,36 @@
 	href="https://getbootstrap.com/docs/4.5/examples/album/">
 <link rel='stylesheet' href='js/bootstrap.bundle.js' type="text/js" />
 <link rel='stylesheet' href='css/bootstrap.css' type="text/css" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700&display=swap" rel="stylesheet">
 <title>menu</title>
 <style>
-p {
-	color: white;
-	font-style: italic;
+* {
+	padding: 0px;
+	margin: 0px;
+}
+
+.foodN {
+	color: black;
+	font-family: 'Noto Sans TC', sans-serif;
+	font-weight: 300;
+	font-size:20px;
 }
 
 div {
 	color: white;
 }
+
+.setFlex span{
+	display: inline-block;
+	justify-content: space-around;
+	text-align: right;
+}
+.tran{
+	transition-duration: 2s;
+}
+
+
+
 </style>
 
 </head>
@@ -37,7 +57,7 @@ div {
 	<div class='c1'>
 		<main role="main">
 			<div class="container">
-				<div class="row" id='food'></div>
+				<div class="row tran" id='food'></div>
 			</div>
 		</main>
 	</div>
@@ -50,19 +70,19 @@ div {
 				var content = "";
 				var foods = JSON.parse(xhr.responseText);
 				for (var i = 0; i < foods.length; i++) {
-					content += "<div class='col-4 shadow-sm'id='hot' style='border: 1px solid;padding-top: 10px;margin: 10px'>"
+					content += "<div class='col-4 shadow-sm'id='hot' style='border-radius: 10px; margin:20px;padding-top: 20px;background:#E2F2F8'>"
 							+ "<div>"
-							+ "<img width='100%' height='100%' "
+							+ "<img width='80%' height='80%' "
 							+ " src='"
 							+ foods[i].imageData
 							+ "'>"
-							+ "</div>"
-							+ "<p class='card-text'> 餐點名稱 : "
+							+ "</div><div style='display:flex' class='setFlex'>"
+							+ "<div  style='margin-top:5px' class='card-text foodN'> "
 							+ foods[i].bean.foodName
-							+ "</p>"
-							+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>價錢 : "
+							+ "</div>"
+							+ "<div style='margin-left:10px;text-align: right;float: right;font-weight: 600;font-size: 25px;color:#ED3131'>NT. "
 							+ foods[i].bean.foodPrice
-							+ " 元 </small></div>"
+							+ "</div>"
 							+ "</div>"
 					content += "</div>";
 				}
@@ -80,6 +100,7 @@ div {
 		window.jQuery
 				|| document
 						.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
+	
 	</script>
 </body>
 
