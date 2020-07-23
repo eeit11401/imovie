@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
 <style>
@@ -16,18 +17,29 @@
 }
 
 .c2 {
+	margin:35px;
 	padding-top: 10%;
+	margin-botton: 20px;
+	text-align: left;
+}
+.imgsize{
+	width:240px;
+	height:168px
+}
+.fontcss{
+	font-family: 'Noto Sans TC', sans-serif;
 }
 </style>
 </head>
 <body>
 	<div class='c2'>
-		餐點類型: <select id='publish' onchange="Foods()">
+		<div class='fontcss' style='border-radius:20px;font-size:20px'>餐點類型 : <select style="border-radius:5px" id='publish' onchange="Foods()">
 			<option value='全部'>全部</option>
 			<c:forEach var='category' items='${categoryList}'>
 				<option value='${category.fGenreName}'>${category.fGenreName}</option>
 			</c:forEach>
 		</select>
+		</div>
 	</div>
 
 	<script>
@@ -42,9 +54,9 @@
 					var foods = JSON.parse(xhr.responseText);
 					var content = "";
 					for (var i = 0; i < foods.length; i++) {
-							content += "<div class='col-4 shadow-sm'id='hot' style='border-radius: 10px; margin:20px;padding-top: 20px;background:#E2F2F8'>"
+							content += "<div class='fade-in col-4 shadow-sm'id='hot' style='border-radius: 10px; margin:20px;padding-top: 20px;background:#E2F2F8'>"
 								+ "<div>"
-								+ "<img width='100%' height='100%' "
+								+ "<img class='imgsize' "
 								+ ' src="' + "<c:url value='/getPicture/"+foods[i].foodId+"'/>" +'"/>'  
 								+ "</div>"
 								+ "<div style='display:flex' class='setFlex'>"

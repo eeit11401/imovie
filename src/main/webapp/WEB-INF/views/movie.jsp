@@ -39,6 +39,36 @@ small {
  margin-bottom :60px;
 }
 
+.fade-in{
+	-webkit-animation: fade-in-right 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: fade-in-right 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@-webkit-keyframes fade-in-right {
+  0% {
+    -webkit-transform: translateX(50px);
+            transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes fade-in-right {
+  0% {
+    -webkit-transform: translateX(50px);
+            transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -67,7 +97,7 @@ small {
 				var content = "";
 				var movies = JSON.parse(xhr.responseText);
 				for (var i = 0; i < movies.length; i++) {
-					content += "<div class='col-3 shadow-sm'id='hot' style='border: 0px solid; padding-top: 50px;'>"
+					content += "<div class='fade-in col-3 shadow-sm'id='hot' style='border: 0px solid; padding-top: 50px;'>"
 							+ "<div>"
 							+ "<img width='245px' height='350px' "
 							+ " src='"
@@ -116,7 +146,7 @@ small {
 		
 		
 		
-		<!-----------------------------回到頂端按鈕------------------------------------->			
+		<!-----------------------------回到頂端按鈕- -------------- ---------------------->			
 	
 		$(window).scroll(function(event){
 			  var scroll = $(window).scrollTop();

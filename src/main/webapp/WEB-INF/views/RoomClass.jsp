@@ -7,27 +7,36 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
 <style>
 .c2 {
+	margin:35px;
 	padding-top: 10%;
+	margin-botton: 20px;
+	text-align: left;
 }
 
 .roomImg {
-	height: 200px;
-	width: 200px;
+	height: 250px;
+	width: 375px;
 	
+}
+
+.fontcss{
+	font-family: 'Noto Sans TC', sans-serif;
 }
 </style>
 </head>
 <body>
 	
 	<div class='c2'>
-	包廂類型:<select  id='publish' onchange="Rooms()">
+	<div class='fontcss' style='font-size:20px' >包廂類型 : <select style="border-radius:5px" id='publish' onchange="Rooms()">
 		<option value='全部'>全部</option>
 		<c:forEach var='category' items='${categoryList}'>
 			<option value='${category}'>${category}</option>
 		</c:forEach>
 	</select>
+	</div>
 	</div>
 	
 	<script>
@@ -42,21 +51,21 @@
 					var rooms = JSON.parse(xhr.responseText);
 					var content = "";
 					for (var i = 0; i < rooms.length; i++) {
-						content += "<div class='col-4 shadow-sm'id='hot' style='border: 1px solid;padding-top: 10px;margin: 10px'>"
+						content += "<div class='fade-in fontcss col-4 shadow-sm'id='hot' style='margin-right:100px;margin-bottom:40px;padding-top: 10px;'>"
 								+ "<div class='roomImg'>"
-								+ "<img width='100%' height='100%' "
+								+ "<img style='border-radius:5px' width='100%' height='100%' "
 								+ ' src="' + "<c:url value='/getPicture2/"+rooms[i].roomId+"'/>" +'"/>'
 								+ "</div>"
-								+"<p class='card-text'>包廂名稱 : "
+								+"<p style='margin-top:15px' class='card-text'>包廂名稱 : "
 								+ rooms[i].roomName
 								+ "</p>"
 								+ "<p class='card-text'>包廂類型 : "
-								+ rooms[i].roomPopulation
-								+ "</p>"
-								+ "<p class='card-text'>人數 : "
 								+ rooms[i].roomSize
 								+ "</p>"
-								+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>價錢 : "
+								+ "<p class='card-text'>人數 : "
+								+ rooms[i].roomPopulation
+								+ "</p>"
+								+ "<div style='font-size:20px;color:#F15637' class='d-flex justify-content-between align-items-center'><small>預約 : "
 								+ rooms[i].roomPrice
 								+ "元</small></div>"
 								+ "</div>"

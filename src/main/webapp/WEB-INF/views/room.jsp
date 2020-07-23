@@ -23,10 +23,10 @@
 	href='${pageContext.request.contextPath}/css/bootstrap.css'
 	type="text/css" />
 <title>Room</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
 <style>
 p {
 	color: white;
-	font-style: italic;
 }
 
 div {
@@ -34,13 +34,51 @@ div {
 }
 
 .roomImg {
-	height: 200px;
-	width: 200px;
-	
+	height: 250px;
+	width: 375px;
+}
+
+.fontcss{
+	font-family: 'Noto Sans TC', sans-serif;
+}
+.fade-in{
+	-webkit-animation: fade-in-right 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: fade-in-right 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@-webkit-keyframes fade-in-right {
+  0% {
+    -webkit-transform: translateX(50px);
+            transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes fade-in-right {
+  0% {
+    -webkit-transform: translateX(50px);
+            transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
 }
 </style>
 </head>
 <body>
+<!-----------------------------回到頂端按鈕------------------------------------->		
+<div style="position: fixed; top: 90%; right: -15%; z-index: 999;">
+<a class="gototop close" href="#" title="回頂端" alt="回頂端" >
+<img id="topimg" style="height:10%;width:10%;opacity:0.3" src="img\cart\totop2.png">
+</a></div>
+<!-----------------------------回到頂端按鈕------------------------------------->	
 	<c:set var="funcName" value="Room" scope="session" />
 	<jsp:include page="Navigation.jsp" />
 	<jsp:include page="RoomClass.jsp" />
@@ -62,20 +100,23 @@ div {
 				var rooms = JSON.parse(xhr.responseText);
 				console.log("rooms:" + rooms);
 				for (var i = 0; i < rooms.length; i++) {
-					content += "<div class='col-3 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;margin: 10px;'>"
+					content += "<div class='fade-in fontcss col-4 shadow-sm'id='hot' style='margin-right:100px;margin-bottom:40px;padding-top: 10px;'>"
 							+ "<div class='roomImg'>"
-							+ "<img width='100%' height='100%' "
+							+ "<img style='border-radius:5px' width='100%' height='100%' "
 							+ " src='"
 							+ rooms[i].imageData
 							+ "'>"
 							+ "</div>"
-							+ "<p class='card-text'>包廂類型 : "
+							+"<p style='margin-top:15px' class='card-text'>包廂名稱 : "
 							+ rooms[i].bean.roomName
 							+ "</p>"
-							+ "<p class='card-text'>人數 : "
+							+ "<p class='card-text'>包廂類型 : "
 							+ rooms[i].bean.roomSize
 							+ "</p>"
-							+ "<div class='d-flex justify-content-between align-items-center'><small class='text-muted'>價錢 : "
+							+ "<p class='card-text'>人數 : "
+							+ rooms[i].bean.roomPopulation
+							+ "</p>"
+							+ "<div style='font-size:20px;color:#F15637' class='d-flex justify-content-between align-items-center'><small>預約 : "
 							+ rooms[i].bean.roomPrice
 							+ "元</small></div>"
 							+ "</div>"
@@ -94,6 +135,18 @@ div {
 		window.jQuery
 				|| document
 						.write('<script src="js/jquery.slim.min.js"><\/script>')
+	
+	<!-----------------------------回到頂端按鈕- -------------- ---------------------->			
+	
+		$(window).scroll(function(event){
+			  var scroll = $(window).scrollTop();
+			    if (scroll >= 200) {
+			       $(".gototop").removeClass("close");
+			    }else {
+			    	$(".gototop").addClass("close");
+			    }
+			});
+		<!-----------------------------回到頂端按鈕------------------------------------->
 	</script>
 	<script src="js/bootstrap.bundle.js"></script>
 </body>

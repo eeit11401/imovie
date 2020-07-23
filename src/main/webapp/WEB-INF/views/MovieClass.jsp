@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <style>
 * {
@@ -13,17 +14,21 @@
 	margin: 0;
 }
 .c2 {
+	margin:35px;
 	padding-top: 10%;
 	margin-botton: 20px;
-	text-align: center;
+	text-align: left;
+}
+.fontcss{
+	font-family: 'Noto Sans TC', sans-serif;
 }
 
 </style>
 </head>
 <body>
 	<div class='c2'>
-		<div id="my">電影類型： <select id='publish' onchange="Movies()">
-			<option value='全部'>全部</option>
+		<div class='fontcss' style='font-size:20px' id="my">電影類型： <select style="border-radius:5px"  id='publish' onchange="Movies()">
+			<option  value='全部'>全部</option>
 			<c:forEach var='category' items='${categoryList}'>
 				<option value='${category.mGenreName}'>${category.mGenreName}</option>
 			</c:forEach>
@@ -46,7 +51,7 @@
 					for (var i = 0; i < movies.length; i++) {
 						console.log(movies[i]);
 						//content += "<div class='col-4 shadow-sm'id='hot' style='border: 0px solid; padding-top: 10px;'>"
-						content += "<div class='col-3 shadow-sm'id='hot' style='border: 0px solid; padding-top: 50px;'>"
+						content += "<div class='fade-in col-3 shadow-sm'id='hot' style='border: 0px solid; padding-top: 50px;'>"
 
 								+ "<div>"
 								+ "<img width='245px' height='350px' "

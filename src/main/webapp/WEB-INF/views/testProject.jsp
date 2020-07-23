@@ -33,15 +33,15 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&display=swap"
 	rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet"
 	href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
 
-
-
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700&display=swap" rel="stylesheet">
 
  <script> 
  
@@ -90,7 +90,7 @@
 	width: 25%;
 	height: 600px;
 	overflow: auto;
-	border: 2px solid #669dcc;
+	border: 3px solid #669dcc;
 	border-radius: 20px;
 }
 
@@ -351,8 +351,8 @@ margin-bottom: 20px;
 
 /* -------------------TEST----------------------------     */
 .testAnime {
-	-webkit-animation: slide-in-fwd-center 2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: slide-in-fwd-center 2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	-webkit-animation: slide-in-fwd-center 1.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-in-fwd-center 1.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 /* ----------------------------------------------
@@ -393,6 +393,14 @@ margin-bottom: 20px;
 }
 
 
+
+.font07232{
+	font-family: 'Noto Sans TC', sans-serif;
+}
+
+.font07230506{
+	font-family: 'Noto Serif TC', serif;
+}
 
 
 </style>
@@ -447,13 +455,16 @@ margin-bottom: 20px;
 			<!-------------------------------movie ---------------------------------------->
 			<div id="tabs-2" class="tagContext">
 			<br>
-			<div>
-		電影類型: <select id='publish'>
+		<div style="font-size:20px" class="font07232">
+		電影類型: <select style="border-radius:10px" id='publish'>
 			<option value='全部'>全部</option>
 			<c:forEach var='category' items='${categoryList}'>
 				<option value='${category.mGenreName}'>${category.mGenreName}</option>
 			</c:forEach>
 			</select>
+		</div>
+		<div style="font-size:20px;margin-top:5px;" class="font07232">
+		查詢 : <input style="border-radius:5px" value="" type="text" autocomplete="off">
 		</div>
 			<br><!-- style='padding:0px;margin:0px' -->
 			<div class='111' id='forTypeMovie'>
@@ -500,7 +511,7 @@ margin-bottom: 20px;
 			</div>
 			<!-------------------------------time ---------------------------------------->
 			<div id="tabs-4" class="tagContext">
-			<div class="date_time">  
+			<div class="font07232 date_time">  
                        <p style="font-weight: bolder;font-size: 25px">選擇日期： <input type="text" name="fname" id="datepicker" class="hiTime" value="" autocomplete="off"></p>
                        <p style="font-size:20px">預約日期限制為三天以內</p>
                         <p style="font-size:20px">可預約時間為每三十分鐘，預約時間如在三十分鐘內不開放預約</p><br>
@@ -721,7 +732,7 @@ margin-bottom: 20px;
 
 		<!------------------------------------------購物車------------------------------------->
 
-		<table  class="seconddiv inner" id="idtable">
+		<table  class="seconddiv inner font07230506" id="idtable">
 			<tr>
 				<th class="panel-title" style="padding: 5px;"><h3>您的購物車</h3></th>
 			</tr>

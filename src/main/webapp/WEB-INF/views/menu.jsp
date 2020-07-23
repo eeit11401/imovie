@@ -43,7 +43,34 @@ div {
 .tran{
 	transition-duration: 2s;
 }
-
+.fade-in{
+	-webkit-animation: fade-in-right 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: fade-in-right 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+@-webkit-keyframes fade-in-right {
+  0% {
+    -webkit-transform: translateX(50px);
+            transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes fade-in-right {
+  0% {
+    -webkit-transform: translateX(50px);
+            transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
 
 
 </style>
@@ -51,6 +78,12 @@ div {
 </head>
 
 <body>
+<!-----------------------------回到頂端按鈕------------------------------------->		
+<div style="position: fixed; top: 90%; right: -15%; z-index: 999;">
+<a class="gototop close" href="#" title="回頂端" alt="回頂端" >
+<img id="topimg" style="height:10%;width:10%;opacity:0.3" src="img\cart\totop2.png">
+</a></div>
+<!-----------------------------回到頂端按鈕------------------------------------->	
 	<c:set var="funcName" value="menu" scope="session" />
 	<jsp:include page="Navigation.jsp" />
 	<jsp:include page="FoodClass.jsp" />
@@ -70,9 +103,9 @@ div {
 				var content = "";
 				var foods = JSON.parse(xhr.responseText);
 				for (var i = 0; i < foods.length; i++) {
-					content += "<div class='col-4 shadow-sm'id='hot' style='border-radius: 10px; margin:20px;padding-top: 20px;background:#E2F2F8'>"
+					content += "<div class='fade-in col-4 shadow-sm'id='hot' style='border-radius: 10px; margin:20px;padding-top: 20px;background:#E2F2F8'>"
 							+ "<div>"
-							+ "<img width='80%' height='80%' "
+							+ "<img class='imgsize' "
 							+ " src='"
 							+ foods[i].imageData
 							+ "'>"
@@ -100,7 +133,17 @@ div {
 		window.jQuery
 				|| document
 						.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
+	<!-----------------------------回到頂端按鈕- -------------- ---------------------->			
 	
+		$(window).scroll(function(event){
+			  var scroll = $(window).scrollTop();
+			    if (scroll >= 200) {
+			       $(".gototop").removeClass("close");
+			    }else {
+			    	$(".gototop").addClass("close");
+			    }
+			});
+		<!-----------------------------回到頂端按鈕------------------------------------->
 	</script>
 </body>
 
