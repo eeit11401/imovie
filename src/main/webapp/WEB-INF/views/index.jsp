@@ -14,7 +14,9 @@
 <link rel='stylesheet'
 	href='${pageContext.request.contextPath}/css/index.css' type="text/css" />
 <link rel='stylesheet' href='js/bootstrap.bundle.js' type="text/js" />
-<link rel='stylesheet' href='${pageContext.request.contextPath}/css/bootstrap.css' type="text/css" />
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/css/bootstrap.css'
+	type="text/css" />
 <style>
 * {
 	padding: 0;
@@ -98,6 +100,11 @@ h3 {
 	color: red;
 	font-size: 60px;
 }
+h4 {
+	text-align: center;
+	color: red;
+	font-size: 60px;
+}
 
 #c2 {
 	color: white;
@@ -120,7 +127,7 @@ h3 {
 	</section>
 	<section class="p-top-issue js-enter is-active" id="js-top-issue">
 
-<a href="<c:url value='hihihi' />" ><h3>testChart</h3></a>
+		<a href="<c:url value='hihihi' />"><h3>testChart</h3></a>
 
 		<h2 class="p-top-issue__title">
 			<div class="sectionTitle__line"></div>
@@ -153,16 +160,45 @@ h3 {
 					</div>
 				</div>
 			</div>
-		</h2>
+			
 		<div class="p-top-issue__marginBox"></div>
-		<h3>熱門的電影</h3>
-		<div>
-		<main role="main">
-			<div class="container">
-				<div class="row" id='home'></div>
+		<h4>電影的預告</h4>
+		<div class="p-top-issue__moduleArea"
+				style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+
+				<div class="p-top-issue__moduleArea__slider"
+					style="transform: matrix(1, 0, 0, 1, 0, 0);">
+					<article class="issueCard js-enter sliderTop is-active">				
+							<div class="issueCard__topLine"></div>
+							<div class="issueCard__leftLine"></div>
+							<div class="issueCard__rightLine"></div>
+							<div class="issueCard__img">
+								<video id="js-top-mv-video" loop="true" autoplay="autoplay"
+									preload="auto" muted="true" src="img/女鬼橋.mp4"
+									style="width: 600px; height: 400px"></video>
+							</div>
+							<div class="issueCard__imgFrame" style="height: 300px;"></div>
+							<h1 class="issueCard__txtarea">女鬼橋</h1>
+							<div class="issueCard__bottoms">
+								<div class="issueCard__bottoms__linkArrowCover">
+									<div class="linkArrow-blk__line1"></div>
+									<div class="linkArrow-blk__line2"></div>
+									<div class="linkArrow-blk__line2Cover">
+										<div class="linkArrow-blk__line2Cover__line2"></div>
+									</div>
+								</div>						
+					</article>
+				</div>
+		<div >
+			<h3>熱門的電影</h3>
+			<div>
+				<main role="main">
+					<div class="container">
+						<div class="row" id='home'></div>
+					</div>
+				</main>
 			</div>
-		</main>
-	</div>
+		</div>
 	</section>
 	<script>
 		var xhr = new XMLHttpRequest();
@@ -174,17 +210,15 @@ h3 {
 				var homes = JSON.parse(xhr.responseText);
 				for (var i = 0; i < homes.length; i++) {
 					content += "<div id='c1' class='col-4 shadow-sm'id='hot' style='border: 1px solid; padding-top: 10px;'>"
-						+ "<div>"
-						+ "<img width='100%' height='100%' "
-						+ " src='"
-						+ homes[i].imageData
-						+ "'>"
-						+ "</div>"
-						+ "<p id='c2' class='card-text'> 電影名稱 : "
-						+ homes[i].bean.homeName
-						+ "</p>"
-						+ "</div>"
-				content += "</div>";
+							+ "<div>"
+							+ "<img width='100%' height='100%' "
+							+ " src='"
+							+ homes[i].imageData
+							+ "'>"
+							+ "</div>"
+							+ "<p id='c2' class='card-text'> 電影名稱 : "
+							+ homes[i].bean.homeName + "</p>" + "</div>"
+					content += "</div>";
 				}
 				var divs = document.getElementById("home");
 				divs.innerHTML = content;
