@@ -37,10 +37,17 @@ public class MemberBean implements Serializable {
 	String fileName;
 	Clob comment;
 	Double unpaid_amount;
+	String login;
 	@Transient
 	MultipartFile memberMultipartFile;
 	              
-	              
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}              
 	public void setPkey(Integer pkey) {
 		this.pkey = pkey;
 	}

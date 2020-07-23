@@ -90,28 +90,28 @@
 										<form:input path='memberId' placeholder="請輸入您的帳號" />		 
 											</p>
                                 <p> 
-                                    <label for="usernamesignup" class="uname" >Your username</label>
+                                    <label for="usernamesignup" class="uname" >姓名</label>
                                     <form:input path="name" id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="輸入您的姓名" />
                                 </p>
                                 <p> 
-                                    <label for="emailsignup" class="youmail"  > Your email</label>
+                                    <label for="emailsignup" class="youmail"  >Email</label>
                                     <form:input path='email' id="emailsignup" name="emailsignup" required="required" type="email" placeholder="輸入您的Email"/> 
                                 </p>
                                 <p> 
-                                    <label for="passwordsignup" class="" >Your password </label>
+                                    <label for="passwordsignup" class="" >密碼</label>
                                     <form:input path='password' id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="輸入您的密碼"/>
                                 </p>
                                 <p> 
-                                    <label for="passwordsignup_confirm" class="youpasswd" >Please confirm your password </label>
-                                    <form:input path='password1' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="再次確認您的密碼"/>
+                                    <label for="passwordsignup_confirm" class="youpasswd" >再次確認您的密碼</label>
+                                    <form:input path='password1' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="再次輸入您的密碼"/>
                                 </p>
                                 <p> 
-                                    <label for="address" class="youaddr" >address </label>
+                                    <label for="address" class="youaddr" >地址 </label>
                                     <form:input path='address' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="text" placeholder="address"/>
                                 </p>
                                 <p> 
-                                    <label for="tel" class="youpasswd" >text </label>
-                                    <form:input path='tel' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="text" placeholder="再次確認您的密碼"/>
+                                    <label for="tel" class="youpasswd" >電話</label>
+                                    <form:input path='tel' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="text" placeholder="輸入您的電話"/>
                                 </p>
                                 <p>
                                     <label for="file" class="youfile" >照片 </label>

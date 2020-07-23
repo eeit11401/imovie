@@ -15,4 +15,8 @@ public interface MemberDao {
 	public MemberBean checkIdPassword(String userId, String password);	
 	
 	public void setConnection(Connection con);
+	
+	public void updateMember(MemberBean mb) ;
+	MemberBean get(Integer pkey);
+
 }

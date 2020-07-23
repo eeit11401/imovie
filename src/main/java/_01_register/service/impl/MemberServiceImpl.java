@@ -30,6 +30,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 	@Transactional
 	@Override
+	public void updateMember(MemberBean mb) {
+		dao.updateMember(mb);
+	}
+	@Transactional
+	@Override
 	public boolean idExists(String id) {
 		boolean exist = false;
 		exist = dao.idExists(id);
@@ -48,5 +53,11 @@ public class MemberServiceImpl implements MemberService {
 		MemberBean mb = null;
 		mb = dao.checkIdPassword(userId, password);
 		return mb;
+	}
+	@Transactional
+	@Override
+	public MemberBean get(Integer pkey) {
+		return dao.get(pkey);
+		
 	}
 }

@@ -32,6 +32,13 @@ public class MemberDaoImpl_Hibernate implements MemberDao {
 		n++;
 		return n;
 	}
+	@Override
+	public void updateMember(MemberBean mb) {
+		if (mb != null && mb.getMemberId() != null) 	{
+			Session session = getSession();
+			session.saveOrUpdate(mb);
+		}
+	}
 	// 判斷參數id(會員帳號)是否已經被現有客戶使用，如果是，傳回true，表示此id不能使用，
 	// 否則傳回false，表示此id可使用。
 	@Override
@@ -90,5 +97,14 @@ public class MemberDaoImpl_Hibernate implements MemberDao {
 	@Override
 	public void setConnection(Connection conn) {
 		throw new RuntimeException("本類別為提供此功能");
+	}
+	
+	public Session getSession() {
+        return factory.getCurrentSession();			
+	}
+	
+	@Override
+	public MemberBean get(Integer pkey) {
+		return factory.getCurrentSession().get(MemberBean.class, pkey);
 	}
 }

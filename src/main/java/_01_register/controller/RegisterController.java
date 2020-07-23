@@ -3,6 +3,7 @@ package _01_register.controller;
 import java.io.File;
 import java.sql.Blob;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.rowset.serial.SerialBlob;
@@ -11,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +25,7 @@ import _01_register.model.MemberBean;
 import _01_register.service.MemberService;
 import _01_register.validator.MemberBeanValidator;
 
+
 @Controller
 @RequestMapping("/_01_register")
 
@@ -29,6 +33,7 @@ public class RegisterController {
 	
 	String rootDirectory = "d:\\images";
 	String inputDataForm = "registerForm"; 
+	String inputDataForm2 = "registerForm2"; 
 	
 	@Autowired
 	MemberService memberService;
@@ -46,7 +51,7 @@ public class RegisterController {
 		model.addAttribute("memberBean", memberBean);
 		return inputDataForm;
 	}
-	
+
 	@PostMapping("/register")
 	public String processFormData(
 			@ModelAttribute("memberBean") MemberBean bean,
@@ -124,11 +129,87 @@ public class RegisterController {
 		return "redirect: " + request.getContextPath();
 		
 	}
-	
 	@ModelAttribute
 	public MemberBean prepareMemberBean(HttpServletRequest req) {
 		MemberBean memberBean = new MemberBean();
 		return memberBean;
 	}
+	@GetMapping(value = "/mem/{pkey}")
+	public String showDataForm(@PathVariable("pkey") Integer pkey, Model model) {
+		MemberBean memberBean = memberService.get(pkey);
+		model.addAttribute(memberBean);
+		return inputDataForm2;
+	}
+	@PostMapping("/mem/{pkey}")
+	// BindingResult 參數必須與@ModelAttribute修飾的參數連續編寫，中間不能夾其他參數
+	// 
+	public String modify(
+			@ModelAttribute("memberBean") MemberBean memberBean, 
+			BindingResult result, 
+			Model model,
+			@PathVariable Integer pkey, 
+			HttpServletRequest request) {
+//		MemberBeanValidator validator = new MemberBeanValidator();
+//		validator.validate(mb, result);
+//		if (result.hasErrors()) {
+//			System.out.println("result hasErrors(), member=" + mb);
+//			List<ObjectError> list = result.getAllErrors();
+//			for (ObjectError error : list) {
+//				System.out.println("有錯誤：" + error);
+//			}
+//			return inputDataForm2;
+//		}
+
+		// 找到對應的Hobby物件
+//		Hobby hobby = hobbyService.getHobby(member.getHobby().getId());
+//		member.setHobby(hobby);
+//		
+//		// 找到對應的Category物件
+//		Category category = categoryService.getCategory(member.getCategory().getId());
+//		member.setCategory(category);
+//		Timestamp adminTime = new Timestamp(System.currentTimeMillis());
+//		member.setAdmissionTime(adminTime);
+//
+//		MultipartFile picture = member.getProductImage();
+//
+//		if (picture.getSize() == 0) {
+//			// 表示使用者並未挑選圖片
+////			Member original = memberService.get(id);
+////			member.setImage(original.getImage());
+//		} else {
+//			String originalFilename = picture.getOriginalFilename();
+//			if (originalFilename.length() > 0 && originalFilename.lastIndexOf(".") > -1) {
+//				member.setFileName(originalFilename);
+//			}
+//
+//			// 建立Blob物件
+//			if (picture != null && !picture.isEmpty()) {
+//				try {
+//					byte[] b = picture.getBytes();
+//					Blob blob = new SerialBlob(b);
+//					member.setImage(blob);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//					throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+//				}
+//			}
+//		}
+		
+		
+		memberService.updateMember(memberBean);
+		return "redirect:/_01_register/mem/{pkey}";
+	}
 	
+	@ModelAttribute
+	public void getMember(@PathVariable(value="pkey", required = false ) Integer pkey, Model model) {
+		System.out.println("@ModelAttribute.getMember()...");
+		if (pkey != null) {
+			MemberBean memberBean = memberService.get(pkey);
+			model.addAttribute("memberBean", memberBean);
+		} else {
+			MemberBean memberBean = new MemberBean();
+			memberBean.setLogin("false");
+			model.addAttribute("memberBean", memberBean);
+		}
+	}
 }
