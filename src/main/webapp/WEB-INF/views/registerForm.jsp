@@ -31,7 +31,10 @@
 		 border-radius: 5px;
 
 	}
-
+.error{
+	color:red;
+	font-size:30px;
+}
 </style>
 </head>
 <body>
@@ -86,35 +89,35 @@
   							enctype='multipart/form-data'>							  
 							<h1> 註冊 </h1> 
                                		 <p> 
-								<label for="memberId" class="cols-sm-2 control-label">帳號</label>
+								<label for="memberId" class="cols-sm-2 control-label">帳號<form:errors path="memberId" class='error'/></label>
 										<form:input path='memberId' placeholder="請輸入您的帳號" />		 
 											</p>
                                 <p> 
-                                    <label for="usernamesignup" class="uname" >姓名</label>
+                                    <label for="usernamesignup" class="uname" >姓名<form:errors path="name" class='error'/></label>
                                     <form:input path="name" id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="輸入您的姓名" />
                                 </p>
                                 <p> 
-                                    <label for="emailsignup" class="youmail"  >Email</label>
+                                    <label for="emailsignup" class="youmail"  >Email<form:errors path="email" class='error'/></label>
                                     <form:input path='email' id="emailsignup" name="emailsignup" required="required" type="email" placeholder="輸入您的Email"/> 
                                 </p>
                                 <p> 
-                                    <label for="passwordsignup" class="" >密碼</label>
+                                    <label for="passwordsignup" class="" >密碼<form:errors path="password" class='error'/></label>
                                     <form:input path='password' id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="輸入您的密碼"/>
                                 </p>
                                 <p> 
-                                    <label for="passwordsignup_confirm" class="youpasswd" >再次確認您的密碼</label>
+                                    <label for="passwordsignup_confirm" class="youpasswd" >再次確認您的密碼<form:errors path="password1" class='error'/></label>
                                     <form:input path='password1' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="再次輸入您的密碼"/>
                                 </p>
                                 <p> 
-                                    <label for="address" class="youaddr" >地址 </label>
+                                    <label for="address" class="youaddr" >地址<form:errors path="address" class='error'/> </label>
                                     <form:input path='address' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="text" placeholder="address"/>
                                 </p>
                                 <p> 
-                                    <label for="tel" class="youpasswd" >電話</label>
+                                    <label for="tel" class="youpasswd" >電話<form:errors path="tel" class='error'/></label>
                                     <form:input path='tel' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="text" placeholder="輸入您的電話"/>
                                 </p>
                                 <p>
-                                    <label for="file" class="youfile" >照片 </label>
+                                    <label for="file" class="youfile" >照片<form:errors path="memberMultipartFile" class='error'/></label>
                                 	<form:input path="memberMultipartFile" type='file' />
                                 </p>
                                 <p class="signin button"> 
