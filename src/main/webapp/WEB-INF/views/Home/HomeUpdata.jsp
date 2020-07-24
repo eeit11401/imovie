@@ -41,10 +41,10 @@ h2 {
 }
 function HomeUpdate(homeId,homeImg,homeName) {
 	
-   //$("#updata").hide();
+//    $("#updata").hide();
    $("input[name='homeName']").val(homeName);
    $("#homeImgUp").attr("src", ''+homeImg+'');
-  /*  $("input[name='roomName']").val(roomName); */
+//  	$("input[name='homeName']").val(homeName);
    $("input[name='homeId']").val(homeId);
    $("#updata").show();
 }
@@ -78,7 +78,6 @@ function UpdataCancel() {
 														<th>圖片</th>
 														<th>影片名稱</th>
 														<th>修改/刪除</th>
-														<!-- 													<th></th> -->
 													</tr>
 												</thead>
 												<c:forEach var="home" items="${homeMap}">
@@ -158,7 +157,8 @@ function UpdataCancel() {
 							</tr>
 							<tr>
 								<td>選擇圖片：</td>
-								<td><form:input path="productImage" type='file' /></td>
+								<td><img id="homeImgUp" height='100' width='80' src="">
+									<form:input id="productImage" path="productImage" type='file' /></td>
 							</tr>
 							<tr>
 								<td align="center"><input type="submit" name="intor"
