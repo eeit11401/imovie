@@ -32,6 +32,7 @@
 	float:right;
 	margin-left:10px;
 	 }
+
 	
 </style>
 <head>
@@ -50,54 +51,73 @@
 </a></div>
 <!-----------------------------回到頂端按鈕------------------------------------->	
 
-<h3 style="font-family:微軟正黑體"><a href="<c:url value='/' />" >回上頁</a></h3>
+<h3 style="font-family:微軟正黑體"><a href="<c:url value='//allmyorder' />" >回上頁</a></h3>
+
 	<table id="answer" class="table table-bordered">
 		<tr id="title" >
-			<td>訂單管理
-			</td>
+			<td>${memberid.name}的訂單</td>
 		</tr>
 		<tr>
-			<th>訂單資訊</th>
+			<th style="text-align:center">訂單資訊</th>
 		</tr>
 		<tr>
-			<td>訂單編號：</td>
+			<td>1.會員ID：&nbsp;***${memberID}***</td>
 		</tr>
 		<tr>
-		    <td>訂單時間：</td>
+			<td>2.訂單編號：${OrderNo}</td>
 		</tr>
 		<tr>
-			 <td>訂單狀態：<span style="color:green">訂單成立</span></td>
+			 <td>3.訂單狀態：<span style="color:green">訂單成立</span></td>
 		</tr>
-		
 		<tr>	 
-		     <th><br>商品清單</th>
+		     <th style="text-align:center"><br>商品清單</th>
 		</tr>
 		<tr>
-		     <td>包廂：</td>
+		     <td>1.包廂： ${roomproduct.roomName}&nbsp;&nbsp;${roomproduct.roomSize}&nbsp;&nbsp;NT.${roomproduct.roomPrice}</td>
 		</tr>
 		<tr>
-			 <td>電影： 電影分級： 電影長度：</td>
+			 <td>2.電影：${movieproduct.movieName}&nbsp;&nbsp;${movieproduct.movieEName} </td>
 		</tr>
 		<tr>
-			 <td>預約日期：</td>
+			 <td>3.電影分級：${movieproduct.movieRated} &nbsp;&nbsp;&nbsp;&nbsp;電影長度：${movieproduct.movieLength} </td>
 		</tr>
 		<tr>
-			 <td>預約時間：</td>
-		</tr>	
-		<tr>
-			 <td>餐點：</td>
+			 <td>4.預約日期：${OrderDate}</td>
 		</tr>
 		<tr>
-		    <td style="text-align:right">總金額：NT.2600 </td> 
-		</tr>
-		<tr>	
-     		<th>備註</th>
+			 <td>5.預約時間：${OrderDateStart}&nbsp;-&nbsp;${OrderDateEnd}</td>
 		</tr>
 		<tr>
-			<td>付款資訊：</td>
+			 <td>6.餐點：</td>
+		</tr>
+		<c:forEach var='food' items='${OrderFood}'>
+				<tr>
+ 				<td>&nbsp;&nbsp;&nbsp;&nbsp;${food.foodTitle} 
+ 				<span style="text-align:right">&nbsp;&nbsp;&nbsp;&nbsp; 
+					NT.${food.foodPrice}&nbsp;&nbsp;X&nbsp;&nbsp;${food.qty}&nbsp;&nbsp;=&nbsp;&nbsp;NT.${food.foodPrice*food.qty}</span></td>
+ 				</tr> 
+			</c:forEach>	
+		
+		<tr>
+		    <td style="text-align:right">餐點金額：NT.${Ordertotal-roomproduct.roomPrice} </td> 
+		</tr>
+		<tr>
+		    <td style="text-align:right">包廂金額：NT.${roomproduct.roomPrice}</td> 
+		</tr>
+		<tr>
+		    <td style="text-align:right">總金額：NT.${Ordertotal} </td> 
 		</tr>
 		<tr>
 			<td><br></td>
+		</tr>
+		<tr>	
+     		<th style="text-align:center">備 註</th>
+		</tr>
+		<tr>
+			<td>為維護預約消費者權益，預約時間未到者，視同取消預約。<br></td>
+		</tr>
+		<tr>
+			<td>後續退費相關請洽詢門市人員。<br></td>
 		</tr>
 		<tr>
 			<td><br></td>
@@ -105,11 +125,10 @@
 		<tr>
 		<td><span text-align:right;>
 		<span><Input type='submit' class="btn btn-default btn-lg" onclick="self.location.href='mailto:admin@mobiled.tw'" value='聯絡我們'></span>	
-		<span><Input type='submit' class="btn btn-danger btn-lg"  value='取消訂單'>	</span>
+		<span><Input type='submit' class="btn btn-danger btn-lg cancel"  value='取消訂單' >	</span>
 		</span></td>
 		</tr>
 	</table>
-
 <script>
 <!-----------------------------回到頂端按鈕------------------------->			
 $(window).scroll(function(event){
@@ -121,6 +140,11 @@ $(window).scroll(function(event){
     }
 });	
 <!-----------------------------回到頂端按鈕------------------------->	
+
+$(".cancel").click(function(){
+alert("如欲取消訂單，最晚請於預約前一天來電取消\n聯絡電話：02-6631-6666");
+});
+
 </script>
 </body>
 </html>

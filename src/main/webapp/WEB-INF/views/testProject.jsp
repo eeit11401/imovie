@@ -409,8 +409,7 @@ margin-bottom: 20px;
  
 <body>
 	<div id="Header">
-		<a href="<c:url value='/myorder' />" ><h3>MyOrder</h3></a>
-		<a href="<c:url value='/draw' />" ><h3>Draw</h3></a>
+		<a href="<c:url value='/allmyorder' />" ><h3>MyAllOrder</h3></a>
 	</div>
 	
 <!-----------------------------回到頂端按鈕------------------------------------->		

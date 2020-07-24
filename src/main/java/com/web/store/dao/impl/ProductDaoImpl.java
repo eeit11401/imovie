@@ -21,6 +21,7 @@ import org.springframework.stereotype.Repository;
 
 import com.web.store.dao.ProductDao;
 import com.web.store.model.CartOrderBean;
+import com.web.store.model.CartOrderFood;
 import com.web.store.model.FoodBean;
 import com.web.store.model.FoodBeanWithImageData;
 import com.web.store.model.Food_Genre;
@@ -31,6 +32,7 @@ import com.web.store.model.MovieBeanWithImageData;
 import com.web.store.model.Movie_Genre;
 import com.web.store.model.RoomBean;
 import com.web.store.model.RoomBeanWithImageData;
+import com.web.store.model.SurveyBean;
 
 import _00_init.util.GlobalService;
 import antlr.StringUtils;
@@ -837,6 +839,62 @@ public class ProductDaoImpl implements ProductDao {
 		}else {
 			return listRoom;			
 		}
+	}
+
+	@Override
+	public void saveSurvey(SurveyBean satisfy) {
+		Session session = factory.getCurrentSession();
+        session.save(satisfy);
+	}
+	@Override
+	public List<CartOrderBean> getOrderById(String memberId) {
+		List<CartOrderBean> list = null;
+        Session session = factory.getCurrentSession();
+        String hql = "FROM CartOrderBean ob WHERE ob.memberId = :mid";
+        list = session.createQuery(hql)
+        			  .setParameter("mid", memberId)
+        			  .getResultList();
+        return list;
+	}
+	
+	@Override
+	public List<CartOrderFood> getFoodByBean(CartOrderBean bean) {
+		
+//		Session session = factory.getCurrentSession();
+//				
+//		return  (List<CartOrderFood>) session.get(CartOrderFood.class,CartOrderId);
+		List<CartOrderFood> list = null;
+        Session session = factory.getCurrentSession();
+        String hql = "FROM CartOrderFood f WHERE f.cartOrderBean = :mid";        
+        list = session.createQuery(hql)
+        			  .setParameter("mid", bean)
+        			  .getResultList();
+        return list;
+	}
+
+	
+
+	@Override
+	public CartOrderBean getIdByNo(String orderNo) {
+		Session session = factory.getCurrentSession();
+		return session.get(CartOrderBean.class,orderNo);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Double getSatisfy() {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM SurveyBean";
+		List<SurveyBean> beans = session.createQuery(hql).getResultList();
+		double size = beans.size();
+		double totalRate = 0.0;
+		for(SurveyBean tot:beans) {
+			totalRate+=tot.getSatisfaction();
+			System.out.println(totalRate);
+		}
+		
+		Double finalSatisfy = totalRate/size;
+		return finalSatisfy;
 	}
 
 

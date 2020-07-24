@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.web.store.dao.ProductDao;
 import com.web.store.model.CartOrderBean;
+import com.web.store.model.CartOrderFood;
 import com.web.store.model.FoodBean;
 import com.web.store.model.FoodBeanWithImageData;
 import com.web.store.model.Food_Genre;
@@ -20,6 +21,7 @@ import com.web.store.model.MovieBeanWithImageData;
 import com.web.store.model.Movie_Genre;
 import com.web.store.model.RoomBean;
 import com.web.store.model.RoomBeanWithImageData;
+import com.web.store.model.SurveyBean;
 import com.web.store.service.ProductServiec;
 
 @Service
@@ -222,6 +224,44 @@ public class ProductServiecImpl implements ProductServiec {
 	@Override
 	public List<RoomBean> getRoomByString(String roomType) {
 		return productDao.getRoomByString(roomType);
+	}
+	
+	@Transactional
+	@Override
+	public List<CartOrderBean> getOrderById(String memberId) {
+		List<CartOrderBean> list = null;
+
+		list = productDao.getOrderById(memberId);
+
+		return list;
+	}
+	
+	@Transactional
+	@Override
+	public List<CartOrderFood>  getFoodByBean(CartOrderBean bean) {
+		List<CartOrderFood> list = null;
+		list = productDao.getFoodByBean(bean);
+		return list;
+	}
+	
+	
+	
+	@Transactional
+	@Override
+	public CartOrderBean getIdByNo(String orderNo) {
+		return productDao.getIdByNo(orderNo);
+	}
+	
+	@Transactional
+	@Override
+	public void saveSurvey(SurveyBean satisfy) {
+		productDao.saveSurvey(satisfy);
+	}
+	
+	@Transactional
+	@Override
+	public Double getSatisfy() {
+		return productDao.getSatisfy();
 	}
 
 }

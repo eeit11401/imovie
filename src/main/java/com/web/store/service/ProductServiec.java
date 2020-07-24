@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.web.store.model.CartOrderBean;
+import com.web.store.model.CartOrderFood;
 import com.web.store.model.FoodBean;
 import com.web.store.model.FoodBeanWithImageData;
 import com.web.store.model.Food_Genre;
@@ -15,6 +16,7 @@ import com.web.store.model.MovieBeanWithImageData;
 import com.web.store.model.Movie_Genre;
 import com.web.store.model.RoomBean;
 import com.web.store.model.RoomBeanWithImageData;
+import com.web.store.model.SurveyBean;
 
 public interface ProductServiec {
 	
@@ -66,5 +68,13 @@ Boolean checkOrderNo(String checkNum);
 	
 	List<String> getAllRoom ();
 	List<RoomBean> getRoomByString(String roomType);
+	
+	List<CartOrderBean> getOrderById(String memberId);
+	CartOrderBean getIdByNo(String orderNo);
+	List<CartOrderFood> getFoodByBean(CartOrderBean bean);
+	
+	void saveSurvey(SurveyBean satisfy);
+	
+	Double getSatisfy();
 
 }

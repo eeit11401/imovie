@@ -554,7 +554,7 @@ public class ProductController {
 				obj.setTradeDesc("Imovie+%e9%9b%bb%e5%bd%b1%e9%a4%a8");
 				obj.setItemName("Imovie 預訂服務");
 				obj.setReturnURL("http://211.23.128.214:5000");
-				obj.setClientBackURL("http://localhost:8080/Imovie/");
+				obj.setClientBackURL("http://localhost:8080/ImovieS/");
 				obj.setNeedExtraPaidInfo("N");
 				
 			String form = all.aioCheckOut(obj, null);
@@ -624,32 +624,7 @@ public class ProductController {
 			ResponseEntity<Map<String,String>> re = new ResponseEntity<>(map,HttpStatus.OK);
 			return re;
 		}
-		@GetMapping("/myorder")
-		public String myorder(Model model, HttpServletRequest req) { 
-			return "MyOrder";
-		}
 
-//		@GetMapping("/draw")
-//		public String Draw(Model model, HttpServletRequest req) { 
-//			List<Integer> list = service.getMovieChose(); //取電影id
-//			model.addAttribute("MovieChose", list);	
-//			
-//
-//			for(Integer i:list) {
-//			//for (int i = 0; i < list.size(); i++) {
-//			System.out.println("++++++++++++++++++++++++++++"+i);	      
-//			List<MovieBean> list2 = service.getMovieTypeById(i);
-//			
-////			List<MovieBean> list2 = service.getMovieTypeById(11); 
-//			for(MovieBean W:list2) {
-//				System.out.println("============"+W);
-//			}
-//			
-//			model.addAttribute("MovieType", list2);		
-//		    }
-//						
-//			return "Draw";
-//		}
 		@GetMapping("/hihihi")
 		public String wtf(Model model, HttpServletRequest req) {
 			return "columnChart";
