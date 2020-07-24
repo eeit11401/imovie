@@ -74,6 +74,17 @@ public class TestHomeController {
 			sizeInBytes = -1;
 		}
 		homeService.HomeUpdata(homeBean, sizeInBytes);
+		String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
+		String rootDirectory = context.getRealPath("/images");
+		try {
+			File imageFolder = new File(rootDirectory, "images");
+			if (!imageFolder.exists()) imageFolder.mkdirs();
+			File file = new File(imageFolder,homeBean.getHomeId()  + ext);
+			productImage.transferTo(file);
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+		}
 		return "redirect:/Home";
 	}
 	

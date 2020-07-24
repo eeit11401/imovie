@@ -86,7 +86,7 @@
 						</div></li>
 
 					<li class=c-header__nav__news data-nav=news><a
-						href='test'>TSET</a>
+						href='Manager'>TSET</a>
 						<div class=c-header__nav__news__bottom>
 							<div class=c-header__nav__news__bottom__dots></div>
 							<div class=c-header__nav__news__bottom__dots></div>
