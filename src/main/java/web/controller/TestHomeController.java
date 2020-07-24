@@ -74,10 +74,12 @@ public class TestHomeController {
 			sizeInBytes = -1;
 		}
 		homeService.HomeUpdata(homeBean, sizeInBytes);
+		String path = Thread.currentThread().getContextClassLoader().getResource("").getPath();
 		String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
-		String rootDirectory = context.getRealPath("/images");
+//		String rootDirectory = context.getRealPath("/");
 		try {
-			File imageFolder = new File(rootDirectory, "images");
+			File imageFolder = new File(path);
+			System.out.println("---------------"+path);
 			if (!imageFolder.exists()) imageFolder.mkdirs();
 			File file = new File(imageFolder,homeBean.getHomeId()  + ext);
 			productImage.transferTo(file);

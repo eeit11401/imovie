@@ -174,7 +174,7 @@ h4 {
 							<div class="issueCard__rightLine"></div>
 							<div class="issueCard__img">
 								<video id="js-top-mv-video" loop="true" autoplay="autoplay"
-									preload="auto" muted="true" src="img/女鬼橋.mp4"
+									preload="auto" muted="true" src="img/18.mp4"
 									style="width: 600px; height: 400px"></video>
 							</div>
 							<div class="issueCard__imgFrame" style="height: 300px;"></div>
