@@ -74,14 +74,12 @@ public class TestHomeController {
 			sizeInBytes = -1;
 		}
 		homeService.HomeUpdata(homeBean, sizeInBytes);
-		String path = Thread.currentThread().getContextClassLoader().getResource("").getPath();
 		String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
-//		String rootDirectory = context.getRealPath("/");
 		try {
-			File imageFolder = new File(path);
-			System.out.println("---------------"+path);
+			File imageFolder = new File("C:/Imovie/src/main/webapp/WEB-INF/views/img");			
+			System.out.println("---------------"+imageFolder);
 			if (!imageFolder.exists()) imageFolder.mkdirs();
-			File file = new File(imageFolder,homeBean.getHomeId()  + ext);
+			File file = new File(imageFolder,homeBean.getHomeId()  + ext);			
 			productImage.transferTo(file);
 		} catch(Exception e) {
 			e.printStackTrace();
