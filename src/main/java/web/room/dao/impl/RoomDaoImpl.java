@@ -2,6 +2,7 @@ package web.room.dao.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +12,12 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.web.store.model.CartOrderBean;
+import com.web.store.model.MovieBean;
 import com.web.store.model.RoomBean;
+import com.web.store.model.SurveyBean;
 
+import _01_register.model.MemberBean;
 import web.room.dao.RoomDao;
 
 
@@ -133,6 +138,42 @@ public class RoomDaoImpl implements RoomDao{
 			}
 		}
 		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, CartOrderBean> getCartOrderBean() {
+		Map<String, CartOrderBean> orderMap = new HashMap<>();
+		String hql = "From CartOrderBean";
+		Session session = factory.getCurrentSession();
+		List<CartOrderBean> list = session.createQuery(hql).getResultList();
+		for (CartOrderBean cartOrderBean : list) {
+			RoomBean room = null;
+	        room = session.get(RoomBean.class, cartOrderBean.getRoomId());
+	        MovieBean movie = null;
+	        movie = session.get(MovieBean.class, cartOrderBean.getMovieId());
+	        MemberBean member = null;
+	        Integer MemberId = Integer.parseInt(cartOrderBean.getMemberId());
+	        member = session.get(MemberBean.class, MemberId);
+			cartOrderBean.setRoom(room);
+			cartOrderBean.setMovie(movie);
+			cartOrderBean.setMember(member);
+			orderMap.put(cartOrderBean.getOrderNo(), cartOrderBean);
+		}
+		return orderMap;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<Integer, SurveyBean> getSurveyBean() {
+		Map<Integer, SurveyBean> surveyMap = new HashMap<Integer, SurveyBean>();
+		String hql = "From SurveyBean";
+		Session session = factory.getCurrentSession();
+		List<SurveyBean> list = session.createQuery(hql).getResultList();
+		for (SurveyBean surveyBean : list) {
+			surveyMap.putIfAbsent(surveyBean.getSurveySeq(), surveyBean);
+		}
+		return surveyMap;
 	}
 	
 }

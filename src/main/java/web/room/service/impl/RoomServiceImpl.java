@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.web.store.model.CartOrderBean;
 import com.web.store.model.RoomBean;
+import com.web.store.model.SurveyBean;
 
 import web.room.dao.RoomDao;
 import web.room.service.RoomService;
@@ -68,6 +70,18 @@ public class RoomServiceImpl implements RoomService{
 	@Override
 	public List<RoomBean> getUpRoom(Integer roomId) {
 		return dao.getUpRoom(roomId);
+	}
+
+	@Transactional
+	@Override
+	public Map<String, CartOrderBean> getCartOrderBean() {
+		return dao.getCartOrderBean();
+	}
+
+	@Transactional
+	@Override
+	public Map<Integer, SurveyBean> getSurveyBean() {
+		return dao.getSurveyBean();
 	}
 
 }

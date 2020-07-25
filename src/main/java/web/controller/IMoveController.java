@@ -36,11 +36,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.web.store.model.CartOrderBean;
 import com.web.store.model.RoomBean;
+import com.web.store.model.SurveyBean;
 
 import web.room.service.RoomService;
-
-
 
 @Controller
 public class IMoveController {
@@ -52,8 +52,12 @@ public class IMoveController {
 	@Autowired
 	ServletContext context;
 	
-	@GetMapping("/Manager")//包廂測試畫面，有拉資料表的內容
+	@GetMapping("/Manager")//後端畫面，有拉資料表的內容
 	public String Manager(Model model, HttpServletRequest req) {
+		Map<String,CartOrderBean> order = service.getCartOrderBean();
+		model.addAttribute("CartOrderBean",order);
+		Map<Integer,SurveyBean> survey = service.getSurveyBean();
+		model.addAttribute("SurveyBean",survey);
 		return "Manager/index";
 	}
 	@GetMapping("/ManagerTest")//包廂測試畫面，有拉資料表的內容

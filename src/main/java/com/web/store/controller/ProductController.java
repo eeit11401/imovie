@@ -56,7 +56,7 @@ import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
 
 @Controller
-@SessionAttributes({"FoodCart","allFood","room","movie","main","dessert","drink","packa","LoginOK","OrderCart","categoryList"})
+@SessionAttributes({"FoodCart","allFood","room","movie","main","dessert","drink","packa","OrderCart","categoryList"})
 public class ProductController {
 	public static AllInOne all;
 	@Autowired
@@ -585,9 +585,11 @@ public class ProductController {
 			return movies;
 		}
 		
+
 		@GetMapping(value= "/roomAnalysis", produces = {"application/json"})
-		protected ResponseEntity<Map<String,String>> toChart(Model model, HttpServletRequest req) {
-			Map<String,String> map = new HashMap<>();
+		protected ResponseEntity<List<Map<String,String>>> toChart(Model model, HttpServletRequest req) {
+			
+			List<Map<String,String>> list = new ArrayList<Map<String,String>>();
 			ArrayList<Integer> bookedId = service.getBookedList();
 			System.out.println("?????東西呢");
 			DecimalFormat df = new DecimalFormat("##.00");
@@ -607,21 +609,30 @@ public class ProductController {
 				String bookedRate = String.valueOf(rate);
 				System.out.println("轉換前double:"+rate+" ,轉換後:"+bookedRate);
 				String name = service.getProductById2(roomId).getRoomName();
-				
-				
+				System.out.println(name);
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("roomName",name);
+				map.put("roomRate",bookedRate);
+				list.add(map);
 				test++;
 				if(test==listSize) {
-					nameStr += "'"+name+"'";
+					nameStr += name;
 					rateStr += bookedRate;
 				}else {
-					nameStr += "'"+name+"', ";
-					rateStr += bookedRate+", ";
+					nameStr += name+",";
+					rateStr += bookedRate+",";
 				}
 			}
-			map.put("roomName",nameStr);
-			map.put("roomRate",rateStr);
-			System.out.println("wtfwtfwtfwtfwtf");
-			ResponseEntity<Map<String,String>> re = new ResponseEntity<>(map,HttpStatus.OK);
+			
+			System.out.println(nameStr+"wtfwtfwtfwtfwtf");
+			System.out.println(rateStr+"wtfwtfwtfwtfwtf");
+			String[] nameStrSplit = nameStr.split(",");
+			String[] rateStrSplit = rateStr.split(",");
+			for (int i = 0; i < nameStrSplit.length; i++) {
+				
+				System.out.println(nameStrSplit[i]+"="+rateStrSplit[i]);
+			}
+			ResponseEntity<List<Map<String,String>>> re = new ResponseEntity<>(list,HttpStatus.OK);
 			return re;
 		}
 

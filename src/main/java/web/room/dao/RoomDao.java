@@ -3,7 +3,9 @@ package web.room.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.web.store.model.CartOrderBean;
 import com.web.store.model.RoomBean;
+import com.web.store.model.SurveyBean;
 
 
 
@@ -21,4 +23,8 @@ public interface RoomDao {
 	List<RoomBean> AddRoomAjax(RoomBean roomBean);
 
 	List<RoomBean> getUpRoom(Integer roomId);
+
+	Map<String, CartOrderBean> getCartOrderBean();
+
+	Map<Integer, SurveyBean> getSurveyBean();
 }
