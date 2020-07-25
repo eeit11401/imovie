@@ -2,12 +2,26 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <c:set var="funcName" value="index" scope="session"/>
 	<head>
 		<meta charset="UTF-8">
 		<title>首頁</title>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<style type="text/css">
+credits: {
+enabled:false
+}
+</style>
 	</head>
 	<body class="bg-theme bg-theme1">
 		<c:set var="funcName" value="index" scope="session"/>
@@ -81,36 +95,42 @@
 		   </div>
 		 </div>
 		 <div class="card-body">
+		 
 		    <!-- <ul class="list-inline">
 			  <li class="list-inline-item"><i class="fa fa-circle mr-2 text-white"></i>New Visitor</li>
 			  <li class="list-inline-item"><i class="fa fa-circle mr-2 text-light"></i>Old Visitor</li>
 			</ul> -->
 			<div class="chart-container-1">
-        <!-- <canvas id="chart1"></canvas> -->
-          <div id="chart11"></div>
-      
+			
+<%--         	<canvas id="chart1"> --%>
+        		<div id="container"></div>
+<%--         	</canvas> --%>
+			  
+			  <button id="plain">Plain</button>
+			  <button id="inverted">Inverted</button>
+			  <button id="polar">Polar</button>
 			</div>
 		 </div>
 		 
 		 <div class="row m-0 row-group text-center border-top border-light-3">
-		   <div class="col-12 col-lg-4">
-		     <div class="p-3">
-		       <h5 class="mb-0">45.87M</h5>
-			   <small class="mb-0">Overall Visitor <span> <i class="fa fa-arrow-up"></i> 2.43%</span></small>
-		     </div>
-		   </div>
-		   <div class="col-12 col-lg-4">
-		     <div class="p-3">
-		       <h5 class="mb-0">15:48</h5>
-			   <small class="mb-0">Visitor Duration <span> <i class="fa fa-arrow-up"></i> 12.65%</span></small>
-		     </div>
-		   </div>
-		   <div class="col-12 col-lg-4">
-		     <div class="p-3">
-		       <h5 class="mb-0">245.65</h5>
-			   <small class="mb-0">Pages/Visit <span> <i class="fa fa-arrow-up"></i> 5.62%</span></small>
-		     </div>
-		   </div>
+<!-- 		   <div class="col-12 col-lg-4"> -->
+<!-- 		     <div class="p-3"> -->
+<!-- 		       <h5 class="mb-0">45.87M</h5> -->
+<!-- 			   <small class="mb-0">Overall Visitor <span> <i class="fa fa-arrow-up"></i> 2.43%</span></small> -->
+<!-- 		     </div> -->
+<!-- 		   </div> -->
+<!-- 		   <div class="col-12 col-lg-4"> -->
+<!-- 		     <div class="p-3"> -->
+<!-- 		       <h5 class="mb-0">15:48</h5> -->
+<!-- 			   <small class="mb-0">Visitor Duration <span> <i class="fa fa-arrow-up"></i> 12.65%</span></small> -->
+<!-- 		     </div> -->
+<!-- 		   </div> -->
+<!-- 		   <div class="col-12 col-lg-4"> -->
+<!-- 		     <div class="p-3"> -->
+<!-- 		       <h5 class="mb-0">245.65</h5> -->
+<!-- 			   <small class="mb-0">Pages/Visit <span> <i class="fa fa-arrow-up"></i> 5.62%</span></small> -->
+<!-- 		     </div> -->
+<!-- 		   </div> -->
 		 </div>
 		 
 		</div>
@@ -282,5 +302,112 @@
     <!-- End container-fluid-->
     
     </div><!--End content-wrapper--></div>
+    <script>
+     
+// 		var container = document.getElementById("hiFigure");
+		var scriptJSON = document.createElement('script');
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET","<c:url value='roomAnalysis' />", true);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xhr.send();
+		console.log("jalfshkjadnfjl");
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var rooms = JSON.parse(xhr.responseText);
+				var roomName = new Array();
+				var roomRate = new Array();
+				for (var i = 0; i < rooms.length; i++) {
+					roomName.push(rooms[i].roomName);
+					roomRate.push(Math.round(rooms[i].roomRate));
+					
+					console.log(rooms[i].roomName +" , "+ rooms[i].roomRate);
+				}
+// 					var strs= new Array();
+// 					strs=rooms.roomName.split(","); //字元分割
+// 					for (i=0;i<strs.length ;i )
+// 					{
+						
+// 					}
+				
+				analysisF(roomName,roomRate);
+// 				var divs = document.getElementById("somedivS");
+// 				divs.innerHTML = content;
+			}
+		}
+		//var ctx = document.getElementById('chart1').getContext('2d');
+		function analysisF(roomName,roomRate){
+			
+			var chart = Highcharts.chart("container", {
+				chart: {
+			        height: 400,
+			        type: 'line'
+			    },
+			    title: {
+			        text: 'Chart.update'
+			    },
+
+			    subtitle: {
+			        text: 'Plain'
+			    },
+
+			    xAxis: {
+			        categories: roomName
+			    },
+
+			    series: [{
+			        type: 'column',
+			        colorByPoint: true,
+			        data: roomRate,
+			        showInLegend: false
+			    }],
+			    
+
+			});
+
+
+			$('#plain').click(function () {
+			    chart.update({
+			        chart: {
+			            inverted: false,
+			            polar: false
+			        },
+			        subtitle: {
+			            text: 'Plain'
+			        }
+			    });
+			});
+
+			$('#inverted').click(function () {
+			    chart.update({
+			        chart: {
+			            inverted: true,
+			            polar: false
+			        },
+			        subtitle: {
+			            text: 'Inverted'
+			        }
+			    });
+			});
+
+			$('#polar').click(function () {
+			    chart.update({
+			        chart: {
+			            inverted: false,
+			            polar: true
+			        },
+			        subtitle: {
+			            text: 'Polar'
+			        }
+			    });
+			});
+		}
+
+
+			
+</script>
+    <script src="assets/plugins/Chart.js/Chart.min.js"></script>
+ 
+  <!-- Index js -->
+  <script src="assets/js/index.js"></script>
  	</body>
 </html>
