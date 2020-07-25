@@ -135,11 +135,6 @@ public class TestMovieController {
         Date d1 = Timestamp.valueOf(movieDate);
         movieBean.setMovieDate(d1);
 		movieService.MovieUpdata(movieBean, sizeInBytes);
-		
-//		List<MovieBean> mapMovieUpdate = movieService.MovieUpdateAjax(MoviemId);
-//		ResponseEntity<List<MovieBean>> MovieUpdateAjax = new ResponseEntity<>(mapMovieUpdate, HttpStatus.OK);
-//		
-//		System.out.println(mapMovieUpdate+"==============================");
 		Map<Integer, MovieBean> movieMap = movieService.getMovie();
 		ResponseEntity<Map<Integer, MovieBean>> MovieUpdateAjax = new ResponseEntity<>(movieMap, HttpStatus.OK);
 		return MovieUpdateAjax;
@@ -198,23 +193,8 @@ public class TestMovieController {
 			}
 		}
 		movieService.saveMovie(movieBean);
-//		String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
-//		String rootDirectory = context.getRealPath("/");
-//		try {
-//			File imageFolder = new File(rootDirectory, "images");
-//			if (!imageFolder.exists()) imageFolder.mkdirs();
-//			File file = new File(imageFolder, movieBean.getMovieId() + ext);
-//			productImage.transferTo(file);
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//			throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
-//		}
 		return "redirect:/Movie";
 	}
-	
-	
-	
-	
 	
 	
 	@GetMapping("/getMovieImg/{movieId}")//包廂測試畫面，圖片(資料表內容，二進制轉圖片)

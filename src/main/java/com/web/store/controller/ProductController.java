@@ -111,7 +111,6 @@ public class ProductController {
 	public ResponseEntity<List<FoodBean>>  allFoodPublishers(@RequestParam ("foodTypeStr") String foodTypeStr, Model model)  {		
 		List<FoodBean> list = service.getFoodByString(foodTypeStr);
 		ResponseEntity<List<FoodBean>> re = new ResponseEntity<>(list, HttpStatus.OK);
-//		 System.out.println("F----------------------"+foodTypeId);
 		return re;
 	}
 	//Movie Ajax分類顯示

@@ -149,6 +149,7 @@ public class EDMTableResetHibernate {
 				// 讀取圖片檔
 				Blob blob = SystemUtils2018.fileToBlob(token[2].trim());
 				home.setHomeImg(blob);
+				home.setHomeTpy(Integer.parseInt(token[3]));
 				session.save(home);
 				System.out.println("新增一筆home紀錄成功");
 			}

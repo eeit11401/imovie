@@ -49,10 +49,6 @@ public class HomeServiceImpl implements HomeService {
 		homeDao.HomeDelete(homeId);
 		
 	}
-	@Transactional
-	@Override
-	public ArrayList<Integer> getBookedList() {
-		return homeDao.getBookedList();
-	}
+
 
 }

@@ -1,6 +1,7 @@
 package web.home.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.web.store.model.HomeBean;
@@ -17,7 +18,6 @@ public interface HomeDao {
 	void saveHome(HomeBean homeBean);
 
 	HomeBean getHomeImg(Integer homeId);
-
-	ArrayList<Integer> getBookedList();
+	
 	
 }

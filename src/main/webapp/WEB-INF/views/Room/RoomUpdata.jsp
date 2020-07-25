@@ -149,8 +149,6 @@
 		        	$("#roomPopulation"+data[0].roomId).html(data[0].roomPopulation);
 		        	$("#roomPrice"+data[0].roomId).html(data[0].roomPrice);
 		        	$("#roomDateString"+data[0].roomId).html(data[0].roomDateString);
-		        	//$("#roomImg"+data[0].roomId).html(data[0].roomName);
-		        	//roomImg.innerHTML="<img height='100' width='80' src='<c:url value='/getRoomImg/"+data[0].roomId+"' />'>";
 		        	$.ajax({//AJAX開始
 				        url : "<c:url value='/getRoomImg/"+data[0].roomId+"' />",
 				        type : "GET",

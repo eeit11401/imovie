@@ -139,11 +139,6 @@ public class IMoveController {
 	
 	@PostMapping("/Room")
 	public String roomUpdata(@ModelAttribute("roomUpdata") RoomBean roomBean ,Model model) {
-		//System.out.println(roomBean.getRoomIdUp());
-		//String roomId1 = roomBean.getRoomIdUp();
-		//Integer roomId = Integer.parseInt(roomId1);
-//		Integer roomId = Integer.parseInt(roomBean.getRoomIdUp());
-		//roomBean.setRoomId(roomId);
 		long sizeInBytes = 0;
 		InputStream is = null;
 		MultipartFile productImage = roomBean.getProductImage();
@@ -223,14 +218,7 @@ public class IMoveController {
 	
 	@PostMapping("/RoomDelete")//刪除包廂測試
 	public String RoomDelete(@RequestParam Integer RoomId, Model model) {
-		//HttpSession session = model.getSession();
 		service.RoomDelete(RoomId);
-//		int n = service.RoomDelete(RoomId);
-//		if (n == 1) {
-//			model.addAttribute("BookDeleteMsg", "刪除成功");
-//		} else {
-//			model.addAttribute("BookDeleteMsg", "刪除失敗");
-//		}
 		return "redirect:/Room";
 	}
 	

@@ -14,7 +14,6 @@
 咖啡|coffee.jpg|data/img/食物/coffee.jpg|65|飲品|2
 柳橙汁|orangejuice.jpg|data/img/食物/orangejuice.jpg|60|飲品|2
 原味炸雞|friedchicken.jpg|data/img/食物/friedchicken.jpg|180|點心|3
-牛肉漢堡+熱狗套餐|burgerset.jpg|data/img/食物/burgerset.jpg|180|套餐|4
 法式吐司|toast.jpg|data/img/食物/toast.jpg|50|點心|3
 豐盛晨間套餐|breakfast.jpg|data/img/食物/breakfast.jpg|200|套餐|4
 晨間鬆餅套餐|breakfast2.jpg|data/img/食物/breakfast2.jpg|160|套餐|4

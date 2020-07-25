@@ -1,6 +1,5 @@
 package web.home.dao.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +39,7 @@ public class HomeDaoImpl implements HomeDao {
 		return map;
 	}
 
+	
 	@Override
 	public HomeBean getHomeImg(Integer homeId) {
 		Session session = factory.getCurrentSession();
@@ -68,21 +68,6 @@ public class HomeDaoImpl implements HomeDao {
 			 Session session = factory.getCurrentSession();
 			 session.saveOrUpdate(homeBean);
 		}
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public ArrayList<Integer> getBookedList() {
-		Session session = factory.getCurrentSession();
-		String hqlStr ="Select Distinct roomId From CartOrderBean";
-		List<Integer> room = session.createQuery(hqlStr).getResultList();
-//		System.out.println(room);
-//		System.out.println(room.toString());
-		ArrayList<Integer> roomIds = new ArrayList<Integer>();
-		for(Integer beans:room) {
-			roomIds.add(beans);
-		}
-		return roomIds;
 	}
 
 }

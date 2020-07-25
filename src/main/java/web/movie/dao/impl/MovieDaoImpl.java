@@ -71,9 +71,7 @@ public class MovieDaoImpl implements MovieDao {
 		String hql = "DELETE MovieBean Where movieId = :movieId";
 		Session session = factory.getCurrentSession();
 		session.createQuery(hql).setParameter("movieId", moviemId).executeUpdate();
-//		 MovieBean movieBean = new MovieBean();
-//		 movieBean.setMovieId(moviemId);
-//	     session.delete(movieBean);
+
 	}
 
 	@Override
@@ -100,13 +98,7 @@ public class MovieDaoImpl implements MovieDao {
 		Map<Integer, MovieBean> map = new LinkedHashMap<>();
 		String hql = "FROM MovieBean WHERE movieId = :movieId";
 		Session session = factory.getCurrentSession();
-		List<MovieBean> list = session.createQuery(hql).setParameter("movieId", moviemId).getResultList();
-		
-//		for (MovieBean movie : list) {
-//			movie.setMovieImg(null);
-//			movie.setMoveFileName(null);
-//			map.put(movie.getMovieId(), movie);
-//		}
+		List<MovieBean> list = session.createQuery(hql).setParameter("movieId", moviemId).getResultList();		
 		return list;
 	}
 
