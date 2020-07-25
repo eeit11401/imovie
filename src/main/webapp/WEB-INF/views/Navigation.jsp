@@ -32,7 +32,7 @@
 			</h1>
 			<nav class='c-header__nav'>
 				<ul>
-					<li class="c-header__nav__about is-current" data-nav='index'><a
+					<li class="c-header__nav__about" data-nav='index'><a
 						href="<c:url value='/' />" id='js-header-about'>首頁</a>
 						<div class='c-header__nav__about__bottom'>
 							<div class='c-header__nav__event__bottom__dots'></div>
@@ -44,7 +44,7 @@
 							<div class='c-header__nav__event__bottom__dots'></div>
 							<div class='c-header__nav__event__bottom__dots'></div>
 						</div></li>
-					<li class='c-header__nav__event' data-nav='event'><a
+					<li class='c-header__nav__event' data-nav='room'><a
 						href='room?type=roomall'>包廂</a>
 						<div class='c-header__nav__event__bottom'>
 							<div class='c-header__nav__event__bottom__dots'></div>
@@ -56,7 +56,7 @@
 							<div class='c-header__nav__event__bottom__dots'></div>
 							<div class='c-header__nav__event__bottom__dots'></div>
 						</div></li>
-					<li class='c-header__nav__goods' data-nav='goods'><a
+					<li class='c-header__nav__goods' data-nav='movie'><a
 						href="movie?type=movieall">電影</a>
 						<div class='c-header__nav__goods__bottom'>
 							<div class='c-header__nav__event__bottom__dots'></div>
@@ -68,7 +68,7 @@
 							<div class='c-header__nav__event__bottom__dots'></div>
 							<div class='c-header__nav__event__bottom__dots'></div>
 						</div></li>
-					<li class='c-header__nav__magazine' data-nav='magazine'><a
+					<li class='c-header__nav__magazine' data-nav='menu'><a
 						href='menu?type=foodall'>菜單</a>
 						<div class='c-header__nav__magazine__bottom'>
 							<div class='c-header__nav__event__bottom__dots'></div>
@@ -85,7 +85,7 @@
 							<div class='c-header__nav__event__bottom__dots'></div>
 						</div></li>
 
-					<li class=c-header__nav__news data-nav=news><a
+					<li class=c-header__nav__news data-nav=test><a
 						href='Manager'>TSET</a>
 						<div class=c-header__nav__news__bottom>
 							<div class=c-header__nav__news__bottom__dots></div>
@@ -225,6 +225,13 @@
 	<script>
 	</script>
 	<script src="js/bootstrap.bundle.js"></script>
+
+	<script type="text/javascript">
+	var path =location.pathname !== '/ImovieS/'? location.pathname.replace("/ImovieS/",""):'index';
+	$('li').removeClass("is-current"); 
+	$(`li[data-nav=${'${path}'}]`).addClass("is-current"); 
+	</script>
+
 
 </body>
 </html>

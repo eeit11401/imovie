@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import _01_register.model.MemberBean;
+
 
 @Entity
 @Table(name="CartOrders")
@@ -27,6 +29,8 @@ public class CartOrderBean implements Serializable{
 	private RoomBean room;
 	@Transient
 	private MovieBean movie;
+	@Transient
+	private MemberBean member;
 	
 	private Integer roomId;
 	private Integer movieId;
@@ -151,6 +155,16 @@ public class CartOrderBean implements Serializable{
 
 	public void setOrderFood(Set<CartOrderFood> orderFood) {
 		this.orderFood = orderFood;
+	}
+
+
+	public MemberBean getMember() {
+		return member;
+	}
+
+
+	public void setMember(MemberBean member) {
+		this.member = member;
 	}
 
 	

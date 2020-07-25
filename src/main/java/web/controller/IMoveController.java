@@ -36,11 +36,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.web.store.model.CartOrderBean;
 import com.web.store.model.RoomBean;
+import com.web.store.model.SurveyBean;
 
 import web.room.service.RoomService;
-
-
 
 @Controller
 public class IMoveController {
@@ -52,8 +52,12 @@ public class IMoveController {
 	@Autowired
 	ServletContext context;
 	
-	@GetMapping("/Manager")//包廂測試畫面，有拉資料表的內容
+	@GetMapping("/Manager")//後端畫面，有拉資料表的內容
 	public String Manager(Model model, HttpServletRequest req) {
+		Map<String,CartOrderBean> order = service.getCartOrderBean();
+		model.addAttribute("CartOrderBean",order);
+		Map<Integer,SurveyBean> survey = service.getSurveyBean();
+		model.addAttribute("SurveyBean",survey);
 		return "Manager/index";
 	}
 	@GetMapping("/ManagerTest")//包廂測試畫面，有拉資料表的內容
@@ -139,6 +143,11 @@ public class IMoveController {
 	
 	@PostMapping("/Room")
 	public String roomUpdata(@ModelAttribute("roomUpdata") RoomBean roomBean ,Model model) {
+		//System.out.println(roomBean.getRoomIdUp());
+		//String roomId1 = roomBean.getRoomIdUp();
+		//Integer roomId = Integer.parseInt(roomId1);
+//		Integer roomId = Integer.parseInt(roomBean.getRoomIdUp());
+		//roomBean.setRoomId(roomId);
 		long sizeInBytes = 0;
 		InputStream is = null;
 		MultipartFile productImage = roomBean.getProductImage();
@@ -218,7 +227,14 @@ public class IMoveController {
 	
 	@PostMapping("/RoomDelete")//刪除包廂測試
 	public String RoomDelete(@RequestParam Integer RoomId, Model model) {
+		//HttpSession session = model.getSession();
 		service.RoomDelete(RoomId);
+//		int n = service.RoomDelete(RoomId);
+//		if (n == 1) {
+//			model.addAttribute("BookDeleteMsg", "刪除成功");
+//		} else {
+//			model.addAttribute("BookDeleteMsg", "刪除失敗");
+//		}
 		return "redirect:/Room";
 	}
 	
