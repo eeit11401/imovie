@@ -141,7 +141,7 @@
 		  <ul class="navbar-nav mr-auto align-items-center">
 		    <li class="nav-item">
 		      <a class="nav-link toggle-menu" href="javascript:void();">
-		       <i class="icon-menu menu-icon"></i>
+		       <i id="wdithChane" onclick="wdithChane()" class="icon-menu menu-icon"></i>
 		     </a>
 		    </li>
 		  </ul>

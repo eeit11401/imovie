@@ -17,6 +17,8 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+
 <style type="text/css">
 credits: {
 enabled:false
@@ -94,21 +96,21 @@ enabled:false
 			  </div>
 		   </div>
 		 </div>
-		 <div class="card-body">
+		 <div id="container" class="card-body">
 		 
 		    <!-- <ul class="list-inline">
 			  <li class="list-inline-item"><i class="fa fa-circle mr-2 text-white"></i>New Visitor</li>
 			  <li class="list-inline-item"><i class="fa fa-circle mr-2 text-light"></i>Old Visitor</li>
 			</ul> -->
-			<div class="chart-container-1">
+			<div  class="chart-container-1">
 			
 <%--         	<canvas id="chart1"> --%>
-        		<div id="container"></div>
+        		<div ></div>
 <%--         	</canvas> --%>
 			  
-			  <button id="plain">Plain</button>
-			  <button id="inverted">Inverted</button>
-			  <button id="polar">Polar</button>
+<!-- 			  <button id="plain">Plain</button> -->
+<!-- 			  <button id="inverted">Inverted</button> -->
+<!-- 			  <button id="polar">Polar</button> -->
 			</div>
 		 </div>
 		 
@@ -302,8 +304,33 @@ enabled:false
     <!-- End container-fluid-->
     
     </div><!--End content-wrapper--></div>
+    <script src="assets/plugins/Chart.js/Chart.min.js"></script>
+  <!-- Index js -->
+  	<script src="assets/js/index.js"></script>
     <script>
-     
+    function wdithChane(){
+    	var scriptJSON = document.createElement('script');
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET","<c:url value='roomAnalysis' />", true);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xhr.send();
+		console.log("jalfshkjadnfjl");
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var rooms = JSON.parse(xhr.responseText);
+				var roomName = new Array();
+				var roomRate = new Array();
+				console.log(rooms);
+				for (var i = 0; i < rooms.length; i++) {
+					roomName.push(rooms[i].roomName);
+					roomRate.push(Math.round(rooms[i].roomRate));
+					
+					console.log(rooms[i].roomName +" , "+ rooms[i].roomRate);
+				}
+				analysisF(roomName,roomRate);
+			}
+		}
+    }
 // 		var container = document.getElementById("hiFigure");
 		var scriptJSON = document.createElement('script');
 		var xhr = new XMLHttpRequest();
@@ -316,55 +343,70 @@ enabled:false
 				var rooms = JSON.parse(xhr.responseText);
 				var roomName = new Array();
 				var roomRate = new Array();
+				console.log(rooms);
 				for (var i = 0; i < rooms.length; i++) {
 					roomName.push(rooms[i].roomName);
 					roomRate.push(Math.round(rooms[i].roomRate));
 					
 					console.log(rooms[i].roomName +" , "+ rooms[i].roomRate);
 				}
-// 					var strs= new Array();
-// 					strs=rooms.roomName.split(","); //字元分割
-// 					for (i=0;i<strs.length ;i )
-// 					{
-						
-// 					}
-				
 				analysisF(roomName,roomRate);
-// 				var divs = document.getElementById("somedivS");
-// 				divs.innerHTML = content;
+				
 			}
 		}
-		//var ctx = document.getElementById('chart1').getContext('2d');
 		function analysisF(roomName,roomRate){
-			
+			console.log(roomName)
+			console.log(roomRate)
 			var chart = Highcharts.chart("container", {
 				chart: {
-			        height: 400,
-			        type: 'line'
+			        height: 380,
+			        type: 'line',
+			        backgroundColor: 'rgba(0,0,0,0)',
+			        
 			    },
 			    title: {
-			        text: 'Chart.update'
+			        text: '包廂使用率(%)',
+			        style: {
+		                color: '#FFFFFF'
+		            }
 			    },
-
-			    subtitle: {
-			        text: 'Plain'
-			    },
-
 			    xAxis: {
-			        categories: roomName
+			    	title:{
+			    	       text:'包廂名稱',
+		    	    	   style: {
+				                color: '#FFFFFF'
+				            }
+			    	   },
+			        categories: roomName,
+			        labels: {
+			            style: {
+			                color: '#FFFFFF'
+			            }
+			        }
 			    },
-
+			    yAxis:{
+		    	   title:{
+		    	       text:'使用率(%)',
+		    	       style: {
+			                color: '#FFFFFF'
+			            }
+		    	   },
+		    	   labels: {
+			            style: {
+			                color: '#FFFFFF'
+			            }
+			        }
+			    },
+			    credits: { enabled:false },   //去掉右下角highchart.com
+			    exporting: { enabled:false },   //去掉右上角的打印及导出按钮
 			    series: [{
 			        type: 'column',
 			        colorByPoint: true,
 			        data: roomRate,
 			        showInLegend: false
 			    }],
-			    
-
+			 
 			});
-
-
 			$('#plain').click(function () {
 			    chart.update({
 			        chart: {
@@ -400,14 +442,15 @@ enabled:false
 			        }
 			    });
 			});
+			//	$('#container').highcharts().reflow();
 		}
-
+		window.onresize = function() {
+	        $('#container').highcharts().reflow();
+	    }
+		
 
 			
 </script>
-    <script src="assets/plugins/Chart.js/Chart.min.js"></script>
- 
-  <!-- Index js -->
-  <script src="assets/js/index.js"></script>
+    
  	</body>
 </html>
