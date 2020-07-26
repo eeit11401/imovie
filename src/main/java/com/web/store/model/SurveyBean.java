@@ -18,17 +18,20 @@ public class SurveyBean {
 	private Integer satisfaction;
 	@Column(updatable = true,nullable = true, columnDefinition = "varchar(max)")
 	private String comment;
+	private String commentTime;
 	
 	public SurveyBean() {
 	}
 
-	public SurveyBean(Integer surveySeq, String orderNo, String date, Integer satisfaction, String comment) {
+	public SurveyBean(Integer surveySeq, String orderNo, String date, Integer satisfaction, String comment,
+			String commentTime) {
 		super();
 		this.surveySeq = surveySeq;
 		this.orderNo = orderNo;
 		this.date = date;
 		this.satisfaction = satisfaction;
 		this.comment = comment;
+		this.commentTime = commentTime;
 	}
 
 	public Integer getSurveySeq() {
@@ -70,4 +73,14 @@ public class SurveyBean {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+	public String getCommentTime() {
+		return commentTime;
+	}
+
+	public void setCommentTime(String commentTime) {
+		this.commentTime = commentTime;
+	}
+
+	
 }

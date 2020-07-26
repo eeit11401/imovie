@@ -60,17 +60,6 @@ function UpdataCancel() {
 	$("#updata").hide();
 }
 //預告
-$(document).ready(function() {
-	$('#productVedio').change(function() {//圖片預覽
-		  var file = $('#productVedio')[0].files[0];
-		  var reader = new FileReader;
-		  reader.onload = function(e) {
-		    $('#homeVedioUp').attr('src', e.target.result);
-		    $("#homeVedioUp").show();
-		  };
-		  reader.readAsDataURL(file);
-		});
-})
 function HomeVdDelete(Name,Id) {
 	if (confirm("確定刪除此項圖片資料(電影:"+Name+")?") ) {
 		document.forms[0].action="HomeVdDelete?HomeId="+Id+"";
@@ -80,18 +69,18 @@ function HomeVdDelete(Name,Id) {
 	}
 }
 function HomeVdUpdate(homeId,homeImg,homeName) {	
-   $("#updataVd").hide();
+   $("#updata").hide();
    $("input[name='homeName']").val(homeName);
    $("#homeVedioUp").attr("src", ''+homeImg+'');
    $("input[name='homeId']").val(homeId);
-   $("#updataVd").show();
+   $("#updata").show();
 }
 function HomeVdIn(homeId,homeImg,homeName) {	
 	   $("#homeVdIn").hide();
 	   $("#homeVdIn").show();
 	}
 function UpdataCancel() {
-	$("#updataVd").hide();
+	$("#updata").hide();
 }
 </script>
 
@@ -108,7 +97,7 @@ function UpdataCancel() {
 							<div class="card">
 								<div class="card-header">
 									<h1>前端首頁修改</h1>
-									<input type="button" value="新增" data-toggle="modal" 
+									<input type="button" value="新增" data-toggle="modal"
 										data-target="#HomeModal" onclick="HomeIn()">
 									<form id="form1" name="form1" method="post" action="">
 										<div class="table-responsive">
@@ -131,9 +120,8 @@ function UpdataCancel() {
 															value="${home.homeId}" /> <input type="button"
 															value="修改" data-toggle="modal" data-target="#HomeModalUp"
 															id="updata${home.homeId}"
-															onclick="HomeUpdate('${home.homeId}','<c:url value="/getHomeImg/${home.homeTpy}" />','${home.homeName}')">
-															<input type="button" value="刪除"
-															id="delet${home.homeId}"
+															onclick="HomeUpdate('${home.homeId}','<c:url value="/getHomeImg/${home.homeId}" />','${home.homeName}')">
+															<input type="button" value="刪除" id="delet${home.homeId}"
 															onclick="HomeDelete('${home.homeName}',${home.homeId})">
 														</td>
 													</tr>
@@ -149,64 +137,61 @@ function UpdataCancel() {
 				<div class="overlay toggle-menu"></div>
 			</div>
 		</div>
-<%-- 		<form:form method='POST' modelAttribute="homeImg" --%>
-<%-- 			enctype='multipart/form-data'> --%>
-<!-- 			<div class="modal" id="HomeModalUp"> -->
-<!-- 				<div class="modal-dialog"> -->
-<!-- 					<div class="modal-content" -->
-<!-- 						style="background-image: url(assets/images/bg-themes/1.png);"> -->
-<!-- 						Modal (開啟) -->
-<!-- 						<table id="updata" style="display: none"> -->
-<!-- 							<tr> -->
-<!-- 								<td>圖片名稱：</td> -->
-<%-- 								<td><form:input id="homeName" path="homeName" --%>
-<%-- 										name="homeName" type='text' /></td>  --%>
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<!-- 								<td>選擇圖片：</td> -->
-<!-- 								<td><img id="homeImgUp" height='100' width='80' src=""> -->
-<%-- 									<form:input  path="productImage" type='file' /></td> --%>
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<%-- 								<td colspan="2" align="center"><form:input type="hidden" --%>
-<%-- 										id="homeId" path="homeId" name="homeId" /> <input  --%>
-<!-- 									type="submit" name="intor" value="修改"> <input -->
-<!-- 									type="button" onclick="UpdataCancel()" value="取消"></td> -->
-<!-- 							</tr> -->
-<!-- 						</table> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<%-- 		</form:form> --%>
-<%-- 		<form:form method='POST' modelAttribute="homeBean" --%>
-<%-- 			enctype='multipart/form-data'> --%>
-<!-- 			<div class="modal" id="HomeModal"> -->
-<!-- 				<div class="modal-dialog"> -->
-<!-- 					<div class="modal-content" -->
-<!-- 						style="background-image: url(assets/images/bg-themes/1.png);"> -->
-<!-- 						Modal (開啟) -->
-<!-- 						<table id='homeIn' style="display: none"> -->
-<!-- 							<tr> -->
-<!-- 								<td>圖片名稱：</td> -->
-<%-- 								<td><form:input id="homeName" path="homeName" --%>
-<%-- 										name="homeName" type='text' /></td> --%>
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<!-- 								<td>選擇圖片：</td> -->
-<!-- 								<td> -->
-<%-- 									<form:input id="productImage" path="productImage" type='file' /></td> --%>
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<%-- 								<td colspan="2" align="center"><form:input type="hidden" --%>
-<%-- 										id="homeId" path="homeId" name="homeId" /> <input --%>
-<!-- 									type="submit" name="intor" value="新增"></td> -->
-<!-- 							</tr> -->
-<!-- 						</table> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<%-- 		</form:form> --%>
-		
+		<form method='POST' action="HomeUp" enctype='multipart/form-data'>
+			<div class="modal" id="HomeModalUp">
+				<div class="modal-dialog">
+					<div class="modal-content"
+						style="background-image: url(assets/images/bg-themes/1.png);">
+						Modal (開啟)
+						<table id="updata" style="display: none">
+							<tr>
+								<td>圖片名稱：</td>
+								<td><input id="homeName" path="homeName" name="homeName"
+									type='text' /></td>
+							</tr>
+							<tr>
+								<td>選擇圖片：</td>
+								<td><img id="homeImgUp" height='100' width='80' src="">
+									<input name="productImage" path="productImage" type='file' /></td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center"><input type="hidden"
+									id="homeId" path="homeId" name="homeId" /> <input
+									type="submit" name="intor" value="修改"> <input
+									type="button" onclick="UpdataCancel()" value="取消"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</form>
+		<form method='POST' action="HomeIn" enctype='multipart/form-data'>
+			<div class="modal" id="HomeModal">
+				<div class="modal-dialog">
+					<div class="modal-content"
+						style="background-image: url(assets/images/bg-themes/1.png);">
+						Modal (開啟)
+						<table id='homeIn' style="display: none">
+							<tr>
+								<td>圖片名稱：</td>
+								<td><input id="homeName" path="homeName" name="homeName"
+									type='text' /></td>
+							</tr>
+							<tr>
+								<td>選擇圖片：</td>
+								<td><input id="productImage" name="productImage"
+									path="productImage" type='file' /></td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center"><input type="hidden"
+									id="homeId" path="homeId" name="homeId" /> <input
+									type="submit" name="intor" value="新增"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</form>
 		<div class="content-wrapper">
 			<div class="container-fluid">
 				<div id='c3' class="clearfix">
@@ -215,7 +200,7 @@ function UpdataCancel() {
 							<div class="card">
 								<div class="card-header">
 									<h1>前端預告片修改</h1>
-									<input type="button" value="新增" data-toggle="modal" 
+									<input type="button" value="新增" data-toggle="modal"
 										data-target="#HomeModalVd" onclick="HomeVdIn()">
 									<form id="form1" name="form1" method="post" action="">
 										<div class="table-responsive">
@@ -230,17 +215,15 @@ function UpdataCancel() {
 												</thead>
 												<c:forEach var="home" items="${homeVedio}">
 													<tr>
-														<td><video height='100' width='80'
-															src='<c:url value="/getHomeVd/${home.homeId}" />'>
-														</td>
-														<td>${home.value.homeName}</td>
+														<td><video height='100' width='100'
+																src='<c:url value="/getHomeVd/${home.homeId}" />'></td>
+														<td>${home.homeName}</td>
 														<td><input name="homeId" type="hidden" id="homeId"
 															value="${home.homeId}" /> <input type="button"
-															value="修改" data-toggle="modal" data-target="#HomeModalVdUp"
-															id="updata${home.homeId}"
+															value="修改" data-toggle="modal"
+															data-target="#HomeModalVdUp" id="updata${home.homeId}"
 															onclick="HomeVdUpdate('${home.homeId}',<c:url value="/getHomeVd/${home.homeId}" />','${home.homeName}')">
-															<input type="button" value="刪除"
-															id="delet${home.homeId}"
+															<input type="button" value="刪除" id="delet${home.homeId}"
 															onclick="HomeVdDelete('${home.homeName}',${home.homeId})">
 														</td>
 													</tr>
@@ -256,63 +239,60 @@ function UpdataCancel() {
 				<div class="overlay toggle-menu"></div>
 			</div>
 		</div>
-<%-- 		<form:form method='POST' modelAttribute="homeBean" --%>
-<%-- 			enctype='multipart/form-data'> --%>
-<!-- 			<div class="modal" id="HomeModalVdUp"> -->
-<!-- 				<div class="modal-dialog"> -->
-<!-- 					<div class="modal-content" -->
-<!-- 						style="background-image: url(assets/images/bg-themes/1.png);"> -->
-<!-- 						Modal (開啟) -->
-<!-- 						<table id="updataVd" style="display: none"> -->
-<!-- 							<tr> -->
-<!-- 								<td>影片名稱：</td> -->
-<%-- 								<td><form:input id="homeName" path="homeName" --%>
-<%-- 										name="homeName" type='text' /></td> --%>
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<!-- 								<td>選擇影片：</td> -->
-<!-- 								<td><video id="homeVdUp" height='100' width='80' src=""> -->
-<%-- 									<form:input  path="productVedio" type='file' /></td> --%>
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<%-- 								<td colspan="2" align="center"><form:input type="hidden" --%>
-<%-- 										id="homeId" path="homeId" name="homeId" /> <input --%>
-<!-- 									type="submit" name="intor" value="修改"> <input -->
-<!-- 									type="button" onclick="UpdataCancel()" value="取消"></td> -->
-<!-- 							</tr> -->
-<!-- 						</table> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<%-- 		</form:form> --%>
-<%-- 		<form:form method='POST' modelAttribute="homeBean" --%>
-<%-- 			enctype='multipart/form-data'> --%>
-<!-- 			<div class="modal" id="HomeModalVd"> -->
-<!-- 				<div class="modal-dialog"> -->
-<!-- 					<div class="modal-content" -->
-<!-- 						style="background-image: url(assets/images/bg-themes/1.png);"> -->
-<!-- 						Modal (開啟) -->
-<!-- 						<table id='homeVdIn' style="display: none"> -->
-<!-- 							<tr> -->
-<!-- 								<td>影片名稱：</td> -->
-<%-- 								<td><form:input id="homeName" path="homeName" --%>
-<%-- 										name="homeName" type='text' /></td> --%>
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<!-- 								<td>選擇影片：</td> -->
-<!-- 								<td> -->
-<%-- 									<form:input id="productVedio" path="productVedio" type='file' /></td> --%>
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<%-- 								<td colspan="2" align="center"><form:input type="hidden" --%>
-<%-- 										id="homeId" path="homeId" name="homeId" /> <input --%>
-<!-- 									type="submit" name="intor" value="新增"></td> -->
-<!-- 							</tr> -->
-<!-- 						</table> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<%-- 		</form:form> --%>
+		<form method='POST' action="HomeVdUp" enctype='multipart/form-data'>
+			<div class="modal" id="HomeModalVdUp">
+				<div class="modal-dialog">
+					<div class="modal-content"
+						style="background-image: url(assets/images/bg-themes/1.png);">
+						<table id="updata" style="display: none">
+							<tr>
+								<td>影片名稱：</td>
+								<td><input id="homeName" path="homeName" name="homeName"
+									type='text' /></td>
+							</tr>
+							<tr>
+								<td>選擇影片：</td>
+								<td><video id="homeVdUp" height='100' width='80' src="">
+										<input name="productImage" path="productImage" type='file' /></td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center"><input type="hidden"
+									id="homeId" path="homeId" name="homeId" /> <input
+									type="submit" name="intor" value="修改"> <input
+									type="button" onclick="UpdataCancel()" value="取消"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</form>
+		<form method='POST' action="HomeVdIn" enctype='multipart/form-data'>
+			<div class="modal" id="HomeModalVd">
+				<div class="modal-dialog">
+					<div class="modal-content"
+						style="background-image: url(assets/images/bg-themes/1.png);">
+
+						<table id='homeVdIn' style="display: none">
+							<tr>
+								<td>影片名稱：</td>
+								<td><input id="homeName" path="homeName" name="homeName"
+									type='text' /></td>
+							</tr>
+							<tr>
+								<td>選擇影片：</td>
+								<td><input id="productImage" path="productImage"
+									name="productImage" type='file' /></td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center"><input type="hidden"
+									id="homeId" path="homeId" name="homeId" /> <input
+									type="submit" name="intor" value="新增"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
 </body>
 

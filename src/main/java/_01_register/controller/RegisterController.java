@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.rowset.serial.SerialBlob;
@@ -23,6 +26,7 @@ import _00_init.util.GlobalService;
 import _01_register.model.MemberBean;
 import _01_register.service.MemberService;
 import _01_register.validator.MemberBeanValidator;
+
 
 
 @Controller
@@ -185,5 +189,13 @@ public class RegisterController {
 			memberBean.setLogin("false");
 			model.addAttribute("memberBean", memberBean);
 		}
+	}
+	
+	@ModelAttribute
+	public void commonData(Model model) {
+		Map<String, String> genderMap = new HashMap<>();
+		genderMap.put("M", "Male");
+		genderMap.put("F", "Female");
+		model.addAttribute("genderMap", genderMap);
 	}
 }

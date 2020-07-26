@@ -53,6 +53,10 @@ public class TestHomeController {
     String passwd = "sa123456";
     private static final String SELECT_Img = "Select * From Home where homeTpy=1";
     private static final String SELECT_Vedio = "Select * From Home where homeTpy=2";
+    private static final String INSERT_Img = "INSERT INTO Home(homeName,homeImg,homeTpy,homeFileName)  VALUES (?,?,?,?)";
+    private static final String INSERT_Vedio = "INSERT INTO Home(homeName,homeImg,homeTpy,homeFileName)  VALUES (?,?,?,?)";
+    private static final String UPDATE_Img = "UPDATE  Home set  homeName=? ,homeImg =?,homeTpy=?,homeFileName=? Where homeId=?";
+    private static final String UPDATE_Vedio = "UPDATE  Home set homeName=? ,homeImg =?,homeTpy=?,homeFileName=? Where homeId=?";
 	
 	@GetMapping("/Home")//圖片顯示畫面
 	public String homeImg(Model model) {
@@ -61,13 +65,13 @@ public class TestHomeController {
 		List<HomeBean> list = new LinkedList<HomeBean>();
 		PreparedStatement ps1 = null;
 		List<HomeBean> list1 = new LinkedList<HomeBean>();
-		
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			ps = con.prepareStatement(SELECT_Img);
 			ps1 = con.prepareStatement(SELECT_Vedio);
 			ResultSet rs=ps.executeQuery();
+			ResultSet rs1=ps1.executeQuery();
 			while(rs.next()) {
 				HomeBean homeBean = new HomeBean();
 				homeBean = new HomeBean();
@@ -88,7 +92,28 @@ public class TestHomeController {
 				homeBean.setHomeName(rs.getString("homeName"));
 				homeBean.setHomeImg(rs.getBlob("homeImg"));
 				homeBean.setHomeFileName(iamgeData);
-				list.add(homeBean);
+				list.add(homeBean);			
+			}
+			while(rs1.next()) {
+				HomeBean homeBean = new HomeBean();
+				homeBean = new HomeBean();
+				//圖片轉檔
+				StringBuffer sb = new StringBuffer();
+				String fileName = rs1.getString("homeFileName");
+				String mimeType = context.getMimeType(fileName);
+				Blob blob = rs1.getBlob("homeImg");
+				byte[] bytes = blob.getBytes(1, (int) blob.length());
+				String prefix = "data:" + mimeType + ";base64,";
+				sb.append(prefix);
+				Base64.Encoder be = Base64.getEncoder();
+				String str = new String(be.encode(bytes));
+				sb.append(str);
+				String iamgeData = sb.toString();
+				homeBean.setHomeId(rs1.getInt("homeId"));
+				homeBean.setHomeTpy(rs1.getInt("homeTpy"));
+				homeBean.setHomeName(rs1.getString("homeName"));
+				homeBean.setHomeImg(rs1.getBlob("homeImg"));
+				homeBean.setHomeFileName(iamgeData);
 				list1.add(homeBean);				
 			}
 		} catch (Exception e) {
@@ -100,42 +125,42 @@ public class TestHomeController {
 	}
 	
 	
-	@PostMapping("/Home")//更新電影
-	public String updataHome(@ModelAttribute("homeBean") HomeBean homeBean, BindingResult result) {
-		long sizeInBytes = 0;
-		InputStream is = null;
-		MultipartFile productImage = homeBean.getProductImage();
-		String originalFilename = productImage.getOriginalFilename();
-		homeBean.setHomeFileName(originalFilename);
-		//  建立Blob物件，交由 Hibernate 寫入資料庫
-		if (productImage != null && !productImage.isEmpty() ) {
-			
-			try {
-				byte[] b = productImage.getBytes();
-				Blob blob = new SerialBlob(b);
-				homeBean.setHomeImg(blob);
-				sizeInBytes = 1;
-			} catch(Exception e) {
-				e.printStackTrace();
-				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
-			}
-		}else {
-			sizeInBytes = -1;
-		}
-		homeService.HomeUpdata(homeBean, sizeInBytes);
-		String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
-		try {
-			File imageFolder = new File("C:/Users/黃瑋/Documents/imovie/src/main/webapp/WEB-INF/views/img");			
-			System.out.println("---------------"+imageFolder);
-			if (!imageFolder.exists()) imageFolder.mkdirs();
-			File file = new File(imageFolder,homeBean.getHomeId()  + ext);			
-			productImage.transferTo(file);
-		} catch(Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
-		}
-		return "redirect:/Home";
-	}
+//	@PostMapping("/Home")//更新電影
+//	public String updataHome(@ModelAttribute("homeBean") HomeBean homeBean, BindingResult result) {
+//		long sizeInBytes = 0;
+//		InputStream is = null;
+//		MultipartFile productImage = homeBean.getProductImage();
+//		String originalFilename = productImage.getOriginalFilename();
+//		homeBean.setHomeFileName(originalFilename);
+//		//  建立Blob物件，交由 Hibernate 寫入資料庫
+//		if (productImage != null && !productImage.isEmpty() ) {
+//			
+//			try {
+//				byte[] b = productImage.getBytes();
+//				Blob blob = new SerialBlob(b);
+//				homeBean.setHomeImg(blob);
+//				sizeInBytes = 1;
+//			} catch(Exception e) {
+//				e.printStackTrace();
+//				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+//			}
+//		}else {
+//			sizeInBytes = -1;
+//		}
+//		homeService.HomeUpdata(homeBean, sizeInBytes);
+//		String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
+//		try {
+//			File imageFolder = new File("C:/Users/黃瑋/Documents/imovie/src/main/webapp/WEB-INF/views/img");			
+//			System.out.println("---------------"+imageFolder);
+//			if (!imageFolder.exists()) imageFolder.mkdirs();
+//			File file = new File(imageFolder,homeBean.getHomeId()  + ext);			
+//			productImage.transferTo(file);
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//			throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+//		}
+//		return "redirect:/Home";
+//	}
 	
 	@PostMapping("/HomeDelete")//刪除電影測試
 	public String HomeDelete(@RequestParam Integer HomeId, Model model) {
@@ -151,22 +176,54 @@ public class TestHomeController {
 	}
 	
 	@PostMapping("/HomeIn")//新增首頁圖，送出表單
-	public String AddfoodIn(@ModelAttribute("homeBean") HomeBean homeBean, BindingResult result) {
-		MultipartFile productImage = homeBean.getProductImage();
-		String originalFilename = productImage.getOriginalFilename();
-		homeBean.setHomeFileName(originalFilename);
+	public String AddfoodIn(@RequestParam("homeName") String homeName ,@RequestParam("productImage") MultipartFile productImage) {		
+		Connection con = null;
+		PreparedStatement ps = null;
+		List<HomeBean> list = new LinkedList<HomeBean>();
 		//  建立Blob物件，交由 Hibernate 寫入資料庫
 		if (productImage != null && !productImage.isEmpty() ) {
 			try {
+				Class.forName(driver);
+				con = DriverManager.getConnection(url, userid, passwd);
+				ps = con.prepareStatement(INSERT_Img);
+				ps.setString(1, homeName);
 				byte[] b = productImage.getBytes();
 				Blob blob = new SerialBlob(b);
-				homeBean.setHomeImg(blob);
+				ps.setBlob(2, blob);
+				ps.setInt(3, 1);
+				ps.setString(4, homeName+".jpg");
+				ps.execute();
 			} catch(Exception e) {
 				e.printStackTrace();
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
 		}
-		homeService.saveHome(homeBean);
+		return "redirect:/Home";
+	}
+	@PostMapping("/HomeUp")//修改首頁圖，送出表單
+	public String UpdataImgn(@RequestParam("homeName") String homeName ,@RequestParam("productImage") MultipartFile productImage,@RequestParam("homeId") Integer homeId) {		
+		Connection con = null;
+		PreparedStatement ps = null;
+		List<HomeBean> list = new LinkedList<HomeBean>();
+		//  建立Blob物件，交由 Hibernate 寫入資料庫
+		if (productImage != null && !productImage.isEmpty() ) {
+			try {
+				Class.forName(driver);
+				con = DriverManager.getConnection(url, userid, passwd);
+				ps = con.prepareStatement(UPDATE_Img);
+				ps.setString(1, homeName);
+				byte[] b = productImage.getBytes();
+				Blob blob = new SerialBlob(b);
+				ps.setBlob(2, blob);
+				ps.setInt(3, 1);
+				ps.setString(4, homeName+".jpg");
+				ps.setInt(5, homeId);
+				ps.executeUpdate();
+			} catch(Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
+		}
 		return "redirect:/Home";
 	}
 	
@@ -199,7 +256,6 @@ public class TestHomeController {
 		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
 		String mimeType = context.getMimeType(filename);
 		MediaType mediaType = MediaType.valueOf(mimeType);
-
 		headers.setContentType(mediaType);
 		ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
 		return responseEntity;
@@ -222,6 +278,14 @@ public class TestHomeController {
 		return b;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
 	@PostMapping("/HomeVdDelete")//刪除電影測試
 	public String HomevedioDelete(@RequestParam Integer HomeId, Model model) {
 		homeService.HomeDelete(HomeId);
@@ -236,22 +300,55 @@ public class TestHomeController {
 	}
 	
 	@PostMapping("/HomeVdIn")//新增首頁圖，送出表單
-	public String AddvedioIn(@ModelAttribute("homeBean") HomeBean homeBean, BindingResult result) {
-		MultipartFile productVedio = homeBean.getProductVedio();
-		String originalFilename = productVedio.getOriginalFilename();
-		homeBean.setHomeFileName(originalFilename);
+	public String AddvedioIn(@RequestParam("homeName") String homeName ,@RequestParam("productImage") MultipartFile productImage) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		List<HomeBean> list = new LinkedList<HomeBean>();
 		//  建立Blob物件，交由 Hibernate 寫入資料庫
-		if (productVedio != null && !productVedio.isEmpty() ) {
+		if (productImage != null && !productImage.isEmpty() ) {
 			try {
-				byte[] b = productVedio.getBytes();
+				Class.forName(driver);
+				con = DriverManager.getConnection(url, userid, passwd);
+				ps = con.prepareStatement(INSERT_Vedio);
+				ps.setString(1, homeName);
+				byte[] b = productImage.getBytes();
 				Blob blob = new SerialBlob(b);
-				homeBean.setHomeImg(blob);
+				ps.setBlob(2, blob);
+				ps.setInt(3, 2);
+				ps.setString(4, homeName+".mp4");
+				ps.execute();
 			} catch(Exception e) {
 				e.printStackTrace();
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
 		}
-		homeService.saveHome(homeBean);
+		return "redirect:/Home";
+	}
+	
+	@PostMapping("/HomeVdUp")//修改首頁圖，送出表單
+	public String UpdataVedio(@RequestParam("homeName") String homeName ,@RequestParam("productImage") MultipartFile productVedio,@RequestParam("homeId") Integer homeId) {		
+		Connection con = null;
+		PreparedStatement ps = null;
+		List<HomeBean> list = new LinkedList<HomeBean>();
+		//  建立Blob物件，交由 Hibernate 寫入資料庫
+		if (productVedio != null && !productVedio.isEmpty() ) {
+			try {
+				Class.forName(driver);
+				con = DriverManager.getConnection(url, userid, passwd);
+				ps = con.prepareStatement(UPDATE_Vedio);
+				ps.setString(1, homeName);
+				byte[] b = productVedio.getBytes();
+				Blob blob = new SerialBlob(b);
+				ps.setBlob(2, blob);
+				ps.setInt(3, 2);
+				ps.setString(4, homeName+".mp4");
+				ps.setInt(5, homeId);
+				ps.executeUpdate();
+			} catch(Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
+		}
 		return "redirect:/Home";
 	}
 	
@@ -283,8 +380,7 @@ public class TestHomeController {
 		}
 		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
 		String mimeType = context.getMimeType(filename);
-		MediaType mediaType = MediaType.valueOf(mimeType);
-
+		MediaType mediaType = MediaType.valueOf(mimeType);		
 		headers.setContentType(mediaType);
 		ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
 		return responseEntity;

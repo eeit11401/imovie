@@ -1,7 +1,9 @@
 package _01_register.dao.impl;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
@@ -114,5 +116,17 @@ public class MemberDaoImpl_Hibernate implements MemberDao {
 	@Override
 	public MemberBean get(Integer pkey) {
 		return factory.getCurrentSession().get(MemberBean.class, pkey);
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<Integer, MemberBean> getMemberList() {
+		Map<Integer, MemberBean> memberMap = new HashMap<>();
+		String hql = "FROM MemberBean";
+		Session session = factory.getCurrentSession();
+		List<MemberBean> list = session.createQuery(hql).getResultList();
+		for (MemberBean memberBean : list) {
+			memberMap.put(memberBean.getPkey(), memberBean);
+		}
+		return memberMap;
 	}
 }

@@ -36,6 +36,9 @@ public class MemberBean implements Serializable {
 	Blob memberImage;
 	String fileName;
 	Clob comment;
+	String gender;
+	String birth;
+
 	Double unpaid_amount;
 	String login;
 	@Transient
@@ -51,11 +54,26 @@ public class MemberBean implements Serializable {
 	public void setPkey(Integer pkey) {
 		this.pkey = pkey;
 	}
+	
+	public String getGender() {
+		return gender;
+	}
+	
+	public String getBirth() {
+		return birth;
+	}
+	
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
 
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
 	public MemberBean(Integer pkey, String memberId, String name, String password, String password1, String address,
 			String email, String tel, String userType, Timestamp registerTime, Double totalAmt, Blob memberImage,
-			String fileName, Clob comment, Double unpaid_amount, MultipartFile memberMultipartFile) {
+			String fileName, Clob comment,String gender, String birth, Double unpaid_amount, MultipartFile memberMultipartFile) {
 		super();
 		this.pkey = pkey;
 		this.memberId = memberId;
@@ -71,13 +89,15 @@ public class MemberBean implements Serializable {
 		this.memberImage = memberImage;
 		this.fileName = fileName;
 		this.comment = comment;
+		this.gender = gender;
+		this.birth = birth ;
 		this.unpaid_amount = unpaid_amount;
 		this.memberMultipartFile = memberMultipartFile;
 	}
 
 
 	public MemberBean(Integer pkey, String memberId, String name, String password, String address, String email,
-			String tel, String userType, Timestamp registerTime, Double totalAmt, Double unpaid_amount,
+			String tel, String userType, Timestamp registerTime, Double totalAmt,String gender,String birth, Double unpaid_amount,
 			Blob memberImage, String fileName) {
 		System.out.println("Constructor=>" + memberImage);
 		this.pkey = pkey;
@@ -90,6 +110,8 @@ public class MemberBean implements Serializable {
 		this.userType = userType;
 		this.registerTime = registerTime;
 		this.totalAmt = totalAmt;
+		this.gender = gender;
+		this.birth = birth ;
 		this.unpaid_amount = unpaid_amount;
 		this.fileName = fileName;
 		this.memberImage = memberImage;
@@ -227,7 +249,10 @@ public class MemberBean implements Serializable {
 		builder.append(fileName);
 		builder.append(", unpaid_amount=");
 		builder.append(unpaid_amount);
-		
+		builder.append(", gender=");
+		builder.append(gender);
+		builder.append(", birth");
+		builder.append(birth);
 		builder.append("]");
 		return builder.toString();
 	}

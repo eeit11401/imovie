@@ -17,7 +17,7 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-
+<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
 
 <style type="text/css">
 credits: {
@@ -80,7 +80,7 @@ enabled:false
 	<div class="row">
      <div class="col-12 col-lg-8 col-xl-8">
 	    <div class="card">
-		 <div class="card-header">Site Traffic
+		 <div class="card-header">訂單分析圖
 		   <div class="card-action">
 			 <div class="dropdown">
 			 <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
@@ -96,21 +96,31 @@ enabled:false
 			  </div>
 		   </div>
 		 </div>
+<!-- 		 <button id="plain">Plain</button> -->
+<!-- 			  <button id="inverted">Inverted</button> -->
+			  <ul class="nav nav-tabs" id="mySelect" role="tablist" >
+                  <li class="nav-item">
+                      <a class="nav-link active" id="plain" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true" >長條圖</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" id="inverted" data-toggle="tab" href="#specification" role="tab" aria-controls="specification" aria-selected="false" >行條統計圖</a>
+                  </li>
+              </ul>
+			  
+<!-- 			  <button id="polar">Polar</button> -->
 		 <div id="container" class="card-body">
 		 
 		    <!-- <ul class="list-inline">
 			  <li class="list-inline-item"><i class="fa fa-circle mr-2 text-white"></i>New Visitor</li>
 			  <li class="list-inline-item"><i class="fa fa-circle mr-2 text-light"></i>Old Visitor</li>
 			</ul> -->
-			<div  class="chart-container-1">
+			<div class="chart-container-1">
 			
 <%--         	<canvas id="chart1"> --%>
         		<div ></div>
 <%--         	</canvas> --%>
 			  
-<!-- 			  <button id="plain">Plain</button> -->
-<!-- 			  <button id="inverted">Inverted</button> -->
-<!-- 			  <button id="polar">Polar</button> -->
+			  
 			</div>
 		 </div>
 		 
@@ -140,7 +150,7 @@ enabled:false
 
      <div class="col-12 col-lg-4 col-xl-4">
         <div class="card">
-           <div class="card-header">Weekly sales
+           <div class="card-header">評分總平均
              <div class="card-action">
              <div class="dropdown">
              <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
@@ -156,9 +166,10 @@ enabled:false
               </div>
              </div>
            </div>
-           <div class="card-body">
+           <div id="strat" class="card-body">
 		     <div class="chart-container-2">
-               <canvas id="chart2"></canvas>
+<%--                <canvas id="chart2"></canvas> --%>
+    			<div ></div>
 			  </div>
            </div>
            <div class="table-responsive">
@@ -170,19 +181,9 @@ enabled:false
                    <td>+55%</td>
                  </tr>
                  <tr>
-                   <td><i class="fa fa-circle text-light-1 mr-2"></i>Affiliate</td>
-                   <td>$2602</td>
-                   <td>+25%</td>
-                 </tr>
-                 <tr>
-                   <td><i class="fa fa-circle text-light-2 mr-2"></i>E-mail</td>
-                   <td>$1802</td>
-                   <td>+15%</td>
-                 </tr>
-                 <tr>
-                   <td><i class="fa fa-circle text-light-3 mr-2"></i>Other</td>
-                   <td>$1105</td>
-                   <td>+5%</td>
+                   <td><i class="fa fa-circle text-white mr-2"></i> Direct</td>
+                   <td>$5856</td>
+                   <td>+55%</td>
                  </tr>
                </tbody>
              </table>
@@ -327,13 +328,14 @@ enabled:false
 // 		var container = document.getElementById("hiFigure");
 		var scriptJSON = document.createElement('script');
 		var xhr = new XMLHttpRequest();
-		xhr.open("GET","<c:url value='roomAnalysis' />", true);
-		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-		xhr.send();
+		var xhr1 = new XMLHttpRequest();
+		xhr1.open("GET","<c:url value='roomAnalysis' />", true);
+		xhr1.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xhr1.send();
 		console.log("jalfshkjadnfjl");
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				var rooms = JSON.parse(xhr.responseText);
+		xhr1.onreadystatechange = function() {
+			if (xhr1.readyState == 4 && xhr1.status == 200) {
+				var rooms = JSON.parse(xhr1.responseText);
 				var roomName = new Array();
 				var roomRate = new Array();
 				console.log(rooms);
@@ -352,10 +354,9 @@ enabled:false
 			console.log(roomRate)
 			var chart = Highcharts.chart("container", {
 				chart: {
-			        height: 380,
+			        height: 350,
 			        type: 'line',
 			        backgroundColor: 'rgba(0,0,0,0)',
-			        
 			    },
 			    title: {
 			        text: '包廂使用率(%)',
@@ -406,9 +407,9 @@ enabled:false
 			            inverted: false,
 			            polar: false
 			        },
-			        subtitle: {
-			            text: 'Plain'
-			        }
+// 			        subtitle: {
+// 			            text: 'Plain'
+// 			        }
 			    });
 			});
 
@@ -418,9 +419,9 @@ enabled:false
 			            inverted: true,
 			            polar: false
 			        },
-			        subtitle: {
-			            text: 'Inverted'
-			        }
+// 			        subtitle: {
+// 			            text: 'Inverted'
+// 			        }
 			    });
 			});
 
@@ -440,8 +441,114 @@ enabled:false
 		window.onresize = function() {
 	        $('#container').highcharts().reflow();
 	    }
-		
 
+// 		var xhr = new XMLHttpRequest();
+		xhr.open("GET","<c:url value='satisfyRate' />", true);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xhr.send();
+		console.log("jalfshkjadnfjl");
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				console.log("inside");
+				var rate = JSON.parse(xhr.responseText);
+				getPie(rate);
+			}
+		}
+		
+	    function renderIcons() {
+	        if (!this.series[0].icon) {
+	            this.series[0].icon = this.renderer.path(['M', -8, 0, 'L', 8, 0, 'M', 0, -8, 'L', 8, 0, 0, 8])
+	                .attr({
+	                    stroke: '#303030',
+	                    'stroke-linecap': 'round',
+	                    'stroke-linejoin': 'round',
+	                    'stroke-width': 2,
+	                    zIndex: 10
+	                });
+	                //.add(this.series[2].group);
+	        }
+	        this.series[0].icon.translate(
+	            this.chartWidth / 2 - 10,
+	            this.plotHeight / 2 - this.series[0].points[0].shapeArgs.innerR -
+	                (this.series[0].points[0].shapeArgs.r - this.series[0].points[0].shapeArgs.innerR) / 2
+	        );
+
+	    }
+	    function getPie(number) {
+	    Highcharts.chart('strat', {
+	        chart: {
+	            type: 'solidgauge',
+	            height: "100%",
+	            backgroundColor: 'rgba(0,0,0,0)',
+	            events: {
+	                render: renderIcons
+	            }
+	        },
+
+	        title: {
+	            text: null,
+	        },
+
+	        tooltip: {
+	            borderWidth: 0,
+	            backgroundColor: 'none',
+	            shadow: false,
+	            style: {
+	                fontSize: '16px'
+	            },
+	            valueSuffix: '/5',
+	            pointFormat: '{series.name}<br><span style="font-size:2em; color: {point.color}; font-weight: bold">{point.y}</span>',
+	            positioner: function (labelWidth) {
+	                return {
+	                    x: (this.chart.chartWidth - labelWidth) / 2,
+	                    y: (this.chart.plotHeight / 2) + 15
+	                };
+	            }
+	        },
+
+	        pane: {
+	            startAngle: 0,
+	            endAngle: 360,
+	            background: [{ // Track for Move
+	                outerRadius: '110%',
+	                innerRadius: '90%',
+	                backgroundColor: Highcharts.color(Highcharts.getOptions().colors[0])
+	                    .setOpacity(0.3)
+	                    .get(),
+	                borderWidth: 0
+	            }]
+	        },
+
+	        yAxis: {
+	            min: 0,
+	            max: 5,
+	            lineWidth: 0,
+	            tickPositions: []
+	        },
+
+	        plotOptions: {
+	            solidgauge: {
+	                dataLabels: {
+	                    enabled: false
+	                },
+	                linecap: 'round',
+	                stickyTracking: false,
+	                rounded: true
+	            }
+	        },
+	        credits: { enabled:false },   //去掉右下角highchart.com
+		    exporting: { enabled:false },   //去掉右上角的打印及导出按钮
+	        series: [{
+	            name: '',
+	            data: [{
+	                color: "#FFFFFF",
+	                radius: '112%',
+	                innerRadius: '88%',
+	                y: number
+	            }]
+	        }]
+	    });
+	    }
 			
 </script>
     

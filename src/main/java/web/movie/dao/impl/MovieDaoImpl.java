@@ -1,3 +1,4 @@
+
 package web.movie.dao.impl;
 
 import java.text.SimpleDateFormat;
@@ -31,12 +32,26 @@ public class MovieDaoImpl implements MovieDao {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public void saveMovie(MovieBean movieBean) {
+	public Map<Integer, MovieBean> saveMovie(MovieBean movieBean) {
+		Map<Integer, MovieBean> map = new LinkedHashMap<>();
 		movieBean.setMovieLength(movieBean.getMovieLength()+"分");
 		Session session = factory.getCurrentSession();
 		session.save(movieBean);
-		
+		String hql = "From MovieBean Where movieDate IN (Select MAX(movieDate) From MovieBean)";
+		List<MovieBean> list = session.createQuery(hql).getResultList();
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = null;
+		for (MovieBean movie : list) {
+			if (movie.getMovieDate() != null) {
+				date = movie.getMovieDate();
+				String movieDate = sdFormat.format(date);
+				movie.setMovieDateString(movieDate);
+			}
+			map.put(movie.getMovieId(), movie);
+		}
+		return map;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -71,11 +86,14 @@ public class MovieDaoImpl implements MovieDao {
 		String hql = "DELETE MovieBean Where movieId = :movieId";
 		Session session = factory.getCurrentSession();
 		session.createQuery(hql).setParameter("movieId", moviemId).executeUpdate();
-
+//		 MovieBean movieBean = new MovieBean();
+//		 movieBean.setMovieId(moviemId);
+//	     session.delete(movieBean);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public void MovieUpdata(MovieBean movieBean, long sizeInBytes) {
+	public Map<Integer, MovieBean> MovieUpdata(MovieBean movieBean, long sizeInBytes) {
 		movieBean.setMovieLength(movieBean.getMovieLength()+"分");
 		if (sizeInBytes == -1) { // 不修改圖片
 			MovieBean movie = null;
@@ -89,7 +107,21 @@ public class MovieDaoImpl implements MovieDao {
 			 Session session = factory.getCurrentSession();
 			 session.saveOrUpdate(movieBean);
 		}
-       
+		Map<Integer, MovieBean> map = new LinkedHashMap<>();
+		Session session = factory.getCurrentSession();
+		String hql = "From MovieBean Where movieDate IN (Select MAX(movieDate) From MovieBean)";
+		List<MovieBean> list = session.createQuery(hql).getResultList();
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = null;
+		for (MovieBean movie : list) {
+			if (movie.getMovieDate() != null) {
+				date = movie.getMovieDate();
+				String movieDate = sdFormat.format(date);
+				movie.setMovieDateString(movieDate);
+			}
+			map.put(movie.getMovieId(), movie);
+		}
+       return map;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -98,10 +130,17 @@ public class MovieDaoImpl implements MovieDao {
 		Map<Integer, MovieBean> map = new LinkedHashMap<>();
 		String hql = "FROM MovieBean WHERE movieId = :movieId";
 		Session session = factory.getCurrentSession();
-		List<MovieBean> list = session.createQuery(hql).setParameter("movieId", moviemId).getResultList();		
+		List<MovieBean> list = session.createQuery(hql).setParameter("movieId", moviemId).getResultList();
+		
+//		for (MovieBean movie : list) {
+//			movie.setMovieImg(null);
+//			movie.setMoveFileName(null);
+//			map.put(movie.getMovieId(), movie);
+//		}
 		return list;
 	}
 
 	
 
 }
+

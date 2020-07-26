@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -884,6 +885,7 @@ public class ProductDaoImpl implements ProductDao {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM SurveyBean";
 		List<SurveyBean> beans = session.createQuery(hql).getResultList();
+		DecimalFormat df = new DecimalFormat("##.00");
 		double size = beans.size();
 		double totalRate = 0.0;
 		for(SurveyBean tot:beans) {
@@ -891,8 +893,18 @@ public class ProductDaoImpl implements ProductDao {
 			System.out.println(totalRate);
 		}
 		
-		Double finalSatisfy = totalRate/size;
+		Double finalSatisfy = Double.parseDouble(df.format(totalRate/size));
 		return finalSatisfy;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<MovieBean> getMovieByFuzzy(String movieStr) {
+		Session session = factory.getCurrentSession();
+		String hqlStr ="FROM MovieBean mb WHERE mb.movieName like :str or mb.movieEName like :str";
+		List<MovieBean> listMovie = session.createQuery(hqlStr).setParameter("str", "%"+movieStr+"%").getResultList();
+		
+		return listMovie;
 	}
 
 

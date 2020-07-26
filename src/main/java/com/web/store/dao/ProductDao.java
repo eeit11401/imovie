@@ -79,4 +79,6 @@ public interface ProductDao {
 	
 	void saveSurvey (SurveyBean satisfy);
 	Double getSatisfy();
+	
+	List<MovieBean> getMovieByFuzzy(String movieStr);
 }

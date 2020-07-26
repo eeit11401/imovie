@@ -114,17 +114,26 @@
 			   </c:if>
 		      
 		
-		      <li>
-		        <a href="profile.html">
-		          <i class="zmdi zmdi-face"></i> <span>客戶清單維護</span>
-		        </a>
-		      </li>
-		
-		      <li>
-		        <a href="register.html" target="_blank">
-		          <i class="zmdi zmdi-lock"></i> <span>會員資料維護</span>
-		        </a>
-		      </li>
+<!-- 		      <li> -->
+<!-- 		        <a href="MemberList"> -->
+<!-- 		          <i class="zmdi zmdi-face"></i> <span>客戶清單維護</span> -->
+<!-- 		        </a> -->
+<!-- 		      </li> -->
+			  <c:if test="${ funcName == 'MemberList' }">
+			  		<li class="active">
+				        <a>
+				          	<i class="zmdi zmdi-lock"></i> <span>會員資料維護</span>
+				        </a>
+				    </li>
+			   </c:if>
+			  <c:if test="${ funcName != 'MemberList' }">
+			  		<li>
+				        <a href="MemberList">
+				          	<i class="zmdi zmdi-lock"></i> <span>會員資料維護</span>
+				        </a>
+				    </li>
+			   </c:if>
+		      
 		
 		       <li>
 		        <a href="login.html" target="_blank">
@@ -232,4 +241,4 @@
 		  <script src="assets/plugins/Chart.js/Chart.min.js"></script>
 		 
 		  <!-- Index js -->
-		  <script src="assets/js/index.js"></script>
+<!-- 		  <script src="assets/js/index.js"></script> -->

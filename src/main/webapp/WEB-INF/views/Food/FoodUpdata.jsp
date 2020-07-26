@@ -16,7 +16,14 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>Insert title here</title>
 <style type="text/css">
-
+#AddFood{    
+	font-size: 20px;
+    color: #019858;
+    float: right;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    }
 </style>
 </head>
 <script type="text/javascript">
@@ -59,14 +66,6 @@
 		var button = tr.insertCell(6);
 		var Updatabtn = document.createElement("I");
 		var Delectbtn = document.createElement("I");
-// 		xhr.onreadystatechange = function() {
-// 			if (xhr.readyState == 4 && xhr.status == 200) {
-// 				var publishers = JSON.parse(xhr.responseText);
-// 				alert("fuck");
-// 			}
-// 		}
-// 		xhr.open("POST", "<c:url value='AddFood' />", true);
-// 		xhr.send(formData); 
 		$.ajax({//AJAX開始
 		        url : "<c:url value='AddFood' />",
 		        type : "POST",
@@ -92,7 +91,7 @@
 		        	foodDateString.innerHTML=data[0].foodDateString;
 		        	$(Updatabtn).attr({
 						"id":"updata"+data[0].foodId,
-						"class":"fas fa-edit",
+						"class":"fas fa-edit btn btn-link",
 						"style":"font-size:25px;color:blue;",
 						"data-toggle":"modal",
 						"data-target":"#FoodModal",
@@ -100,7 +99,7 @@
 					});
 		        	$(Delectbtn).attr({
 						"id":"delet"+data[0].foodId,
-						"class":"fa fa-trash",
+						"class":"fa fa-trash btn btn-link",
 						"style":"font-size:25px;color:red",
 						"onclick":"FoodDelete('"+data[0].foodName+"','"+data[0].foodId+"')"
 					});
@@ -175,24 +174,26 @@
 	<div class="row">
 	 <div class="col-12 col-lg-12">
 	   <div class="card">
-		<h1>前端菜單維護</h1>
-	    <div class="table-responsive">
-		
-		<div data-toggle="modal" data-target="#FoodModal" id="AddFood">
-		   	<a href="javascript:void();"><i class="material-icons" style="font-size:30px;color:blue;">add_box</i></a>
-			<input type="button" value="返回測試選項" onclick="javascript:location.href='/DanielTest'">
+		<div class="card-body" align="center">
+		<h1 style="display:inline">菜單維護</h1>
+		<div data-toggle="modal" data-target="#FoodModal" id="AddFood" class="btn btn-link">			
+			<img style="color:blue;" src="assets/images/add_icon/add-icon-green.png" class="logo-icon" alt="logo icon"/>新增菜單			
 		</div>
-			
+	    <div class="table-responsive">
+<!-- 		<div data-toggle="modal" data-target="#FoodModal" id="AddFood" align="right"> -->
+<!-- 		   	<a href="javascript:void();"><i class="material-icons" style="font-size:30px;color:blue;">add_box新增菜單</i></a> -->
+<!-- 			<input type="button" value="返回測試選項" onclick="javascript:location.href='/DanielTest'"> -->
+<!-- 		</div> -->
 		
 		<table id="FoodTable" class="table align-items-center" >
-			<tr style="font-size:20px;">
+			<tr style="font-size:20px;" class="thead-dark">
 				<th>FoodID</th>
 				<th>圖片</th>
 				<th>食物名稱</th>
 				<th>食物類型</th>
 				<th>食物價錢</th>
 				<th>最後更新時間</th>
-				<th>修改/刪除</th>				
+				<th>&ensp;修改&ensp;&emsp;刪除</th>				
 			</tr>
 			<c:forEach var="food"  items="${foodMap}">
 				<tr id="tr${food.value.foodId}">
@@ -206,8 +207,8 @@
 					<td id="foodDateString${food.value.foodId}">${food.value.foodDateString}</td>
 					<td id="button${food.value.foodId}">
 						<input name="foodId" type="hidden" id="foodId" value="${food.value.foodId}" />
-						<a href="javascript:void();"><i id="updata${food.value.foodId}" class="fas fa-edit" style="font-size:25px;color:blue;" data-toggle="modal" data-target="#FoodModal" onclick="FoodUpdate('${food.value.foodId}','<c:url value="/getFoodImg/${food.value.foodId}" />','${food.value.foodName}','${food.value.foodType}','${food.value.foodPrice}')"></i></a>
-						<a href="javascript:void();"><i id="delet${food.value.foodId}" class="fa fa-trash" onclick="FoodDelete('${food.value.foodName}',${food.value.foodId})" style="font-size:25px;color:red"></i></a>						
+						<i id="updata${food.value.foodId}" class="fas fa-edit btn btn-link" style="font-size:25px;color:blue;" data-toggle="modal" data-target="#FoodModal" onclick="FoodUpdate('${food.value.foodId}','<c:url value="/getFoodImg/${food.value.foodId}" />','${food.value.foodName}','${food.value.foodType}','${food.value.foodPrice}')"></i>
+						<i id="delet${food.value.foodId}" class="fa fa-trash btn btn-link" onclick="FoodDelete('${food.value.foodName}',${food.value.foodId})" style="font-size:25px;color:red"></i>						
 					</td>
 				</tr>
 			</c:forEach>
@@ -261,7 +262,7 @@
 		    </div>
 		</div>
 		</form:form>
-	</div>
+	</div></div>
 	</div></div></div></div></div></div>
 </body>
 </html>

@@ -126,7 +126,6 @@ public class ProductController {
 	public ResponseEntity<List<RoomBean>>  allRoomPublishers(@RequestParam ("roomTypeStr")String TypeStr, Model model)  {		
 		List<RoomBean> list = service.getRoomByString(TypeStr);
 		ResponseEntity<List<RoomBean>> ro = new ResponseEntity<>(list, HttpStatus.OK);
-//		 System.out.println("R----------------------"+roomNameId);
 		return ro;
 	}
 	
