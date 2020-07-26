@@ -1,6 +1,7 @@
 package _01_register.dao;
 
 import java.sql.Connection;
+import java.util.Map;
 
 import _01_register.model.MemberBean;
 
@@ -18,5 +19,7 @@ public interface MemberDao {
 	
 	public void updateMember(MemberBean mb, long sizeInBytes) ;
 	MemberBean get(Integer pkey);
+
+	public Map<Integer, MemberBean> getMemberList();
 
 }

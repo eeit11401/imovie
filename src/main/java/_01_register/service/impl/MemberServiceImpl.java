@@ -1,5 +1,7 @@
 package _01_register.service.impl;
 
+import java.util.Map;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,5 +61,11 @@ public class MemberServiceImpl implements MemberService {
 	public MemberBean get(Integer pkey) {
 		return dao.get(pkey);
 		
+	}
+
+	@Transactional
+	@Override
+	public Map<Integer, MemberBean> getMemberList() {
+		return dao.getMemberList();
 	}
 }
