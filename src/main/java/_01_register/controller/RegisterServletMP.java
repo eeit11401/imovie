@@ -97,6 +97,8 @@ public class RegisterServletMP extends HttpServlet {
 		String addr = "";
 		String tel = "";
 		String fileName = "";
+		String gender= "";
+		String birth = "";
 		long sizeInBytes = 0;
 		InputStream is = null;
 		// 取出HTTP multipart request內所有的parts
@@ -217,7 +219,7 @@ public class RegisterServletMP extends HttpServlet {
 				}
 				// 將所有會員資料封裝到MemberBean(類別的)物件
 				MemberBean mem = new MemberBean(null, memberId, name, password, addr, email, 
-						tel, "M", ts, 0.0, 0.0,	blob, fileName);
+						tel, "M", ts , 0.0, gender , birth, 0.0, blob, fileName);
 				// 呼叫MemberDao的saveMember方法
 				int n = service.saveMember(mem);
 				if (n == 1) {

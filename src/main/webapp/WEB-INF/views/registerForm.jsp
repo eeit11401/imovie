@@ -58,34 +58,6 @@ float:left;
                     <a class="hiddenanchor" id="toregister"></a>
                     <a class="hiddenanchor" id="tologin"></a>
                     <div id="wrapper">
-<!--                         <div id="login" class="animate form"> -->
-<%-- 							<form:form method="POST" modelAttribute="loginBean"> --%>
-<!--                                 <h1>登入</h1>  -->
-<!--                                 <p>  -->
-<!--                                     <label for="username" class="uname" > 帳號 </label> -->
-<%--                                     <form:input path="userId" id="username" name="username" required="required" type="text" placeholder="請輸入您的登入帳號"/> --%>
-<!--                                 </p> -->
-<!--                                 <p>  -->
-<!--                                     <label for="password" class="youpasswd"> 密碼 </label> -->
-<%--                                     <form:input  path="password" id="password" name="password" required="required" type="password" placeholder="請輸入您的登入密碼" />  --%>
-<!--                                 </p> -->
-<!--                                 <p class="keeplogin">  -->
-<%-- 									<form:checkbox path="rememberMe"  name="loginkeeping" id="loginkeeping" value="loginkeeping" />  --%>
-<!-- 									<label for="loginkeeping">記住密碼</label> -->
-<!-- 								</p> -->
-<!--                                 <p class="login button">  -->
-<%--                                 <form:errors path="invalidCredentials" class="error" /> --%>
-<!--                                		<input type="submit" data-dismiss="modal" value="login" > -->
-<!--                                    <a href="http://cookingfoodsworld.blogspot.in/" target="_blank" ></a> -->
-<!-- 								</p> -->
-
-<!--                                 <p class="change_link"> -->
-<!-- 									還不是會員? -->
-<!-- 									<a href="#toregister" class="to_register">加入我們</a> -->
-<!-- 								</p> -->
-<%--                             </form:form> --%>
-<!--                         </div> -->
-<!--                         <div id="register" class="animate form"> -->
 
                         <div  class="animate form">
 						<form:form method="POST" modelAttribute="memberBean"
@@ -110,6 +82,14 @@ float:left;
                                 <p> 
                                     <label for="passwordsignup_confirm" class="youpasswd" >再次確認您的密碼<form:errors path="password1" class='error'/></label>
                                     <form:input path='password1' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="再次輸入您的密碼"/>
+                                </p>
+                                <p>
+<!--                                 	  <label for="passwordsignup" class="">性別:</label> -->
+          							  <form:radiobuttons path="gender" items='${genderMap}'/>
+                                </p>
+                                                                <p> 
+                                    <label for="age" class="youaddr" >年齡 </label>
+                                    <form:input path='birth' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="text" placeholder="輸入您的年齡"/>
                                 </p>
                                 <p> 
                                     <label for="address" class="youaddr" >地址<form:errors path="address" class='error'/> </label>
