@@ -240,7 +240,6 @@ window.onload=function (){
 				<tr id="tr${movie.value.movieId}">
 					<td id="id${movie.value.movieId}">${movie.value.movieId}</td>
 					<td id="movieImgId${movie.value.movieId}">
-<!-- 						${pageContext.servletContext.contextPath}/_00_init/getRoomImage?id=${room.value.roomId} -->
 						<img height='100' width='80' src='<c:url value="/getMovieImg/${movie.value.movieId}" />'>
 					</td>
 					<td id="movieNameId${movie.value.movieId}">${movie.value.movieName}</td>

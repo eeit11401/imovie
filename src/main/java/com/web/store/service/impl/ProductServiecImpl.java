@@ -263,5 +263,11 @@ public class ProductServiecImpl implements ProductServiec {
 	public Double getSatisfy() {
 		return productDao.getSatisfy();
 	}
+	
+	@Transactional
+	@Override
+	public List<MovieBean> getMovieByFuzzy(String movieStr) {
+		return productDao.getMovieByFuzzy(movieStr);
+	}
 
 }

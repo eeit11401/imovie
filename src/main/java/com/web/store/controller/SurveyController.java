@@ -2,12 +2,17 @@ package com.web.store.controller;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,10 +48,14 @@ public class SurveyController {
 		
 		System.out.println(rate);
 		System.out.println(aa);
+		
+		Date currentTime = new Date();
+		SimpleDateFormat  sdFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+		String strDate = sdFormat.format(currentTime);
 
 		String date = String.valueOf(model.getAttribute("orderDate"));
 		String number = String.valueOf(model.getAttribute("orderNo"));
-		SurveyBean surveybean = new SurveyBean(null,number,date,rate,aa);
+		SurveyBean surveybean = new SurveyBean(null,number,date,rate,aa,strDate);
 		service.saveSurvey(surveybean);
 		
 		return "redirect:/allmyorder"; //回到歷史清單
@@ -56,4 +65,14 @@ public class SurveyController {
 		
 		return "redirect:/allmyorder"; //回到歷史清單
 	}
+	
+	@GetMapping(value= "/satisfyRate", produces = {"application/json"})
+	protected ResponseEntity<Double> survey(Model model, HttpServletRequest request, HttpServletResponse response){
+		
+		Double rate = service.getSatisfy();
+		ResponseEntity<Double> re = new ResponseEntity<>(rate,HttpStatus.OK);
+		return re;
+		
+	}
+			
 }

@@ -64,6 +64,10 @@ public class IMoveController {
 	public String ManagerTest(Model model, HttpServletRequest req) {
 		return "Manager/test";
 	}
+	@GetMapping("/PieChart")//包廂測試畫面，有拉資料表的內容
+	public String PieChart(Model model, HttpServletRequest req) {
+		return "Manager/PieChart";
+	}
 	
 	@GetMapping("/Room")//包廂測試畫面，有拉資料表的內容
 	public String updateRoom(Model model, HttpServletRequest req) {
