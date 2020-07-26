@@ -11,7 +11,7 @@ public interface MovieService {
 
 	List<Movie_Genre> getGenreList();
 
-	void saveMovie(MovieBean movieBean);
+	Map<Integer, MovieBean> saveMovie(MovieBean movieBean);
 
 	Map<Integer, MovieBean> getMovie();
 
@@ -19,7 +19,7 @@ public interface MovieService {
 
 	void MovieDelete(Integer moviemId);
 
-	void MovieUpdata(MovieBean movieBean, long sizeInBytes);
+	Map<Integer, MovieBean> MovieUpdata(MovieBean movieBean, long sizeInBytes);
 
 	List<MovieBean> MovieUpdateAjax(Integer moviemId);
 	

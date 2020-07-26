@@ -80,7 +80,7 @@ enabled:false
 	<div class="row">
      <div class="col-12 col-lg-8 col-xl-8">
 	    <div class="card">
-		 <div class="card-header">Site Traffic
+		 <div class="card-header">訂單分析圖
 		   <div class="card-action">
 			 <div class="dropdown">
 			 <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
@@ -96,21 +96,22 @@ enabled:false
 			  </div>
 		   </div>
 		 </div>
+		 <button id="plain">Plain</button>
+			  <button id="inverted">Inverted</button>
+<!-- 			  <button id="polar">Polar</button> -->
 		 <div id="container" class="card-body">
 		 
 		    <!-- <ul class="list-inline">
 			  <li class="list-inline-item"><i class="fa fa-circle mr-2 text-white"></i>New Visitor</li>
 			  <li class="list-inline-item"><i class="fa fa-circle mr-2 text-light"></i>Old Visitor</li>
 			</ul> -->
-			<div  class="chart-container-1">
+			<div class="chart-container-1">
 			
 <%--         	<canvas id="chart1"> --%>
         		<div ></div>
 <%--         	</canvas> --%>
 			  
-<!-- 			  <button id="plain">Plain</button> -->
-<!-- 			  <button id="inverted">Inverted</button> -->
-<!-- 			  <button id="polar">Polar</button> -->
+			  
 			</div>
 		 </div>
 		 
@@ -355,7 +356,6 @@ enabled:false
 			        height: 380,
 			        type: 'line',
 			        backgroundColor: 'rgba(0,0,0,0)',
-			        
 			    },
 			    title: {
 			        text: '包廂使用率(%)',

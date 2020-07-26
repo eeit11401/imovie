@@ -14,9 +14,19 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	
+	<style type="text/css">
+		#Addmovie{    
+			font-size: 20px;
+		    color: #019858;
+		    float: right;
+		    padding-left: 0px;
+		    padding-right: 0px;
+		    padding-bottom: 0px;
+		 }
+	</style>
 </head>
 <script type="text/javascript">
 window.onload=function (){
@@ -32,6 +42,7 @@ window.onload=function (){
 	}
 	function addMovieIn() {//開啟新增畫面
 		$("input[name='movieName']").val("");
+		$("input[name='movieEName']").val("");
 		$("input[name='movieLength']").val("");
 		$("#movieNote").val("");
 		$("input[type='checkbox']").prop("checked",false);
@@ -44,16 +55,6 @@ window.onload=function (){
 		$("#updata").show();
 		$("#intorAdd").show();
 		$("#intor").hide();
-	}
-	function RoomDelete(Name,Id) {//刪除舊版
-		if (confirm("確定刪除此項電影資料(電影:"+Name+")?") ) {
-			document.forms[0].action="MovieDelete/"+Id;
-			document.forms[0].method="POST";
-			document.forms[0].submit(); 
-		} else {
-			document.forms[0].action="";
-			document.forms[0].method="";
-		}
 	}
 	function MovieDelete(Name,Id) {//刪除AJAX
 		if (confirm("確定刪除此項電影資料(電影:"+Name+")?") ) {
@@ -81,11 +82,10 @@ window.onload=function (){
 		var cell4 = row.insertCell(4);
 		var cell5 = row.insertCell(5);
 		var cell6 = row.insertCell(6);
-		var cell7 = row.insertCell(7);
-		var cell8 = row.insertCell(8);
-		var btn = document.createElement("BUTTON");
-		var del = document.createElement("BUTTON");
-		
+		var btn = document.createElement("I");
+		var del = document.createElement("I");
+		xhr.open("POST", "<c:url value='MovieAddSubmit' />", true);
+		xhr.send(formData); 
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				var publishers = JSON.parse(xhr.responseText);
@@ -96,58 +96,40 @@ window.onload=function (){
 				cell1.innerHTML="<img height='100' width='80' src='<c:url value='/getMovieImg/"+publishers[idMap.slice(-1)].movieId+"' />'>"//publishers[idMap.slice(-1)].movieId;//要放圖片
 				cell2.innerHTML=publishers[idMap.slice(-1)].movieName;
 				cell3.innerHTML=publishers[idMap.slice(-1)].movieLength;
-				cell4.innerHTML="<pre>"+publishers[idMap.slice(-1)].movieNote+"</pre>";
-				cell5.innerHTML=publishers[idMap.slice(-1)].movieGenre1;
-				cell7.innerHTML=publishers[idMap.slice(-1)].movieDateString;
-				cell6.innerHTML=publishers[idMap.slice(-1)].movieRated;
+// 				cell4.innerHTML="<pre>"+publishers[idMap.slice(-1)].movieNote+"</pre>";
+// 				cell5.innerHTML=publishers[idMap.slice(-1)].movieGenre1;
+				cell4.innerHTML=publishers[idMap.slice(-1)].movieRated;
+				cell5.innerHTML=publishers[idMap.slice(-1)].movieDateString;
 				cell0.setAttribute("id", "id"+publishers[idMap.slice(-1)].movieId);
 				cell1.setAttribute("id", "movieImgId"+publishers[idMap.slice(-1)].movieId);
 				cell2.setAttribute("id", "movieNameId"+publishers[idMap.slice(-1)].movieId);
 				cell3.setAttribute("id", "movieLengthId"+publishers[idMap.slice(-1)].movieId);
-				cell4.setAttribute("id", "movieNoteId"+publishers[idMap.slice(-1)].movieId);
-				cell5.setAttribute("id", "movieGenre1Id"+publishers[idMap.slice(-1)].movieId);
-				cell6.setAttribute("id", "movieRatedId"+publishers[idMap.slice(-1)].movieId);
-				cell7.setAttribute("id", "movieDateId"+publishers[idMap.slice(-1)].movieId);
-				cell8.setAttribute("align", "center");
-				btn.innerHTML = '<i class="material-icons" style="font-size:25px;color:blue;">edit</i>';
-				del.innerHTML = '<i class="fa fa-trash" style="font-size:25px;color:red"></i>';
+// 				cell4.setAttribute("id", "movieNoteId"+publishers[idMap.slice(-1)].movieId);
+// 				cell5.setAttribute("id", "movieGenre1Id"+publishers[idMap.slice(-1)].movieId);
+				cell4.setAttribute("id", "movieRatedId"+publishers[idMap.slice(-1)].movieId);
+				cell5.setAttribute("id", "movieDateId"+publishers[idMap.slice(-1)].movieId);
+				cell6.setAttribute("align", "center");
+// 				btn.innerHTML = '<i class="material-icons" style="font-size:25px;color:blue;">edit</i>';
+// 				del.innerHTML = '<i class="fa fa-trash" style="font-size:25px;color:red"></i>';
 				$(btn).attr({
 					"id":"updata"+publishers[idMap.slice(-1)].movieId,
-					"type":"button",
-					"class":"btn",
+					"class":"fas fa-edit btn btn-link",
+					"style":"font-size:25px;color:blue;",
 					"data-toggle":"modal",
 					"data-target":"#myModal",
 					"onclick":"MovieUpdateAjax('"+publishers[idMap.slice(-1)].movieId+"')"
 				});
 				$(del).attr({
-					"id":"Delete",
-					"class":"btn",
-					"onclick":"RoomDelete('"+publishers[idMap.slice(-1)].movieName+"',"+publishers[idMap.slice(-1)].movieId+")"
-					});
-				cell8.appendChild(btn);
-				cell8.appendChild(del);
+					"id":"delet"+publishers[idMap.slice(-1)].movieId,
+					"class":"fa fa-trash btn btn-link",
+					"style":"font-size:25px;color:red",
+					"onclick":"MovieDelete('"+publishers[idMap.slice(-1)].movieName+"',"+publishers[idMap.slice(-1)].movieId+")"
+				});
+				cell6.appendChild(btn);
+				cell6.appendChild(del);
 			}
 		}
-		xhr.open("POST", "<c:url value='MovieAddSubmit' />", true);
-		xhr.send(formData); 
-	}
-	function RoomUpdate(movieId,movieImg,movieName,movieLength,movieNote,movieGenre1) {//修改電影(舊版)		
-	   //$("#updata").hide();
-	   $("input[name='movieName']").val(movieName);
-	   $("input[name='movieLength']").val(movieLength);
-	   $("#movieNote").val(movieNote);
-	   $("input[type='checkbox']").prop("checked",false); 
-	   var arr = new Array();
-	   arr = movieGenre1.split(",");
-	   for (var i = 0; i < arr.length; i++) {
-		   console.log(arr[i]);
-		   $("input[type='checkbox'][value='"+arr[i]+"']").prop("checked",true);
-		}
-	   $("#movieImgUp").attr("src", ''+movieImg+'');
-	   $("#movieImgUp").show();
-	  /*  $("input[name='roomName']").val(roomName); */
-	   $("input[name='movieId']").val(movieId);
-	   $("#updata").show();
+		
 	}
 	function MovieUpdateAjax(movieId) {//修改電影(AJAX)
 		$("#modal_title").html("修改電影");
@@ -155,13 +137,16 @@ window.onload=function (){
 		$("#productImage").val("");
 		$("input[type='radio']").prop("checked",false);
 		var xhr = new XMLHttpRequest();
+		xhr.open("POST", "<c:url value='MovieUpdateAjax?MoviemId="+movieId+"' />", true);
+		xhr.send();
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				var publishers = JSON.parse(xhr.responseText);
 				for (var i = 0; i < publishers.length; i++) {
 					console.log(publishers[0].movieName);
 					$("input[name='movieName']").val(publishers[0].movieName);
-				    $("input[name='movieLength']").val(publishers[0].movieLength);
+					$("input[name='movieEName']").val(publishers[0].movieEName);
+				    $("input[name='movieLength']").val(publishers[0].movieLength.substr(0,publishers[0].movieLength.length-1));
 				    $("#movieNote").val(publishers[0].movieNote);
 				    $("input[type='checkbox']").prop("checked",false);
 				    if (publishers[0].movieGenre1 != null) {
@@ -179,8 +164,6 @@ window.onload=function (){
 				} 
 			}
 		}
-		xhr.open("GET", "<c:url value='MovieUpdateAjax?MoviemId="+movieId+"' />", true);
-		xhr.send();
 	    $("#updata").show();
 	    $("#movieImgUp").show();
 		$("#intor").show();
@@ -198,6 +181,9 @@ window.onload=function (){
 		var table = document.getElementById("movieTable");
 		var movieId = $("#movieId").val();
 		//alert("jiji"+movieId);
+		xhr.open("POST", "<c:url value='MovieUpdateSubmit' />", true);
+	    /* xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  */
+		xhr.send(formData);
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				var publishers = JSON.parse(xhr.responseText);
@@ -207,15 +193,13 @@ window.onload=function (){
 				$("#movieImgId"+movieId).html("<img height='100' width='80' src='<c:url value='/getMovieImg/"+publishers[movieId].movieId+"' />'>"); 				
 				$("#movieNameId"+movieId).html(publishers[movieId].movieName);
 				$("#movieLengthId"+movieId).html(publishers[movieId].movieLength);
-				$("#movieNoteId"+movieId).html("<pre>"+publishers[movieId].movieNote+"</pre>");
-				$("#movieGenre1Id"+movieId).html(publishers[movieId].movieGenre1);
+// 				$("#movieNoteId"+movieId).html("<pre>"+publishers[movieId].movieNote+"</pre>");
+// 				$("#movieGenre1Id"+movieId).html(publishers[movieId].movieGenre1);
 				$("#movieDateId"+movieId).html(publishers[movieId].movieDateString);
 				$("#movieRatedId"+movieId).html(publishers[movieId].movieRated);
 			}
 		}
-		xhr.open("POST", "<c:url value='MovieUpdateSubmit' />", true);
-	    /* xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  */
-		xhr.send(formData);
+		
 	}
 </script>
 <body class="bg-theme bg-theme1">
@@ -227,27 +211,31 @@ window.onload=function (){
 	<div class="row">
 	 <div class="col-12 col-lg-12">
 	   <div class="card">
-		<h1>前端電影維護</h1>
-	    <div class="table-responsive">
-		<div class="btn" data-toggle="modal" data-target="#myModal" id="Addmovie" onclick="addMovieIn()">
-		   	<i class="material-icons" style="font-size:30px;color:blue;">add_box</i>
+	   <div class="card-body" align="center">
+		<h1 style="display:inline">前端電影維護</h1>
+		<div data-toggle="modal" data-target="#myModal" id="Addmovie" class="btn btn-link" onclick="addMovieIn()">			
+			<img style="color:blue;" src="assets/images/add_icon/add-icon-green.png" class="logo-icon" alt="logo icon"/>新增電影		
 		</div>
-		<input type="button" value="返回測試選項" onclick="javascript:location.href='/DanielTest'">
-		<table id="movieTable" class="table align-items-center table-flush table-borderless">
-		<thead class="thead-dark">
-			<tr>
+	    <div class="table-responsive">
+<!-- 		<div class="btn" data-toggle="modal" data-target="#myModal" id="Addmovie" onclick="addMovieIn()"> -->
+<!-- 		   	<i class="material-icons" style="font-size:30px;color:blue;">add_box</i> -->
+<!-- 		</div> -->
+<!-- 		<input type="button" value="返回測試選項" onclick="javascript:location.href='/DanielTest'"> -->
+		<table id="movieTable" class="table align-items-center">
+<!-- 		<thead class="thead-dark" > -->
+			<tr style="font-size:20px;" class="thead-dark">
 				<th>MovieID</th>
 				<th>圖片</th>
 				<th>電影名稱</th>
 				<th>電影長度</th>
-				<th>電影說明</th>
-				<th>電影類型</th>
+<!-- 				<th>電影說明</th> -->
+<!-- 				<th>電影類型</th> -->
 				<th>電影等級</th>
 				<th>最後更新時間</th>
-				<th>修改/刪除</th>
+				<th>&ensp;修改&ensp;&emsp;刪除</th>
 				
 			</tr>
-		</thead>
+<!-- 		</thead> -->
 			<c:forEach var="movie"  items="${movieMap}">
 				<tr id="tr${movie.value.movieId}">
 					<td id="id${movie.value.movieId}">${movie.value.movieId}</td>
@@ -257,22 +245,21 @@ window.onload=function (){
 					</td>
 					<td id="movieNameId${movie.value.movieId}">${movie.value.movieName}</td>
 					<td id="movieLengthId${movie.value.movieId}">${movie.value.movieLength}</td>
-					<td style='word-wrap: break-word' id="movieNoteId${movie.value.movieId}">
-					
-							${movie.value.movieNote}
-					</td>
-					<td id="movieGenre1Id${movie.value.movieId}">${movie.value.movieGenre1}</td>
+<%-- 					<td style='word-wrap: break-word' id="movieNoteId${movie.value.movieId}">${movie.value.movieNote}</td> --%>
+<%-- 					<td id="movieGenre1Id${movie.value.movieId}">${movie.value.movieGenre1}</td> --%>
 					<td id="movieRatedId${movie.value.movieId}">${movie.value.movieRated}</td>
 					<td id="movieDateId${movie.value.movieId}">${movie.value.movieDateString}</td>
 					<td align="center">
 						<input name="movieId" type="hidden" id="movieId" value="${movie.value.movieId}" />
-						<button type="button" class="btn" data-toggle="modal" data-target="#myModal" id="updata${movie.value.movieId}" onclick="MovieUpdateAjax('${movie.value.movieId}')">
-						   	<i class="material-icons" style="font-size:25px;color:blue;">edit</i>
-						</button>
+						<i id="updata${movie.value.movieId}" class="fas fa-edit btn btn-link" style="font-size:25px;color:blue;" data-toggle="modal" data-target="#myModal" onclick="MovieUpdateAjax('${movie.value.movieId}')"></i>
+						<i id="delet${movie.value.movieId}" class="fa fa-trash btn btn-link" onclick="MovieDelete('${movie.value.movieName}',${movie.value.movieId})" style="font-size:25px;color:red"></i>
+<%-- 						<button type="button" class="btn" data-toggle="modal" data-target="#myModal" id="updata${movie.value.movieId}" onclick="MovieUpdateAjax('${movie.value.movieId}')"> --%>
+<!-- 						   	<i class="material-icons" style="font-size:25px;color:blue;">edit</i> -->
+<!-- 						</button> -->
 <%-- 						<input type="button" value="修改" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="updata${movie.value.movieId}" onclick="RoomUpdateAjax('${movie.value.movieId}')"> --%>
 <!-- 						<input type="button"  value="刪除"> -->
 <%-- 						<button class="btn" id="delet${movie.value.movieId}" onclick="RoomDelete('${movie.value.movieName}',${movie.value.movieId})"><i class="fa fa-trash" style="font-size:25px;color:red"></i></button> --%>
-						<button class="btn" id="delet${movie.value.movieId}" onclick="MovieDelete('${movie.value.movieName}',${movie.value.movieId})"><i class="fa fa-trash" style="font-size:25px;color:red"></i></button>
+<%-- 						<button class="btn" id="delet${movie.value.movieId}" onclick="MovieDelete('${movie.value.movieName}',${movie.value.movieId})"><i class="fa fa-trash" style="font-size:25px;color:red"></i></button> --%>
 					</td>
 				</tr>
 			</c:forEach>
@@ -292,8 +279,12 @@ window.onload=function (){
 		        <!-- Modal body (內容形式)-->
 		        <div class="modal-body" align="left">
 			          <div class="form-group">
-			            <label for="recipient-name" class="col-form-label">電影名稱</label>
+			            <label for="recipient-name" class="col-form-label">電影中文名稱</label>
 			            <form:input id="movieName" path="movieName" name="movieName" type='text' class="form-control"/>
+			          </div>
+			          <div class="form-group">
+			            <label for="recipient-name" class="col-form-label">電影英文名稱</label>
+			            <form:input id="movieEName" path="movieEName" name="movieEName" type='text' class="form-control"/>
 			          </div>
 			           <div class="form-group">
 				           <label for="recipient-name" class="col-form-label">電影長度(分鐘)</label>
@@ -301,7 +292,7 @@ window.onload=function (){
 			           </div>
 			           <div class="form-group">
 				           <label for="message-text" class="col-form-label">電影說明</label>
-				           <form:textarea id="movieNote" name="movieNote" path="movieNote" class="form-control"></form:textarea>
+				           <form:textarea rows="6" id="movieNote" name="movieNote" path="movieNote" class="form-control"></form:textarea>
 			           </div>
 			           <div class="form-group">
 				           <label for="recipient-name" class="col-form-label">電影類型</label><br>
@@ -360,7 +351,7 @@ window.onload=function (){
 			    </form:form>
 		      </div>
 		    </div>
-		</div>
+		</div></div>
 	</div></div></div></div></div></div></div>
 <!-- 	<script src="assets/js/Movie.js"></script> -->
 </body>

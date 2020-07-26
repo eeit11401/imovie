@@ -28,9 +28,8 @@ public class MovieServiceImpl implements MovieService {
 
 	@Transactional
 	@Override
-	public void saveMovie(MovieBean movieBean) {
-		moviedao.saveMovie(movieBean);
-		
+	public Map<Integer, MovieBean> saveMovie(MovieBean movieBean) {
+		return moviedao.saveMovie(movieBean);
 	}
 
 	@Transactional
@@ -54,8 +53,8 @@ public class MovieServiceImpl implements MovieService {
 
 	@Transactional
 	@Override
-	public void MovieUpdata(MovieBean movieBean, long sizeInBytes) {
-		moviedao.MovieUpdata(movieBean,sizeInBytes);
+	public Map<Integer, MovieBean> MovieUpdata(MovieBean movieBean, long sizeInBytes) {
+		return moviedao.MovieUpdata(movieBean,sizeInBytes);
 	}
 
 	@Transactional

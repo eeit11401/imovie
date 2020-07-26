@@ -100,7 +100,7 @@ public class TestMovieController {
 		return "redirect:/Movie";
 	}
 	
-	@GetMapping("/MovieUpdateAjax")
+	@PostMapping("/MovieUpdateAjax")
 	public ResponseEntity<List<MovieBean>>  MovieUpdateAjax(@RequestParam Integer MoviemId, Model model)  {
 		List<MovieBean> mapMovieUpdate = movieService.MovieUpdateAjax(MoviemId);
 		ResponseEntity<List<MovieBean>> MovieUpdateAjax = new ResponseEntity<>(mapMovieUpdate, HttpStatus.OK);
@@ -134,13 +134,13 @@ public class TestMovieController {
 		String movieDate = sdFormat.format(date);
         Date d1 = Timestamp.valueOf(movieDate);
         movieBean.setMovieDate(d1);
-		movieService.MovieUpdata(movieBean, sizeInBytes);
+        Map<Integer, MovieBean> movieMap = movieService.MovieUpdata(movieBean, sizeInBytes);
 		
 //		List<MovieBean> mapMovieUpdate = movieService.MovieUpdateAjax(MoviemId);
 //		ResponseEntity<List<MovieBean>> MovieUpdateAjax = new ResponseEntity<>(mapMovieUpdate, HttpStatus.OK);
 //		
 //		System.out.println(mapMovieUpdate+"==============================");
-		Map<Integer, MovieBean> movieMap = movieService.getMovie();
+//		Map<Integer, MovieBean> movieMap = movieService.getMovie();
 		ResponseEntity<Map<Integer, MovieBean>> MovieUpdateAjax = new ResponseEntity<>(movieMap, HttpStatus.OK);
 		return MovieUpdateAjax;
 	}
@@ -167,8 +167,8 @@ public class TestMovieController {
 		String movieDate = sdFormat.format(date);
         Date d1 = Timestamp.valueOf(movieDate);
         movieBean.setMovieDate(d1);
-		movieService.saveMovie(movieBean);
-		Map<Integer, MovieBean> movieMap = movieService.getMovie();
+        Map<Integer, MovieBean> movieMap = movieService.saveMovie(movieBean);
+//		Map<Integer, MovieBean> movieMap = movieService.getMovie();
 		ResponseEntity<Map<Integer, MovieBean>> MovieUpdateAjax = new ResponseEntity<>(movieMap, HttpStatus.OK);
 		return MovieUpdateAjax;
 	}

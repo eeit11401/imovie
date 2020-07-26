@@ -27,6 +27,14 @@
 			text-align: center;
 			color: blue font-size: 60px;
 		}
+		#AddRoom{    
+			font-size: 20px;
+		    color: #019858;
+		    float: right;
+		    padding-left: 0px;
+		    padding-right: 0px;
+		    padding-bottom: 0px;
+		 }
 	</style>
 	</head>
 	<script type="text/javascript">
@@ -96,7 +104,7 @@
 		        	roomDateString.innerHTML=data[0].roomDateString;
 		        	$(Updatabtn).attr({
 						"id":"updata"+data[0].roomId,
-						"class":"btn fas fa-edit",
+						"class":"fas fa-edit btn btn-link",
 						"style":"font-size:25px;color:blue;",
 						"data-toggle":"modal",
 						"data-target":"#RoomModal",
@@ -104,9 +112,9 @@
 					});	
 		        	$(Delectbtn).attr({
 						"id":"delet"+data[0].roomId,
-						"class":"btn fa fa-trash",
+						"class":"fa fa-trash btn btn-link",
 						"style":"font-size:25px;color:red",
-						"onclick":"FoodDelete('"+data[0].roomName+"','"+data[0].roomId+"')"
+						"onclick":"RoomDelete('"+data[0].roomName+"','"+data[0].roomId+"')"
 					});
 		        	roomButton.appendChild(Updatabtn);
 		        	roomButton.appendChild(Delectbtn);
@@ -143,7 +151,6 @@
 		        processData: false,
 		        success : function(data) 
 		        {
-		        	alert(data);
 		        	$("#roomName"+data[0].roomId).html(data[0].roomName);
 		        	$("#roomSize"+data[0].roomId).html(data[0].roomSize);
 		        	$("#roomPopulation"+data[0].roomId).html(data[0].roomPopulation);
@@ -191,13 +198,17 @@
 					<div class="row">
 						<div class="col-12 col-lg-12">
 							<div class="card">
-								<div class="card-header">
-			<h1>包廂修改測試</h1>
-			<div class="btn" data-toggle="modal" data-target="#RoomModal" id="AddRoom" onclick="addRoom()">
-			   	<i class="material-icons" style="font-size:30px;color:blue;">add_box</i>
+								<div class="card-header" align="center">
+			<h1 style="display:inline">包廂修改測試</h1>
+<!-- 			<div class="btn" data-toggle="modal" data-target="#RoomModal" id="AddRoom" onclick="addRoom()"> -->
+<!-- 			   	<i class="material-icons" style="font-size:30px;color:blue;">add_box</i> -->
+<!-- 			</div> -->
+			<div data-toggle="modal" data-target="#RoomModal" id="AddRoom" class="btn btn-link" onclick="addRoom()">			
+				<img style="color:blue;" src="assets/images/add_icon/add-icon-green.png" class="logo-icon" alt="logo icon"/>新增包廂			
 			</div>
-			<table id="roomTable" class="table align-items-center table-flush table-borderless">
-				<tr>
+			<div class="table-responsive">
+			<table id="roomTable" class="table align-items-center">
+				<tr style="font-size:20px;" class="thead-dark">
 					<th>RoomID</th>
 					<th>圖片</th>
 					<th>包廂名稱</th>
@@ -205,7 +216,7 @@
 					<th>包廂人數</th>
 					<th>包廂價錢</th>
 					<th>最後更新時間</th>
-					<th>修改/刪除</th>
+					<th>&ensp;修改&ensp;&emsp;刪除</th>
 				</tr>
 				<c:forEach var="room"  items="${rooMap}">
 					<tr id="tr${room.value.roomId}">
@@ -219,12 +230,12 @@
 						<td id="roomPrice${room.value.roomId}">${room.value.roomPrice}</td>
 						<td id="roomDateString${room.value.roomId}">${room.value.roomDateString}</td>
 						<td id="roomButton${room.value.roomId}">
-							<i id="updata${room.value.roomId}" class="btn fas fa-edit" style="font-size:25px;color:blue;" data-toggle="modal" data-target="#RoomModal" onclick="RoomUpdate('${room.value.roomId}','<c:url value="/getRoomImg/${room.value.roomId}" />','${room.value.roomName}','${room.value.roomSize},${room.value.roomPopulation}','${room.value.roomPrice}')"></i>
-							<i id="delet${room.value.roomId}" class="btn fa fa-trash" onclick="RoomDelete('${room.value.roomName}',${room.value.roomId})" style="font-size:25px;color:red"></i>		
+							<i id="updata${room.value.roomId}" class="fas fa-edit btn btn-link" style="font-size:25px;color:blue;" data-toggle="modal" data-target="#RoomModal" onclick="RoomUpdate('${room.value.roomId}','<c:url value="/getRoomImg/${room.value.roomId}" />','${room.value.roomName}','${room.value.roomSize},${room.value.roomPopulation}','${room.value.roomPrice}')"></i>
+							<i id="delet${room.value.roomId}" class="fa fa-trash btn btn-link" onclick="RoomDelete('${room.value.roomName}',${room.value.roomId})" style="font-size:25px;color:red"></i>		
 						</td>
 					</tr>
 				</c:forEach>
-			</table>
+			</table></div>
 			<form:form id="roomBean" method='POST' modelAttribute="roomBean" enctype='multipart/form-data'>
 			<div class="modal" id="RoomModal">
 			    <div class="modal-dialog">
