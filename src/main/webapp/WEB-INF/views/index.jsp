@@ -182,6 +182,10 @@ h4 {
 					</main>
 				</div>
 			</div>
+			<footer class="footer">
+				<div class="container">
+					<div class="text-center">Imovie © 2020</div>
+				</div>
 	</section>
 	<script>
 		var xhr = new XMLHttpRequest();
@@ -199,9 +203,7 @@ h4 {
 								+ " src='"
 								+ homes[i].imageData
 								+ "'>"
-								+ "</div>"
-								+ "<p id='c2' class='card-text'> 電影名稱 : "
-								+ homes[i].bean.homeName + "</p>" + "</div>"
+								+ "</div>" + "</div>"
 						content += "</div>";
 					}
 					var divs = document.getElementById("home");
@@ -223,9 +225,7 @@ h4 {
 								+ "<video width='100%' height='100%' "
 								+ " src='"
 								+ homes[i].imageData
-								+ "' controls />"
-								+ "</div>"
-								+ "</div>"
+								+ "' controls />" + "</div>" + "</div>"
 						content1 += "</div>";
 					}
 					var div = document.getElementById("vedio");
@@ -235,6 +235,7 @@ h4 {
 		}
 	</script>
 
+	</footer>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 		crossorigin="anonymous"></script>
