@@ -96,7 +96,7 @@ function UpdataCancel() {
 						<div class="col-12 col-lg-12">
 							<div class="card">
 								<div class="card-header">
-									<h1>前端首頁修改</h1>
+									<h1>熱門電影維護</h1>
 									<input type="button" value="新增" data-toggle="modal"
 										data-target="#HomeModal" onclick="HomeIn()">
 									<form id="form1" name="form1" method="post" action="">
@@ -199,7 +199,7 @@ function UpdataCancel() {
 						<div class="col-12 col-lg-12">
 							<div class="card">
 								<div class="card-header">
-									<h1>前端預告片修改</h1>
+									<h1>預告片維護</h1>
 									<input type="button" value="新增" data-toggle="modal"
 										data-target="#HomeModalVd" onclick="HomeVdIn()">
 									<form id="form1" name="form1" method="post" action="">
@@ -240,33 +240,6 @@ function UpdataCancel() {
 				<div class="overlay toggle-menu"></div>
 			</div>
 		</div>
-<%-- 		<form method='POST' action="HomeVdUp" enctype='multipart/form-data'> --%>
-<!-- 			<div class="modal" id="HomeModalVdUp"> -->
-<!-- 				<div class="modal-dialog"> -->
-<!-- 					<div class="modal-content" -->
-<!-- 						style="background-image: url(assets/images/bg-themes/1.png);"> -->
-<!-- 						<table id="updata" style="display: none"> -->
-<!-- 							<tr> -->
-<!-- 								<td>影片名稱：</td> -->
-<!-- 								<td><input id="homeName" path="homeName" name="homeName" -->
-<!-- 									type='text' /></td> -->
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<!-- 								<td>選擇影片：</td> -->
-<!-- 								<td><video id="homeVdUp" height='100' width='80' src=""> -->
-<!-- 										<input name="productImage" path="productImage" type='file' /></td> -->
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<!-- 								<td colspan="2" align="center"><input type="hidden" -->
-<!-- 									id="homeId" path="homeId" name="homeId" /> <input -->
-<!-- 									type="submit" name="intor" value="修改"> <input -->
-<!-- 									type="button" onclick="UpdataCancel()" value="取消"></td> -->
-<!-- 							</tr> -->
-<!-- 						</table> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<%-- 		</form> --%>
 		<form method='POST' action="HomeVdIn" enctype='multipart/form-data'>
 			<div class="modal" id="HomeModalVd">
 				<div class="modal-dialog">
