@@ -37,8 +37,8 @@
 											</td>
 											<td>${member.value.memberId}</td>
 											<td>${member.value.name}</td>
-											<td></td>
-											<td></td>
+											<td>${member.value.gender}</td>
+											<td>${member.value.birth}</td>
 											<td>${member.value.email}</td>
 											<td>${member.value.tel}</td>
 											<td>${member.value.registerTime}</td>
