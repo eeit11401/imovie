@@ -52,7 +52,7 @@ function HomeUpdate(homeId,homeImg,homeName) {
    $("input[name='homeId']").val(homeId);
    $("#updata").show();
 }
-function HomeIn(homeId,homeImg,homeName) {	
+function HomeIn() {	
 	   $("#homeIn").hide();
 	   $("#homeIn").show();
 	}
@@ -75,7 +75,7 @@ function HomeVdUpdate(homeId,homeImg,homeName) {
    $("input[name='homeId']").val(homeId);
    $("#updata").show();
 }
-function HomeVdIn(homeId,homeImg,homeName) {	
+function HomeVdIn() {	
 	   $("#homeVdIn").hide();
 	   $("#homeVdIn").show();
 	}
@@ -210,7 +210,7 @@ function UpdataCancel() {
 													<tr>
 														<th>影片</th>
 														<th>影片名稱</th>
-														<th>修改/刪除</th>
+														<th>刪除</th>
 													</tr>
 												</thead>
 												<c:forEach var="home" items="${homeVedio}">
@@ -218,11 +218,12 @@ function UpdataCancel() {
 														<td><video height='100' width='100'
 																src='<c:url value="/getHomeVd/${home.homeId}" />'></td>
 														<td>${home.homeName}</td>
-														<td><input name="homeId" type="hidden" id="homeId"
-															value="${home.homeId}" /> <input type="button"
-															value="修改" data-toggle="modal"
-															data-target="#HomeModalVdUp" id="updata${home.homeId}"
-															onclick="HomeVdUpdate('${home.homeId}',<c:url value="/getHomeVd/${home.homeId}" />','${home.homeName}')">
+														<td>
+<!-- 														<input name="homeId" type="hidden" id="homeId" -->
+<%-- 															value="${home.homeId}" /> <input type="button" --%>
+<!-- 															value="修改" data-toggle="modal" -->
+<%-- 															data-target="#HomeModalVdUp" id="updata${home.homeId}" --%>
+<%-- 															onclick="HomeVdUpdate('${home.homeId}',<c:url value="/getHomeVd/${home.homeId}" />','${home.homeName}')"> --%>
 															<input type="button" value="刪除" id="delet${home.homeId}"
 															onclick="HomeVdDelete('${home.homeName}',${home.homeId})">
 														</td>
@@ -239,33 +240,33 @@ function UpdataCancel() {
 				<div class="overlay toggle-menu"></div>
 			</div>
 		</div>
-		<form method='POST' action="HomeVdUp" enctype='multipart/form-data'>
-			<div class="modal" id="HomeModalVdUp">
-				<div class="modal-dialog">
-					<div class="modal-content"
-						style="background-image: url(assets/images/bg-themes/1.png);">
-						<table id="updata" style="display: none">
-							<tr>
-								<td>影片名稱：</td>
-								<td><input id="homeName" path="homeName" name="homeName"
-									type='text' /></td>
-							</tr>
-							<tr>
-								<td>選擇影片：</td>
-								<td><video id="homeVdUp" height='100' width='80' src="">
-										<input name="productImage" path="productImage" type='file' /></td>
-							</tr>
-							<tr>
-								<td colspan="2" align="center"><input type="hidden"
-									id="homeId" path="homeId" name="homeId" /> <input
-									type="submit" name="intor" value="修改"> <input
-									type="button" onclick="UpdataCancel()" value="取消"></td>
-							</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-		</form>
+<%-- 		<form method='POST' action="HomeVdUp" enctype='multipart/form-data'> --%>
+<!-- 			<div class="modal" id="HomeModalVdUp"> -->
+<!-- 				<div class="modal-dialog"> -->
+<!-- 					<div class="modal-content" -->
+<!-- 						style="background-image: url(assets/images/bg-themes/1.png);"> -->
+<!-- 						<table id="updata" style="display: none"> -->
+<!-- 							<tr> -->
+<!-- 								<td>影片名稱：</td> -->
+<!-- 								<td><input id="homeName" path="homeName" name="homeName" -->
+<!-- 									type='text' /></td> -->
+<!-- 							</tr> -->
+<!-- 							<tr> -->
+<!-- 								<td>選擇影片：</td> -->
+<!-- 								<td><video id="homeVdUp" height='100' width='80' src=""> -->
+<!-- 										<input name="productImage" path="productImage" type='file' /></td> -->
+<!-- 							</tr> -->
+<!-- 							<tr> -->
+<!-- 								<td colspan="2" align="center"><input type="hidden" -->
+<!-- 									id="homeId" path="homeId" name="homeId" /> <input -->
+<!-- 									type="submit" name="intor" value="修改"> <input -->
+<!-- 									type="button" onclick="UpdataCancel()" value="取消"></td> -->
+<!-- 							</tr> -->
+<!-- 						</table> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<%-- 		</form> --%>
 		<form method='POST' action="HomeVdIn" enctype='multipart/form-data'>
 			<div class="modal" id="HomeModalVd">
 				<div class="modal-dialog">

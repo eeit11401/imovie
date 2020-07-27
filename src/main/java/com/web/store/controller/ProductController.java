@@ -76,6 +76,14 @@ public class ProductController {
 			ResponseEntity<List<HomeBeanWithImageData>> he = new ResponseEntity<>(list, HttpStatus.OK);
 			return he;
 		}
+		//Home Ajax分類顯示
+		@GetMapping("/allHomevedio")
+		public ResponseEntity<List<HomeBeanWithImageData>>  allHomesWithImageData1()  {
+			System.out.println("A----------------------");
+			List<HomeBeanWithImageData> list = service.getAllHomesWithImageData();
+			ResponseEntity<List<HomeBeanWithImageData>> he = new ResponseEntity<>(list, HttpStatus.OK);
+			return he;
+		}
 	
 	//Food Ajax分類顯示
 	@GetMapping("/allFoods")

@@ -463,7 +463,7 @@ margin-bottom: 20px;
 			</select>
 		</div>
 		<div style="font-size:20px;margin-top:5px;" class="font07232">
-		查詢 : <input style="border-radius:5px" value="" type="text" autocomplete="off">
+		查詢 : <input id='fuzzySearch' style="border-radius:5px" value="" type="text" autocomplete="off">
 		</div>
 			<br><!-- style='padding:0px;margin:0px' -->
 			<div class='111' id='forTypeMovie'>
@@ -741,7 +741,7 @@ margin-bottom: 20px;
 
 			<tr>
 				<td>
-					<h3 class="secondPerHeader">包廂</h3>
+					<h3 style='font-weight:600' class="secondPerHeader">包廂</h3>
 				</td>
 			</tr>
 			<tr>
@@ -758,7 +758,7 @@ margin-bottom: 20px;
 
 			<tr>
 				<td>
-					<h3 class="secondPerHeader">電影</h3>
+					<h3 style='font-weight:600' class="secondPerHeader">電影</h3>
 				</td>
 			</tr>
 			<tr>
@@ -779,7 +779,7 @@ margin-bottom: 20px;
 			</tr>
 			<tr>
 				<td>
-					<h3 class="secondPerHeader">時間</h3>
+					<h3 style='font-weight:600' class="secondPerHeader">時間</h3>
 				</td>
 			</tr>
 			<tr>
@@ -796,7 +796,7 @@ margin-bottom: 20px;
 			</tr>
 			<tr>
 				<td>
-					<h3 class="secondPerHeader">餐點</h3>
+					<h3 style='font-weight:600' class="secondPerHeader">餐點</h3>
 				</td>
 			</tr>
 			<tr>
@@ -1268,7 +1268,7 @@ $(function(){
         xhr3.setRequestHeader("Content-type","application/x-www-form-urlencoded");
         xhr3.send("typeStr=" + typeStr);
         
-        $("#forTypeMovie").removeAttr("class");
+//         $("#forTypeMovie").removeAttr("class");
         
         xhr3.onreadystatechange = function(){
         	if (xhr3.readyState == 4 && xhr3.status == 200) {
@@ -1278,7 +1278,32 @@ $(function(){
 			}
         }
  	});
+ 	
+	$("#fuzzySearch").keyup(function(){
+		var movieStr = $("#fuzzySearch").val();
+ 		var xhr4 = new XMLHttpRequest();
+        xhr4.open("POST","<c:url value='fuzzy.do' />",true);
+        xhr4.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xhr4.send("fuzzyStr=" + movieStr);
+        
+        
+        xhr4.onreadystatechange = function(){
+        	if (xhr4.readyState == 4 && xhr4.status == 200) {
+        		console.log("hi_OK");
+				var movie = JSON.parse(xhr4.responseText);
+				if(movie.length!=0){
+					displayPageMovies(movie);
+				}else{
+					fuzzyNoResult();
+				}
+			}
+        }
+	});
 });
+	function fuzzyNoResult(){
+		var movieResult = document.getElementById("forTypeMovie");
+		movieResult.innerHTML = "<div class='movsp2'></div><div class='movsp2'></div><div class='movsp2'></div><div class='movsp2'></div><div class='movsp2'></div>";
+	}
 	function displayPageMovies(movies){
 
 	 	var movieResult = document.getElementById("forTypeMovie");
@@ -1313,7 +1338,7 @@ $(function(){
 		}
 		
 		
-		movieResult.innerHTML = contentMovies+"<div class='movsp2'></div><div class='movsp2'></div><div class='movsp2'></div><div class='movsp2'></div>";
+		movieResult.innerHTML = contentMovies+"<div class='movsp2'></div><div class='movsp2'></div><div class='movsp2'></div><div class='movsp2'></div><div class='movsp2'></div>";
 		
 		$(".movsp").hover(function() {
 			$(this).css("background", "#dce8f2");
@@ -1418,8 +1443,7 @@ $(function(){
         }
 	}
 };
-
-
+	
 </script>
 	</body>
 

@@ -802,6 +802,8 @@ public class ProductDaoImpl implements ProductDao {
 
 		String hqlStrAll ="FROM FoodBean";
 		List<FoodBean> allFood = session.createQuery(hqlStrAll).getResultList();
+		System.out.println(allFood.size());
+		System.out.println(foodType);
 		if(foodType.equals("全部")) {
 			System.out.println(foodType);
 			return allFood;

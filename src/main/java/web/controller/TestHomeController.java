@@ -123,45 +123,7 @@ public class TestHomeController {
 		model.addAttribute("homeVedio",list1);//回傳空表單(foodBean)
 		return "Home/HomeUpdata";
 	}
-	
-	
-//	@PostMapping("/Home")//更新電影
-//	public String updataHome(@ModelAttribute("homeBean") HomeBean homeBean, BindingResult result) {
-//		long sizeInBytes = 0;
-//		InputStream is = null;
-//		MultipartFile productImage = homeBean.getProductImage();
-//		String originalFilename = productImage.getOriginalFilename();
-//		homeBean.setHomeFileName(originalFilename);
-//		//  建立Blob物件，交由 Hibernate 寫入資料庫
-//		if (productImage != null && !productImage.isEmpty() ) {
-//			
-//			try {
-//				byte[] b = productImage.getBytes();
-//				Blob blob = new SerialBlob(b);
-//				homeBean.setHomeImg(blob);
-//				sizeInBytes = 1;
-//			} catch(Exception e) {
-//				e.printStackTrace();
-//				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
-//			}
-//		}else {
-//			sizeInBytes = -1;
-//		}
-//		homeService.HomeUpdata(homeBean, sizeInBytes);
-//		String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
-//		try {
-//			File imageFolder = new File("C:/Users/黃瑋/Documents/imovie/src/main/webapp/WEB-INF/views/img");			
-//			System.out.println("---------------"+imageFolder);
-//			if (!imageFolder.exists()) imageFolder.mkdirs();
-//			File file = new File(imageFolder,homeBean.getHomeId()  + ext);			
-//			productImage.transferTo(file);
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//			throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
-//		}
-//		return "redirect:/Home";
-//	}
-	
+		
 	@PostMapping("/HomeDelete")//刪除電影測試
 	public String HomeDelete(@RequestParam Integer HomeId, Model model) {
 		homeService.HomeDelete(HomeId);
@@ -277,14 +239,6 @@ public class TestHomeController {
 		}
 		return b;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	@PostMapping("/HomeVdDelete")//刪除電影測試
 	public String HomevedioDelete(@RequestParam Integer HomeId, Model model) {
