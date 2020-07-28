@@ -36,6 +36,7 @@ import com.web.store.model.RoomBeanWithImageData;
 import com.web.store.model.SurveyBean;
 
 import _00_init.util.GlobalService;
+import _01_register.model.MemberBean;
 import antlr.StringUtils;
 
 @Repository
@@ -118,6 +119,7 @@ public class ProductDaoImpl implements ProductDao {
 		return bbwid;		
 	}
 
+	@SuppressWarnings("unchecked")
 	private List<HomeBean> getAllHomesJson() {
 		String hql = "FROM HomeBean";
 		Session session = factory.getCurrentSession();
@@ -847,6 +849,7 @@ public class ProductDaoImpl implements ProductDao {
 		Session session = factory.getCurrentSession();
         session.save(satisfy);
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<CartOrderBean> getOrderById(String memberId) {
 		List<CartOrderBean> list = null;
@@ -858,6 +861,7 @@ public class ProductDaoImpl implements ProductDao {
         return list;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<CartOrderFood> getFoodByBean(CartOrderBean bean) {
 		
@@ -963,4 +967,61 @@ public class ProductDaoImpl implements ProductDao {
 		return list;
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Integer getAllMoney() {
+		Session session = factory.getCurrentSession();
+		String hqlStr ="FROM CartOrderBean";
+		List<CartOrderBean> list = session.createQuery(hqlStr).getResultList();	
+		int sum = 0;
+		for(CartOrderBean cob :list) {
+			sum+=cob.getTotalAmount();
+		}
+		return sum;		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Integer getAllMemberQua() {
+		Session session = factory.getCurrentSession();
+		String hqlStr ="FROM MemberBean";
+		List<MemberBean> list = session.createQuery(hqlStr).getResultList();	
+		int size = list.size();
+		
+		return size;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Integer getAllRoomQua() {
+		String hql="From CartOrderBean";
+		Session session = factory.getCurrentSession();
+		
+		List <Integer> list = session.createQuery(hql).getResultList();	
+		int size = list.size();
+		return size;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Integer getAllRateMemberQua() {
+		Session session = factory.getCurrentSession();
+		String hqlStr ="FROM SurveyBean";
+		List< SurveyBean> list = session.createQuery(hqlStr).getResultList();	
+		int size = list.size();		
+		return size;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Integer getAllStar() {
+		Session session = factory.getCurrentSession();
+		String hqlStr ="FROM SurveyBean";
+		List<SurveyBean> list = session.createQuery(hqlStr).getResultList();	
+		int sum = 0;
+		for(SurveyBean sb :list) {
+			sum+=sb.getSatisfaction();
+		}
+		return sum;	
+	}
 }

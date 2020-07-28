@@ -82,5 +82,9 @@ Boolean checkOrderNo(String checkNum);
 	String getPercenstByMId(int movieId);
 	String getMovieNameById(int movieId);
 	List<SurveyBean> getSurveyByNo(String orderno);
-	
+	Integer getAllMoney();
+	Integer getAllMemberQua();
+	Integer getAllRoomQua();
+	Integer getAllRateMemberQua();
+	Integer getAllStar();
 }
