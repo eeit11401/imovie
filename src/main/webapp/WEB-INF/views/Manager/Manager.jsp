@@ -155,7 +155,7 @@
 		    </li>
 		    <li class="nav-item">
 		      <form class="search-bar">
-		        <input id="Search" type="text" class="form-control" placeholder="Enter keywords">
+		        <input id="Search" type="text" class="form-control" placeholder="Enter keywords" data-table="order-table">
 		         <a href="javascript:void();"><i class="icon-magnifier"></i></a>
 		      </form>
 		    </li>
