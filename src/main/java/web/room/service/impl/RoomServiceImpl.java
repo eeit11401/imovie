@@ -83,5 +83,11 @@ public class RoomServiceImpl implements RoomService{
 	public Map<Integer, SurveyBean> getSurveyBean() {
 		return dao.getSurveyBean();
 	}
+	
+	@Transactional
+	@Override
+	public List<RoomBean> SearchRoomAjax(String name) {
+		return dao.SearchRoomAjax(name);
+	}
 
 }

@@ -88,6 +88,7 @@
 		        success : function(data) 
 		        {
 		        	tr.setAttribute("id","tr"+data[0].roomId);
+		        	tr.setAttribute("name","tr");
 		        	roomId.setAttribute("id","roomId"+data[0].roomId);
 		        	roomImg.setAttribute("id","roomImg"+data[0].roomId);
 		        	roomName.setAttribute("id","roomName"+data[0].roomId);
@@ -220,7 +221,7 @@
 					<th>&ensp;修改&ensp;&emsp;刪除</th>
 				</tr>
 				<c:forEach var="room"  items="${rooMap}">
-					<tr id="tr${room.value.roomId}">
+					<tr name="tr" id="tr${room.value.roomId}">
 						<td>${room.value.roomId}</td>
 						<td id="roomImg${room.value.roomId}">
 							<img height='100' width='80' src='<c:url value="/getRoomImg/${room.value.roomId}" />'>
@@ -286,5 +287,75 @@
 			</div>
 			</form:form>
 		</div></div></div></div></div></div></div></div>
+		<script type="text/javascript">
+			$("#Search").keyup(function(){
+				 var search = this.value;
+				 var form = document.getElementById('roomBean');  
+					var formData = new FormData(form);
+					var table = document.getElementById("roomTable");
+					$("tr[name='tr']").remove();
+					$.ajax({//AJAX開始
+				        url : "<c:url value='SearchRoomAjax' />",
+				        type : "POST",
+				        data : {name:search},
+				        success : function(data) 
+				        {
+				        	//console.log(data[0].roomId);
+				        	for (var i = 0; i < data.length; i++) {
+				        		var tr = table.insertRow(i+1);
+								var roomId = tr.insertCell(0);
+								var roomImg = tr.insertCell(1);
+								var roomName = tr.insertCell(2);
+								var roomSize = tr.insertCell(3);
+								var roomPopulation = tr.insertCell(4);
+								var roomPrice = tr.insertCell(5);
+								var roomDateString = tr.insertCell(6);
+								var roomButton = tr.insertCell(7);
+								var Updatabtn = document.createElement("I");
+								var Delectbtn = document.createElement("I");
+								tr.setAttribute("id","tr"+data[i].roomId);
+								tr.setAttribute("name","tr");
+	 				        	roomId.setAttribute("id","roomId"+data[i].roomId);
+	 				        	roomImg.setAttribute("id","roomImg"+data[i].roomId);
+	 				        	roomName.setAttribute("id","roomName"+data[i].roomId);
+	 				        	roomSize.setAttribute("id","roomSize"+data[i].roomId);
+	 				        	roomPopulation.setAttribute("id","roomPopulation"+data[i].roomId);
+	 				        	roomPrice.setAttribute("id","roomPrice"+data[i].roomId);
+	 				        	roomDateString.setAttribute("id","roomDateString"+data[i].roomId);
+	 				        	roomButton.setAttribute("id","roomButton"+data[i].foodId);
+	 				        	roomId.innerHTML=data[i].roomId;
+	 				        	roomImg.innerHTML="<img height='100' width='80' src='<c:url value='/getRoomImg/"+data[i].roomId+"' />'>";
+	 				        	roomName.innerHTML=data[i].roomName;
+	 				        	roomSize.innerHTML=data[i].roomSize;
+	 				        	roomPopulation.innerHTML=data[i].roomPopulation;
+	 				        	roomPrice.innerHTML=data[i].roomPrice;
+	 				        	roomDateString.innerHTML=data[i].roomDateString;
+	 				        	$(Updatabtn).attr({
+	 								"id":"updata"+data[i].roomId,
+	 								"class":"fas fa-edit btn btn-link",
+	 								"style":"font-size:25px;color:blue;",
+	 								"data-toggle":"modal",
+	 								"data-target":"#RoomModal",
+	 								"onclick":"RoomUpdate('"+data[i].roomId+"','<c:url value='/getRoomImg/"+data[i].roomId+"' />','"+data[i].roomName+"','"+data[i].roomSize+","+data[i].roomPopulation+"','"+data[i].roomPrice+"')"
+	 							});	
+	 				        	$(Delectbtn).attr({
+	 								"id":"delet"+data[i].roomId,
+	 								"class":"fa fa-trash btn btn-link",
+	 								"style":"font-size:25px;color:red",
+	 								"onclick":"RoomDelete('"+data[i].roomName+"','"+data[i].roomId+"')"
+	 							});
+	 				        	roomButton.appendChild(Updatabtn);
+	 				        	roomButton.appendChild(Delectbtn);
+	 				            console.log(data);
+	 				            console.log(data[i].foodDateString);
+							}
+				            
+				        },error: function(data) 
+				        {
+				            console.log('無法送出');
+				        }
+				    });
+			});
+		</script>
 	</body>
 </html>

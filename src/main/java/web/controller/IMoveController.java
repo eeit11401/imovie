@@ -145,6 +145,14 @@ public class IMoveController {
 		return UpRoom;
 	}
 	
+	@PostMapping(value = "/SearchRoomAjax",produces = "application/json")
+	public ResponseEntity<List<RoomBean>> SearchRoomAjax(String name){
+		
+		List<RoomBean> list = service.SearchRoomAjax(name);
+		ResponseEntity<List<RoomBean>> UpRoom = new ResponseEntity<>(list,HttpStatus.OK);
+		return UpRoom;
+	}
+	
 	@PostMapping("/Room")
 	public String roomUpdata(@ModelAttribute("roomUpdata") RoomBean roomBean ,Model model) {
 		//System.out.println(roomBean.getRoomIdUp());

@@ -175,5 +175,26 @@ public class RoomDaoImpl implements RoomDao{
 		}
 		return surveyMap;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RoomBean> SearchRoomAjax(String name) {
+		Session session = factory.getCurrentSession();
+		String hql = "From RoomBean R Where R.roomName Like :roomName OR R.roomSize Like :roomSize OR R.roomPopulation Like :roomPopulation ORDER BY roomDate DESC";
+		List<RoomBean> list = session.createQuery(hql).setParameter("roomName", "%"+name+"%")
+													  .setParameter("roomSize", "%"+name+"%")
+													  .setParameter("roomPopulation", "%"+name+"%")
+													  .getResultList();
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = null;
+		for (RoomBean roomlist : list) {
+			if (roomlist.getRoomDate() != null) {
+				date = roomlist.getRoomDate();
+				String roomDate = sdFormat.format(date);
+				roomlist.setRoomDateString(roomDate);
+			}
+		}
+		return list;
+	}
 	
 }
