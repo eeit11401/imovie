@@ -269,5 +269,10 @@ public class ProductServiecImpl implements ProductServiec {
 	public List<MovieBean> getMovieByFuzzy(String movieStr) {
 		return productDao.getMovieByFuzzy(movieStr);
 	}
-
+	
+	@Transactional
+	@Override
+	public List<SurveyBean> getSurveyByNo(String orderNo) {
+		return productDao.getSurveyByNo(orderNo);
+	}
 }

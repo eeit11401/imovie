@@ -909,6 +909,12 @@ public class ProductDaoImpl implements ProductDao {
 		return listMovie;
 	}
 
-
+	@Override
+	public List<SurveyBean> getSurveyByNo(String orderNo) {
+		Session session = factory.getCurrentSession();
+		String hqlStr ="FROM SurveyBean sb WHERE sb.orderNo=:no";
+		List<SurveyBean> list = session.createQuery(hqlStr).setParameter("no",orderNo).getResultList();
+		return list;
+	}
 
 }

@@ -77,5 +77,5 @@ Boolean checkOrderNo(String checkNum);
 	
 	Double getSatisfy();
 	List<MovieBean> getMovieByFuzzy(String movieStr);
-
+	List<SurveyBean> getSurveyByNo(String  orderNo);
 }

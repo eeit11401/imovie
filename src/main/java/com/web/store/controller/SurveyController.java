@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -22,8 +23,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.web.store.model.SurveyBean;
 import com.web.store.service.ProductServiec;
 
+import _01_register.model.MemberBean;
+
 @Controller
-@SessionAttributes({"orderNo","orderDate"})
+@SessionAttributes({"orderNo","orderDate","LoginOK"})
 public class SurveyController {
 
 	@Autowired
@@ -31,6 +34,21 @@ public class SurveyController {
 	
 	@GetMapping("/survey153")
 	protected String toSurvey(Model model, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+		MemberBean mb = (MemberBean)model.getAttribute("LoginOK");/////判斷使用者
+		String orderno = request.getParameter("rate");
+		List<SurveyBean> sb= service.getSurveyByNo(orderno);
+		if(sb.size()!=0) {
+			model.addAttribute("ratebefore","*您已經評論過此筆訂單");
+			String yourcom = sb.get(0).getComment();
+			String comtime = sb.get(0).getCommentTime();
+			Integer satis = sb.get(0).getSatisfaction();
+			model.addAttribute("yourcom",yourcom);
+			model.addAttribute("comtime","*上次評論時間："+comtime);
+			model.addAttribute("satis",satis);
+			
+		}
+		
 		String number = request.getParameter("orderNumber");
 		String date = request.getParameter("orderDate");
 		String movieName = (service.getProductById1((Integer.parseInt(request.getParameter("movie"))))).getMovieName();

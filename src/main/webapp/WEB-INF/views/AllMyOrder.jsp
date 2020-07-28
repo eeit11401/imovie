@@ -14,7 +14,7 @@ table{
 	font-size: 20px;
 	border: 3px solid rgb(252, 198, 141);
 	border-radius: 15px;
-	width:45%; 
+	width:55%; 
 }
 #title{
 margin-top:50px;
@@ -52,6 +52,7 @@ font-size: 25px;
 <table>
 <tr>
 <th class="thh">訂單編號<hr></th>
+<th class="thh">預約時間<hr></th>
 <th class="thh">總金額<hr></th>
 <th class="thh">查看訂單<hr></th>
 <th class="thh">給評價<hr></th>
@@ -59,6 +60,7 @@ font-size: 25px;
 <c:forEach var='Orders' items='${memberOrders}'>	
 <tr>
 <td>${Orders.orderNo}<hr></td>
+<td>${Orders.orderDate}<hr></td>
 <td>NT.${Orders.totalAmount}<hr></td>
 <td>
 <form action="<c:url value='lookorder' />" method="POST">
@@ -72,7 +74,8 @@ font-size: 25px;
 <Input type="hidden" name='orderDate' value='${Orders.orderDate}'>
 <Input type="hidden" name='movie' value='${Orders.movieId}'>
 <Input type="hidden" name='room' value='${Orders.roomId}'>
-<button type='submit' class="btn btn-primary"  name='rate' value="">評價</button><hr>
+<button type='submit' class="btn btn-primary"  name='rate' value="${Orders.orderNo}">評價</button><hr>
+<Input type='hidden' id="ratee" name='rates' value='0'>
 </form>
 </td>
 </tr>
@@ -84,6 +87,12 @@ $(".btn-danger").click(function() {
 		var no = $(this).val();		
 		$("#ans").val(no); 
 		console.log("ans="+$("#ans").val()); 
+});
+
+$(".btn-primary").click(function() {
+	var no2 = $(this).val();		
+	$("#ratee").val(no2); 
+	console.log("ratee="+$("#ratee").val()); 
 });
 
 </script>

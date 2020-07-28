@@ -52,6 +52,21 @@
         .fontcss072347 {
             font-family: 'Noto Serif TC', serif;
         }
+        
+        #myidea{
+         	font-size: 20px;      	
+        }
+        #tks{
+			color:#8a1607;
+         	font-size: 20px;
+         	text-align:center;
+         	font-weight:600;
+        }
+       .finish{
+       		color:#c9200a;
+       		margin:20px; 
+       }
+       
     </style>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -59,47 +74,85 @@
 </head>
 
 <body style="background:#FFBD9D;">
-    <form action="<c:url value='/insertComment' />" method="POST" style="padding: 10px;margin: 30px auto;width: 700px;border-radius: 35px;background-color:		#FCFCFC;">
-        <div>
-            <h1 class="fontcss072347" style="margin: 10px auto;">滿意度回饋 </h1>
+       <h3 class="finish">${ratebefore}</h2>
+       <h3 class="finish">${comtime}</h2>
+       
+       <form action="<c:url value='/insertComment' />" method="POST" style="padding: 10px;margin: 30px auto;width: 700px;border-radius: 35px;background-color:		#FCFCFC;">
+        <div style="text-align:center">
+            <h1 class="fontcss072347" >滿意度回饋   </h1>
         </div>
         <div style="display:block;margin: 40px auto;" class="wrap">
             <div>
-                <h6 style="text-align: right;">時間  ${orderDate}</h6>
+                <h4 class="fontcss0723">預約時間： ${orderDate}</h4>
                 <h4 class="fontcss0723">包廂房型：${roomName}</h4>
                 <h4 class="fontcss0723">觀看電影：${movieName}</h4>
             </div>
             <br>
             <br>
-            <div class="fontcss0723" style="font-size: 20px;"><label style="color:#F26536;">* 對此次觀影體驗的滿意度 ： </label><br>
+            
+            <c:choose>
+             <c:when test="${ratebefore== '*您已經評論過此筆訂單'}">
+				<h3 class="fontcss0723">您的評分：${satis}</h3>		
+			</c:when>
+			 <c:otherwise>
+                <div class="fontcss0723" style="font-size: 20px;"><label style="color:#F26536;">* 對此次觀影體驗的滿意度 ： </label><br>
                 <input checked="checked" style="height: 15px;width: 15px;margin-left:70px ;" name='satisfy' type="radio" value="5">5分(滿分)
                 <input style="height: 15px;width: 15px;" name='satisfy' type="radio" value="4">4分
                 <input style="height: 15px;width: 15px;" name='satisfy' type="radio" value="3">3分
                 <input style="height: 15px;width: 15px;" name='satisfy' type="radio" value="2">2分
                 <input style="height: 15px;width: 15px;" name='satisfy' type="radio" value="1">1分
             </div>
+			</c:otherwise>
+            </c:choose>
+            
             <br>
 
 
-            <div style="width: 500px;" class="toolbar">
-                <label class="fontcss0723" style="font-size: 20px;color:#F26536;">* 意見回饋 ： </label><br><br>
-
-                
+            <div style="width: 500px;" class="toolbar"> 
+				<label class="fontcss0723" style="font-size: 20px;color:#F26536;">* 意見回饋 ： </label><br><br>      
             </div>
+            
             <div>
-            <textarea style='font-size:25px' id="page" name='comment' rows="6" cols="40"></textarea>
+            <c:choose>	
+            <c:when test="${ratebefore== '*您已經評論過此筆訂單'}">
+				<p id="myidea">${yourcom}<br><br><br><br><br></p>
+				<p id="tks">感謝您的意見，您的建議是讓我們進步的最大動力！<br></p>		
+			</c:when>
+            <c:otherwise>
+                <textarea style='font-size:25px' id="page" name='comment' rows="6" cols="40"></textarea>
+			</c:otherwise>
+            </c:choose>   
+            
+            
                 
             </div>
-            <tr style="display: block;">
-                <td>
-                    <Input style="color:black" id='sendButton' type='submit' class="btn btn-outline-primary fontcss0723" name='send' value='提交'>
-                    <form action="<c:url value='/surveyCancle' />" method="GET">
-                        <Input style="color:black" id='cancle' type='submit' class="btn btn-outline-danger fontcss0723" name='no' value='取消'>
-                    </form>
-                </td>
-            </tr>
+          
+				<tr style="display: block;">
+				  <td>
+					<c:choose>	
+            			<c:when test="${ratebefore== '*您已經評論過此筆訂單'}">
+               	     		<Input style="color:black" id='sendButton' type='submit' class="btn btn-outline-primary fontcss0723" disabled="disabled" name='send' value='提交'>
+                	     </form>
+                	    <form style="display:inline-block" action="<c:url value='/surveyCancle' />" method="GET">
+                   	     <Input style="color:black" id='cancle' type='submit' class="btn btn-outline-danger fontcss0723" name='no' value='上一頁'>
+                 	    </form>
+                	    </c:when>
+                	    
+                	    <c:otherwise>
+                	    	<Input style="color:black" id='sendButton' type='submit' class="btn btn-outline-primary fontcss0723" name='send' value='提交'>
+                	     </form>
+                	    <form style="display:inline-block" action="<c:url value='/surveyCancle' />" method="GET">
+                   	     <Input style="color:black" id='cancle' type='submit' class="btn btn-outline-danger fontcss0723" name='no' value='取消'>
+                 	    </form>
+                	    </c:otherwise>
+                	    
+                	    
+     				 </c:choose>
+               	  </td>
+           		 </tr>
+			
         </div>
-    </form>
+<!--     </form> -->
     <script>
         console.log($("#page").val());
     </script>

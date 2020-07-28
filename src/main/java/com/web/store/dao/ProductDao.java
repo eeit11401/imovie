@@ -81,4 +81,5 @@ public interface ProductDao {
 	Double getSatisfy();
 	
 	List<MovieBean> getMovieByFuzzy(String movieStr);
+	List<SurveyBean> getSurveyByNo(String  orderNo);
 }
