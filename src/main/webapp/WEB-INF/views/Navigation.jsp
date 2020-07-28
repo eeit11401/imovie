@@ -120,6 +120,18 @@
 							<div class='c-header__nav__issue__bottom__dots'></div>
 						</div></li>
 						</c:if>
+						<c:if test="${!empty LoginOK}">					
+						<li class=c-header__nav__issue data-nav=issue><a href='allmyorder' />我的歷史訂單</a>
+						<div class='c-header__nav__issue__bottom'>
+							<div class='c-header__nav__issue__bottom__dots'></div>
+							<div class='c-header__nav__issue__bottom__dots'></div>
+							<div class='c-header__nav__issue__bottom__dots'></div>
+							<div class='c-header__nav__issue__bottom__dots'></div>
+							<div class='c-header__nav__issue__bottom__dots'></div>
+							<div class='c-header__nav__issue__bottom__dots'></div>
+							<div class='c-header__nav__issue__bottom__dots'></div>
+						</div></li>
+						</c:if>
 				</ul>
 			</nav>
 		<c:if test="${empty LoginOK}">
