@@ -8,6 +8,52 @@
 <title>帳號清單</title>
 </head>
 <body class="bg-theme bg-theme1">
+<script>
+(function(document) {
+	  'use strict';
+
+	  // 建立 LightTableFilter
+	  var LightTableFilter = (function(Arr) {
+
+	    var _input;
+
+	    // 資料輸入事件處理函數
+	    function _onInputEvent(e) {
+	      _input = e.target;
+	      var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+	      Arr.forEach.call(tables, function(table) {
+	        Arr.forEach.call(table.tBodies, function(tbody) {
+	          Arr.forEach.call(tbody.rows, _filter);
+	        });
+	      });
+	    }
+
+	    // 資料篩選函數，顯示包含關鍵字的列，其餘隱藏
+	    function _filter(row) {
+	      var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+	      row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+	    }
+
+	    return {
+	      // 初始化函數
+	      init: function() {
+	        var inputs = document.getElementsByClassName('light-table-filter');
+	        Arr.forEach.call(inputs, function(input) {
+	          input.oninput = _onInputEvent;
+	        });
+	      }
+	    };
+	  })(Array.prototype);
+
+	  // 網頁載入完成後，啟動 LightTableFilter
+	  document.addEventListener('readystatechange', function() {
+	    if (document.readyState === 'complete') {
+	      LightTableFilter.init();
+	    }
+	  });
+
+	})(document);
+</script>
 		<c:set var="funcName" value="MemberList" scope="session"/>
 		<div id="wrapper">
 			<jsp:include page="../Manager/Manager.jsp" />
@@ -19,7 +65,8 @@
 								<div class="card-body" align="center">
 								<h1 style="display:inline">會員清單</h1>
 								<div class="table-responsive">
-									<table id="MemberTable" class="table align-items-center" >
+								搜尋：<input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
+									<table id="MemberTable" class="order-table table" >
 										<tr>
 											<th>會員圖片</th>
 											<th>會員帳號</th>
