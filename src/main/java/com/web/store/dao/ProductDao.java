@@ -2,6 +2,7 @@ package com.web.store.dao;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -81,5 +82,8 @@ public interface ProductDao {
 	Double getSatisfy();
 	
 	List<MovieBean> getMovieByFuzzy(String movieStr);
-	List<SurveyBean> getSurveyByNo(String  orderNo);
+	List<Integer> getOrderedMidList();
+	String getPercenstByMId(int movieId);
+	String getMovieNameById(int movieId);
+	List<SurveyBean> getSurveyByNo(String orderno);
 }
