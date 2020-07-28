@@ -27,4 +27,6 @@ public interface RoomDao {
 	Map<String, CartOrderBean> getCartOrderBean();
 
 	Map<Integer, SurveyBean> getSurveyBean();
+
+	List<RoomBean> SearchRoomAjax(String name);
 }

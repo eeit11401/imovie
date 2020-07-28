@@ -19,5 +19,6 @@ public interface RoomService {
 	List<RoomBean> getUpRoom(Integer roomId);
 	Map<String, CartOrderBean> getCartOrderBean();
 	Map<Integer, SurveyBean> getSurveyBean();
+	List<RoomBean> SearchRoomAjax(String name);
 
 }

@@ -153,6 +153,12 @@
 		       <i id="wdithChane" onclick="wdithChane()" class="icon-menu menu-icon"></i>
 		     </a>
 		    </li>
+		    <li class="nav-item">
+		      <form class="search-bar">
+		        <input id="Search" type="text" class="form-control" placeholder="Enter keywords">
+		         <a href="javascript:void();"><i class="icon-magnifier"></i></a>
+		      </form>
+		    </li>
 		  </ul>
 		     
 		  <ul class="navbar-nav align-items-center right-nav-link">
