@@ -185,7 +185,7 @@
 <!-- 			<input type="button" value="返回測試選項" onclick="javascript:location.href='/DanielTest'"> -->
 <!-- 		</div> -->
 		
-		<table id="FoodTable" class="table align-items-center" >
+		<table id="FoodTable" class="table align-items-center" style="font-size:20px;">
 			<tr style="font-size:20px;" class="thead-dark">
 				<th>FoodID</th>
 				<th>圖片</th>

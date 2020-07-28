@@ -221,7 +221,7 @@ window.onload=function (){
 <!-- 		   	<i class="material-icons" style="font-size:30px;color:blue;">add_box</i> -->
 <!-- 		</div> -->
 <!-- 		<input type="button" value="返回測試選項" onclick="javascript:location.href='/DanielTest'"> -->
-		<table id="movieTable" class="table align-items-center">
+		<table id="movieTable" class="table align-items-center" style="font-size:20px;">
 <!-- 		<thead class="thead-dark" > -->
 			<tr style="font-size:20px;" class="thead-dark">
 				<th>MovieID</th>
@@ -272,68 +272,68 @@ window.onload=function (){
 <%-- 		       <form:form id="updataform" modelAttribute="movieBean"> --%>
 		        <!-- Modal Header (標頭)-->
 		        <div class="modal-header">
-		          <h1 class="modal-title" id="modal_title">修改電影</h1>
+		          <h2 class="modal-title" id="modal_title">修改電影</h2>
 		          <button type="button" class="close" data-dismiss="modal">&times;</button>
 		        </div>
 		        <!-- Modal body (內容形式)-->
-		        <div class="modal-body" align="left">
+		        <div class="modal-body" align="left" >
 			          <div class="form-group">
-			            <label for="recipient-name" class="col-form-label">電影中文名稱</label>
-			            <form:input id="movieName" path="movieName" name="movieName" type='text' class="form-control"/>
+			            <label for="recipient-name" class="col-form-label" style="font-size: 20px">電影中文名稱</label>
+			            <form:input style="font-size: 20px" id="movieName" path="movieName" name="movieName" type='text' class="form-control"/>
 			          </div>
 			          <div class="form-group">
-			            <label for="recipient-name" class="col-form-label">電影英文名稱</label>
-			            <form:input id="movieEName" path="movieEName" name="movieEName" type='text' class="form-control"/>
+			            <label style="font-size: 20px" for="recipient-name" class="col-form-label">電影英文名稱</label>
+			            <form:input style="font-size: 20px" id="movieEName" path="movieEName" name="movieEName" type='text' class="form-control"/>
 			          </div>
 			           <div class="form-group">
-				           <label for="recipient-name" class="col-form-label">電影長度(分鐘)</label>
-				           <form:input type="number" id="movieLength" path="movieLength" name="movieLength" class="form-control"/>		        
+				           <label style="font-size: 20px" for="recipient-name" class="col-form-label">電影長度(分鐘)</label>
+				           <form:input style="font-size: 20px" type="number" id="movieLength" path="movieLength" name="movieLength" class="form-control"/>		        
 			           </div>
 			           <div class="form-group">
-				           <label for="message-text" class="col-form-label">電影說明</label>
-				           <form:textarea rows="6" id="movieNote" name="movieNote" path="movieNote" class="form-control"></form:textarea>
+				           <label style="font-size: 20px" for="message-text" class="col-form-label">電影說明</label>
+				           <form:textarea style="font-size: 20px" rows="5" id="movieNote" name="movieNote" path="movieNote" class="form-control"></form:textarea>
 			           </div>
 			           <div class="form-group">
-				           <label for="recipient-name" class="col-form-label">電影類型</label><br>
+				           <label style="font-size: 20px" for="recipient-name" class="col-form-label">電影類型</label><br>
 <%-- 				           <form:checkboxes items="${GenreList}"  path="movieGenre1" /> --%>
 				           <c:forEach var="GenreList" items="${GenreList}">
 					           <div class="form-check-inline">
-								  <label class="form-check-label">
+								  <label style="font-size: 20px" class="form-check-label">
 										<form:checkbox path="movieGenre1" value="${GenreList}"/>${GenreList}
 								  </label>
 								</div>
 				       		</c:forEach>
 			           </div>
 			           <div class="form-group">
-				           <label for="recipient-name" class="col-form-label">電影級數</label><br>
+				           <label style="font-size: 20px" for="recipient-name" class="col-form-label">電影級數</label><br>
 				           <div class="form-check-inline">
-							   <label class="form-check-label">
+							   <label style="font-size: 20px" class="form-check-label">
 							   		<form:radiobutton class="form-check-input" path="movieRated" value="普遍級" />普遍級
 							   </label>
 						   </div>
 				          <div class="form-check-inline">
-							   <label class="form-check-label">
+							   <label class="form-check-label" style="font-size: 20px">
 							   		<form:radiobutton class="form-check-input" path="movieRated" value="保護級" />保護級
 							   </label>
 						  </div>
 				          <div class="form-check-inline">
-							   <label class="form-check-label">
+							   <label class="form-check-label" style="font-size: 20px">
 							   		<form:radiobutton class="form-check-input" path="movieRated" value="輔12級" />輔12級
 							   </label>
 						  </div>
 				          <div class="form-check-inline">
-							   <label class="form-check-label">
+							   <label class="form-check-label" style="font-size: 20px">
 							   		<form:radiobutton class="form-check-input" path="movieRated" value="輔15級" />輔15級
 							   </label>
 						  </div>
 				          <div class="form-check-inline">
-							   <label class="form-check-label">
+							   <label class="form-check-label" style="font-size: 20px">
 							   		<form:radiobutton class="form-check-input" path="movieRated" value="限制級" />限制級
 							   </label>
 						  </div>
 			           </div>
 			           <div class="form-group">
-				            <label class="btn btn-info">
+				            <label class="btn btn-info" style="font-size: 20px">
 								<form:input id="productImage" path="productImage" type='file' style="display:none;" />
 								<i class="fa fa-photo"></i> 上傳圖片
 							</label>
@@ -343,9 +343,9 @@ window.onload=function (){
 		        <!-- Modal footer (結尾)-->
 		        <div class="modal-footer">
 		          	<form:input type="hidden" id="movieId" path="movieId" name="movieId" />
-					<input type="button" id="intor" class="btn btn-primary" data-dismiss="modal" onclick="UpdataSubmit()" value="修改">
-					<input type="button" id="intorAdd" class="btn btn-primary" data-dismiss="modal" onclick="AddSubmit()" value="新增">
-					<input type="button" class="btn btn-danger" data-dismiss="modal" value="取消">					
+					<input style="font-size: 20px" type="button" id="intor" class="btn btn-primary" data-dismiss="modal" onclick="UpdataSubmit()" value="修改">
+					<input style="font-size: 20px" type="button" id="intorAdd" class="btn btn-primary" data-dismiss="modal" onclick="AddSubmit()" value="新增">
+					<input style="font-size: 20px" type="button" class="btn btn-danger" data-dismiss="modal" value="取消">					
 		        </div>		        
 			    </form:form>
 		      </div>

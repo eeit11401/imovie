@@ -48,29 +48,29 @@ enabled:false
 <!--             </div> -->
             <div class="col-12 col-lg-6 col-xl-3 border-light">
                 <div class="card-body">
-                  <h5 class="text-white mb-0">${AllMoney} <span class="float-right"><i class="fa fa-usd"></i></span></h5>
-                    <div class="progress my-3" style="height:3px;">
+                  <h3 class="text-white mb-0">${AllMoney} <span class="float-right"><i class="fa fa-usd"></i></span></h3>
+                    <div class="progress my-3" style="height:3px; font-size: 18px;">
                        <div class="progress-bar" style="width:100%"></div>
                     </div>
-                  <p class="mb-0 text-white small-font">銷售總額</p>
+                  <p class="mb-0 text-white small-font" style="font-size: 18px">銷售總額</p>
                 </div>
             </div>
             <div class="col-12 col-lg-6 col-xl-3 border-light">
                 <div class="card-body">
-                  <h5 class="text-white mb-0">${AllRoomQua}<span class="float-right"><i class="zmdi zmdi-card-travel"></i></span></h5>
+                  <h3 class="text-white mb-0">${AllRoomQua}<span class="float-right"><i class="zmdi zmdi-card-travel"></i></span></h3>
                     <div class="progress my-3" style="height:3px;">
                        <div class="progress-bar" style="width:100%"></div>
                     </div>
-                  <p class="mb-0 text-white small-font">預約包廂</p>
+                  <p class="mb-0 text-white small-font" style="font-size: 18px">預約包廂</p>
                 </div>
             </div>
             <div class="col-12 col-lg-6 col-xl-3 border-light">
                 <div class="card-body">
-                  <h5 class="text-white mb-0">${AllMemberQua}<span class="float-right"><i class="zmdi zmdi-account"></i></span></h5>
+                  <h3 class="text-white mb-0">${AllMemberQua}<span class="float-right"><i class="zmdi zmdi-account"></i></span></h3>
                     <div class="progress my-3" style="height:3px;">
                        <div class="progress-bar" style="width:100%"></div>
                     </div>
-                  <p class="mb-0 text-white small-font">會員總數</p>
+                  <p class="mb-0 text-white small-font" style="font-size: 18px">會員總數</p>
                 </div>
             </div>
         </div>
@@ -80,7 +80,7 @@ enabled:false
 	<div class="row">
      <div class="col-12 col-lg-8 col-xl-8">
 	    <div class="card">
-		 <div class="card-header">訂單分析圖
+		 <div class="card-header" style="font-size: 20px">訂單分析圖
 		   <div class="card-action">
 			 <div class="dropdown">
 			 <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
@@ -98,15 +98,15 @@ enabled:false
 		 </div>
 <!-- 		 <button id="plain">Plain</button> -->
 <!-- 			  <button id="inverted">Inverted</button> -->
-			  <ul class="nav nav-tabs" id="mySelect" role="tablist" >
+			  <ul class="nav nav-tabs" id="mySelect" role="tablist">
                   <li class="nav-item">
-                      <a class="nav-link active" id="plain" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true" >長條圖</a>
+                      <a style="font-size: 20px" class="nav-link active" id="plain" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true" >長條圖</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" id="inverted" data-toggle="tab" href="#specification" role="tab" aria-controls="specification" aria-selected="false" >行條統計圖</a>
+                      <a style="font-size: 20px" class="nav-link" id="inverted" data-toggle="tab" href="#specification" role="tab" aria-controls="specification" aria-selected="false" >行條統計圖</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" id="PieMovie" data-toggle="tab" href="#specification" role="tab" aria-controls="specification" aria-selected="false" >電影圓餅圖</a>
+                      <a style="font-size: 20px" class="nav-link" id="PieMovie" data-toggle="tab" href="#specification" role="tab" aria-controls="specification" aria-selected="false" >電影圓餅圖</a>
                   </li>
               </ul>
 			  
@@ -150,7 +150,7 @@ enabled:false
 
      <div class="col-12 col-lg-4 col-xl-4">
         <div class="card">
-           <div class="card-header">評分總平均
+           <div class="card-header" style="font-size: 20px">評分總平均
              <div class="card-action">
              <div class="dropdown">
              <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
@@ -175,11 +175,11 @@ enabled:false
            <div class="table-responsive">
              <table class="table align-items-center">
                <tbody>
-                 <tr>
+                 <tr style="font-size: 20px">
                    <td><i class="fa fa-circle text-white mr-2"></i> 評分總數</td>
                    <td>${AllStar}</td>
                  </tr>
-                 <tr>
+                 <tr style="font-size: 20px">
                    <td><i class="fa fa-circle text-white mr-2"></i> 評分人數</td>
                    <td>${AllRateMemberQua}</td>
                  </tr>
@@ -193,7 +193,7 @@ enabled:false
 	<div class="row">
 	 <div class="col-12 col-lg-12">
 	   <div class="card">
-	     <div class="card-header">預約單資訊
+	     <div class="card-header" style="font-size: 20px">預約單資訊
 		  <div class="card-action">
              <div class="dropdown">
              <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
@@ -211,8 +211,8 @@ enabled:false
 		 </div>
 	       <div class="table-responsive">
               <table class="table align-items-center table-flush table-borderless">
-                  <thead>
-	                   <tr>
+<!--                   <thead> -->
+	                   <tr style="font-size: 20px">
 	                     <th>訂單編號</th>
 	                     <th>使用者帳號</th>
 	                     <th>預約包廂名稱</th>
@@ -221,10 +221,10 @@ enabled:false
 	                     <th>預約開始時間</th>
 	                     <th>預約結束時間</th>
 	                   </tr>
-                   </thead>
+<!--                    </thead> -->
                    <tbody>
                    		<c:forEach var="CartOrderBean" items="${CartOrderBean}">
-                   			<tr>
+                   			<tr style="font-size: 20px">
                    				<td>${CartOrderBean.value.orderNo}</td>
                    				<td>${CartOrderBean.value.member.memberId}</td>
                    				<td>${CartOrderBean.value.room.roomName}</td>
@@ -243,7 +243,7 @@ enabled:false
 	<div class="row">
 	 <div class="col-12 col-lg-12">
 	   <div class="card">
-	     <div class="card-header">評分與評論
+	     <div class="card-header" style="font-size: 20px">評分與評論
 		  <div class="card-action">
              <div class="dropdown">
              <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
@@ -261,17 +261,17 @@ enabled:false
 		 </div>
 	       <div class="table-responsive">
               <table class="table align-items-center table-flush table-borderless">
-                  <thead>
-	                   <tr>
+<!--                   <thead> -->
+	                   <tr style="font-size: 20px">
 	                     <th>訂單編號</th>
 	                     <th>預約日期</th>
 	                     <th>評分(分數)</th>
 	                     <th>評論內容</th>
 	                   </tr>
-                   </thead>
+<!--                    </thead> -->
                    <tbody>
                    		<c:forEach var="survey" items="${SurveyBean}">
-                   			<tr>
+                   			<tr style="font-size: 20px">
                    				<td>${survey.value.orderNo}</td>
                    				<td>${survey.value.date}</td>
                    				<td>${survey.value.satisfaction}分</td>
@@ -498,11 +498,12 @@ enabled:false
 	        title: {
 	            text: null,
 	        },
-
+	        
 	        tooltip: {
 	            borderWidth: 0,
 	            backgroundColor: 'none',
 	            shadow: false,
+	            
 	            style: {
 	                fontSize: '16px'
 	            },
@@ -511,9 +512,9 @@ enabled:false
 	            positioner: function (labelWidth) {
 	                return {
 	                    x: (this.chart.chartWidth - labelWidth) / 2,
-	                    y: (this.chart.plotHeight / 2) + 15
+	                    y: (this.chart.plotHeight / 2)
 	                };
-	            }
+	            },
 	        },
 
 	        pane: {
@@ -558,6 +559,7 @@ enabled:false
 	            }]
 	        }]
 	    });
+	    
 	    }
 	    var xhr9 = new XMLHttpRequest();
 		xhr9.open("GET","<c:url value='moviePie' />", true);

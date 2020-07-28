@@ -35,80 +35,80 @@
 		  <!--Start sidebar-wrapper-->
 		   <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
 		     <div class="brand-logo">
-		      <a href="index.html">
+		      <a href="Manager">
 		       <img src="assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
 		       <h5 class="logo-text">Imovie後端控制台</h5>
 		     </a>
 		   </div>
 		   <ul class="sidebar-menu do-nicescrol">
-		      <li class="sidebar-header">管理項目</li>
+		      <li class="sidebar-header" style="font-size: 20px">管理項目</li>
 		      <c:if test="${ funcName == 'index' }">
 			  		<li class="active">
 				        <a>
-				          <i class="zmdi zmdi-view-dashboard"></i> <span>首頁</span>
+				          <i style="font-size: 20px" class="zmdi zmdi-view-dashboard"></i> <span style="font-size: 20px">首頁</span>
 				        </a>
 				    </li>
 			   </c:if>
 			  <c:if test="${ funcName != 'index' }">
 			  		<li>
 				        <a href="Manager">
-				          <i class="zmdi zmdi-view-dashboard"></i> <span>首頁</span>
+				          <i style="font-size: 20px" class="zmdi zmdi-view-dashboard"></i> <span style="font-size: 20px">首頁</span>
 				        </a>
 				    </li>
 			   </c:if>
 			   <c:if test="${ funcName == 'Home' }">
 			  		<li class="active">
 				        <a>
-				          <i class="zmdi zmdi-invert-colors"></i> <span>前端首頁維護</span>
+				          <i class="zmdi zmdi-invert-colors" style="font-size: 20px"></i> <span style="font-size: 20px">前端首頁維護</span>
 				        </a>
 				    </li>
 			   </c:if>
 			  <c:if test="${ funcName != 'Home' }">
 			  		<li>
 				        <a href="Home">
-				          <i class="zmdi zmdi-invert-colors"></i> <span>前端首頁維護</span>
+				          <i class="zmdi zmdi-invert-colors" style="font-size: 20px"></i> <span style="font-size: 20px">前端首頁維護</span>
 				        </a>
 				    </li>
 			   </c:if>
 			  <c:if test="${ funcName == 'Room' }">
 			  		<li class="active">
 				        <a>
-				          <i class="zmdi zmdi-format-list-bulleted"></i> <span>前端包廂維護</span>
+				          <i class="zmdi zmdi-format-list-bulleted" style="font-size: 20px"></i> <span style="font-size: 20px">前端包廂維護</span>
 				        </a>
 				    </li>
 			   </c:if>
 			  <c:if test="${ funcName != 'Room' }">
 			  		<li>
 				        <a href="Room">
-				          <i class="zmdi zmdi-format-list-bulleted"></i> <span>前端包廂維護</span>
+				          <i class="zmdi zmdi-format-list-bulleted" style="font-size: 20px"></i> <span style="font-size: 20px">前端包廂維護</span>
 				        </a>
 				    </li>
 			   </c:if>
 			  <c:if test="${ funcName == 'Movie' }">
 			  		<li class="active">
 				        <a>
-				          <i class="zmdi zmdi-grid"></i> <span>前端電影維護</span>
+				          <i class="zmdi zmdi-grid" style="font-size: 20px"></i> <span style="font-size: 20px">前端電影維護</span>
 				        </a>
 				    </li>
 			  </c:if>
 			  <c:if test="${ funcName != 'Movie' }">
 			  		<li>
 				        <a href="Movie">
-				          <i class="zmdi zmdi-grid"></i> <span>前端電影維護</span>
+				          <i class="zmdi zmdi-grid" style="font-size: 20px"></i> <span style="font-size: 20px">前端電影維護</span>
 				        </a>
 				    </li>
 			  </c:if>
 			  <c:if test="${ funcName == 'Food' }">
 			  		<li class="active">
 				        <a>
-				          <i class="zmdi zmdi-calendar-check"></i> <span>前端菜單維護</span>
+				          <i class="zmdi zmdi-calendar-check" style="font-size: 20px"></i> <span style="font-size: 20px">前端菜單維護</span>
 				        </a>
 				    </li>
 			   </c:if>
 			  <c:if test="${ funcName != 'Food' }">
 			  		<li>
 				        <a href="Food">
-				          <i class="zmdi zmdi-calendar-check"></i> <span>前端菜單維護</span>
+				          <i class="zmdi zmdi-calendar-check" style="font-size: 20px"></i> <span style="font-size: 20px">前端菜單維護</span>
 				        </a>
 				    </li>
 			   </c:if>
@@ -122,24 +122,24 @@
 			  <c:if test="${ funcName == 'MemberList' }">
 			  		<li class="active">
 				        <a>
-				          	<i class="zmdi zmdi-lock"></i> <span>會員資料維護</span>
+				          	<i class="zmdi zmdi-lock" style="font-size: 20px"></i> <span style="font-size: 20px">會員資料維護</span>
 				        </a>
 				    </li>
 			   </c:if>
 			  <c:if test="${ funcName != 'MemberList' }">
 			  		<li>
 				        <a href="MemberList">
-				          	<i class="zmdi zmdi-lock"></i> <span>會員資料維護</span>
+				          	<i class="zmdi zmdi-lock" style="font-size: 20px"></i> <span style="font-size: 20px">會員資料維護</span>
 				        </a>
 				    </li>
 			   </c:if>
 		      
 		
-		       <li>
-		        <a href="login.html" target="_blank">
-		          <i class="zmdi zmdi-account-circle"></i> <span>Registration</span>
-		        </a>
-		      </li>
+<!-- 		       <li> -->
+<!-- 		        <a href="login.html" target="_blank"> -->
+<!-- 		          <i class="zmdi zmdi-account-circle"></i> <span>Registration</span> -->
+<!-- 		        </a> -->
+<!-- 		      </li> -->
 		    </ul>  
 		   </div>
 		   <!--End sidebar-wrapper-->
