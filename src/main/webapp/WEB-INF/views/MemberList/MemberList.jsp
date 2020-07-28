@@ -67,6 +67,7 @@
 								<div class="table-responsive">
 								搜尋：<input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
 									<table id="MemberTable" class="order-table table" >
+										<thead>
 										<tr>
 											<th>會員圖片</th>
 											<th>會員帳號</th>
@@ -76,7 +77,9 @@
 											<th>會員Email</th>
 											<th>聯絡電話</th>
 											<th>註冊時間</th>
-										</tr>
+											</tr>
+										</thead>
+										<tbody>
 										<c:forEach var="member" items="${member}">
 										<tr>
 											<td>
@@ -91,6 +94,7 @@
 											<td>${member.value.registerTime}</td>
 										</tr>
 										</c:forEach>
+										</tbody>
 									</table>
 			
 			</div></div></div></div></div></div></div>
