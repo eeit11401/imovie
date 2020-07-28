@@ -105,24 +105,24 @@ enabled:false
                   <li class="nav-item">
                       <a class="nav-link" id="inverted" data-toggle="tab" href="#specification" role="tab" aria-controls="specification" aria-selected="false" >行條統計圖</a>
                   </li>
+                  <li class="nav-item">
+                      <a class="nav-link" id="PieMovie" data-toggle="tab" href="#specification" role="tab" aria-controls="specification" aria-selected="false" >電影圓餅圖</a>
+                  </li>
               </ul>
 			  
 <!-- 			  <button id="polar">Polar</button> -->
 		 <div id="container" class="card-body">
-		 
 		    <!-- <ul class="list-inline">
 			  <li class="list-inline-item"><i class="fa fa-circle mr-2 text-white"></i>New Visitor</li>
 			  <li class="list-inline-item"><i class="fa fa-circle mr-2 text-light"></i>Old Visitor</li>
 			</ul> -->
 			<div class="chart-container-1">
-			
 <%--         	<canvas id="chart1"> --%>
         		<div ></div>
 <%--         	</canvas> --%>
-			  
-			  
 			</div>
 		 </div>
+		 <div id="MoviePie" class="card-body" style="display:none"> </div>
 		 
 		 <div class="row m-0 row-group text-center border-top border-light-3">
 <!-- 		   <div class="col-12 col-lg-4"> -->
@@ -402,6 +402,8 @@ enabled:false
 			 
 			});
 			$('#plain').click(function () {
+				$("#MoviePie").hide();
+				$("#container").show();
 			    chart.update({
 			        chart: {
 			            inverted: false,
@@ -414,6 +416,8 @@ enabled:false
 			});
 
 			$('#inverted').click(function () {
+				$("#MoviePie").hide();
+				$("#container").show();
 			    chart.update({
 			        chart: {
 			            inverted: true,
@@ -426,6 +430,8 @@ enabled:false
 			});
 
 			$('#polar').click(function () {
+				$("#MoviePie").hide();
+				$("#container").show();
 			    chart.update({
 			        chart: {
 			            inverted: false,
@@ -436,12 +442,18 @@ enabled:false
 			        }
 			    });
 			});
+			
 			//	$('#container').highcharts().reflow();
 		}
 		window.onresize = function() {
 	        $('#container').highcharts().reflow();
 	    }
-
+		$('#PieMovie').click(function () {
+			//alert("fuck");
+			$("#MoviePie").show();
+			$("#container").hide();
+// 			container MoviePie
+		});
 // 		var xhr = new XMLHttpRequest();
 		xhr.open("GET","<c:url value='satisfyRate' />", true);
 		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
@@ -549,6 +561,76 @@ enabled:false
 	        }]
 	    });
 	    }
+	    var xhr9 = new XMLHttpRequest();
+		xhr9.open("GET","<c:url value='moviePie' />", true);
+		xhr9.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xhr9.send();
+		console.log("jalfshkjadnfjl");
+		xhr9.onreadystatechange = function() {
+			if (xhr9.readyState == 4 && xhr9.status == 200) {
+				var movies = JSON.parse(xhr9.responseText);
+				var list = new Array();
+				for(var i=0; i<movies.length; i++){
+					list.push({name: movies[i].name, y: parseFloat(movies[i].percent)});
+				}
+				console.log("inside");
+				movieRank(list);
+		//			var divs = document.getElementById("somedivS");
+		//			divs.innerHTML = content;
+			}
+		}
+		
+
+		function movieRank(content){
+			Highcharts.chart('MoviePie', {
+			    chart: {
+			        plotBackgroundColor: null,
+			        plotBorderWidth: null,
+			        plotShadow: false,
+			        type: 'pie',
+			        height: 350,
+			        backgroundColor: 'rgba(0,0,0,0)',
+			    },
+			    title: {
+			        text: '電影觀賞率(%)',
+			        style: {
+		                color: '#FFFFFF'
+		            }
+			    },
+			    tooltip: {
+			        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+			    },
+			    accessibility: {
+			        point: {
+			            valueSuffix: '%',
+			            style: {
+			                color: '#FFFFFF'
+			            }
+			        }
+			    },
+			    plotOptions: {
+			        pie: {
+			            allowPointSelect: true,
+			            cursor: 'pointer',
+			            dataLabels: {
+			                enabled: true,
+			                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+			            }
+			        }
+			    },
+			    credits: { enabled:false },   //去掉右下角highchart.com
+			    exporting: { enabled:false },   //去掉右上角的打印及导出按钮
+			    series: [{
+			        name: '百分比',
+			        colorByPoint: true,
+			        data: content,
+			        style: {
+		                color: '#FFFFFF'
+		            }
+			    }]
+			});
+		
+		}
 			
 </script>
     

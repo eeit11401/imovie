@@ -71,10 +71,10 @@ font-size: 25px;
 <td>
 <form action="<c:url value='/survey153' />" method="GET">
 <Input type="hidden" name='orderNumber' value='${Orders.orderNo}'>
-<Input type="hidden" name='orderDate' value='${Orders.orderDate}'>
+<Input type="hidden" name='orderDate' id='orderDate' value='${Orders.orderDate}'>
 <Input type="hidden" name='movie' value='${Orders.movieId}'>
 <Input type="hidden" name='room' value='${Orders.roomId}'>
-<button type='submit' class="btn btn-primary"  name='rate' value="${Orders.orderNo}">評價</button><hr>
+<button type='submit' class="btn btn-primary" id="${Orders.orderDate}" name='rate' value="${Orders.orderNo}">評價</button><hr>
 <Input type='hidden' id="ratee" name='rates' value='0'>
 </form>
 </td>
@@ -94,6 +94,27 @@ $(".btn-primary").click(function() {
 	$("#ratee").val(no2); 
 	console.log("ratee="+$("#ratee").val()); 
 });
+
+
+$(".btn-primary").on("mouseenter",function(){
+	//不可評論未來訂單   
+  	var today=new Date();
+	var odrdate = $(this).attr("id"); //預約時間
+	var todayval = Date.parse(today).valueOf();
+	var odrval = Date.parse(odrdate).valueOf();
+	console.log("today="+today+"odrdate="+odrdate)
+	console.log("today==="+Date.parse(today).valueOf()); 
+	console.log("odrdate==="+Date.parse(odrdate).valueOf()); 
+	if (todayval < odrval){
+	alert("尚未到來的訂單無法給予評價");
+	}
+});
+	
+	
+	
+
+
+
 
 </script>
 </body>

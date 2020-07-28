@@ -272,7 +272,26 @@ public class ProductServiecImpl implements ProductServiec {
 	
 	@Transactional
 	@Override
-	public List<SurveyBean> getSurveyByNo(String orderNo) {
-		return productDao.getSurveyByNo(orderNo);
+	public List<Integer> getOrderedMidList() {
+		return productDao.getOrderedMidList();
 	}
+	
+	@Transactional
+	@Override
+	public String getPercenstByMId(int movieId) {
+		return productDao.getPercenstByMId(movieId);
+	}
+	
+	@Transactional
+	@Override
+	public String getMovieNameById(int movieId) {
+		return productDao.getMovieNameById(movieId);
+	}
+	
+	@Transactional
+	@Override
+	public List<SurveyBean> getSurveyByNo(String orderno) {
+		return productDao.getSurveyByNo(orderno);
+	}
+
 }

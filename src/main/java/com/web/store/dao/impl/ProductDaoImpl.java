@@ -909,12 +909,58 @@ public class ProductDaoImpl implements ProductDao {
 		return listMovie;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<SurveyBean> getSurveyByNo(String orderNo) {
+	public List<Integer> getOrderedMidList() {
 		Session session = factory.getCurrentSession();
-		String hqlStr ="FROM SurveyBean sb WHERE sb.orderNo=:no";
-		List<SurveyBean> list = session.createQuery(hqlStr).setParameter("no",orderNo).getResultList();
-		return list;
+		String hqlStr ="Select Distinct movieId From CartOrderBean";
+		List<Integer> Movie = session.createQuery(hqlStr).getResultList();
+		System.out.println("***************"+Movie);
+//		List<Integer> orderedMovies = new LinkedList<Integer>();
+//		System.out.println(orderedMovies);
+//		for(CartOrderBean cob : Movie) {
+//			System.out.println("94616546568"+cob.getMovieId());
+//			orderedMovies.add(cob.getMovieId());
+//		}
+		return Movie;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public String getPercenstByMId(int movieId) {
+		Session session = factory.getCurrentSession();
+		String hqlStr ="FROM CartOrderBean cob Where cob.movieId = :Mid";
+		
+		String hqlStrAll = "FROM CartOrderBean";
+		DecimalFormat df = new DecimalFormat("##.00");
+		
+		List<CartOrderBean> Movie = session.createQuery(hqlStr).setParameter("Mid", movieId).getResultList();
+		Double thisNumber = (double) Movie.size();
+		System.out.println("this count = "+thisNumber);
+		Double allOrder = (double) session.createQuery(hqlStrAll).getResultList().size();
+		System.out.println("all order = " + allOrder);
+		
+		String thisPercent = df.format(thisNumber/allOrder);
+		
+		return thisPercent;
+	}
+
+	@Override
+	public String getMovieNameById(int movieId) {
+		Session session = factory.getCurrentSession();
+		MovieBean bean = null;
+		bean = session.get(MovieBean.class, movieId);
+		String movieName = bean.getMovieName();
+		return movieName;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<SurveyBean> getSurveyByNo(String orderno) {
+		Session session = factory.getCurrentSession();
+		String hqlStr ="FROM SurveyBean sb WHERE sb.orderNo=:no";
+		List<SurveyBean> list = session.createQuery(hqlStr).setParameter("no",orderno).getResultList();
+		return list;
+	}
+	
 }
