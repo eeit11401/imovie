@@ -65,7 +65,7 @@ float:left;
 							<h1> 註冊 </h1> 
                                		 <p> 
 								<label for="memberId" class="cols-sm-2 control-label">帳號<form:errors path="memberId" class='error'/></label>
-										<form:input path='memberId' placeholder="請輸入您的帳號" />		 
+										<form:input path='memberId' id="inputmemberId" placeholder="請輸入您的帳號" />		 
 											</p>
                                 <p> 
                                     <label for="usernamesignup" class="uname" >姓名<form:errors path="name" class='error'/></label>
@@ -113,6 +113,7 @@ float:left;
                                 	<a href=<c:url value='/' /> class='abc'>回首頁</a>
 									已有帳號 ?
 									<a href="<c:url value='/_02_login/login' />" class="to_register"> 回到登入畫面 </a>
+                                	<a href="javascript:void(0)" id="inputMember" onclick="inputMember()">一鍵輸入</a>
 								</p>
                             </form:form>
                         </div>
@@ -121,5 +122,17 @@ float:left;
                 </div>  
             </section>
         </div>
+        <script type="text/javascript">
+        	function inputMember() {
+				//alert("fuck");
+				$("input[name='memberId']").val("A10001");//帳號
+				$("input[name='name']").val("Daniel");//姓名
+				$("input[name='email']").val("Daniel@gmail.com");//Email
+				$("input[name='password']").val("fuck");//密碼
+				$("input[name='password1']").val("fuck");//再次確認您的密碼
+				$("input[name='address']").val("新北市三重區");//地址
+				$("input[name='tel']").val("0906882312");//電話
+			}
+        </script>
 </body>
 </html>

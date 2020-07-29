@@ -277,8 +277,8 @@ public class RegisterController {
 		if (nextPath == null) {
 			nextPath = request.getContextPath();
 		}
-		model.addAttribute("error", "該Email不存在或電話錯誤");
+		//model.addAttribute("error", "該Email不存在或電話錯誤");
 		
-		return "redirect: "+ nextPath;
+		return "redirect: ../_02_login/login";
 	}	
 }

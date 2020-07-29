@@ -27,6 +27,7 @@ float:center;
 }</style>
 </head>
 <body>
+<%-- <h1>${checkOK}</h1> --%>
 	<c:set var="funcName" value="LOG" scope="session" />
 	<c:set var="msg" value="登入" />
 	<c:if test="${ ! empty sessionScope.timeOut }">
@@ -80,5 +81,14 @@ float:center;
                 </div>  
             </section>
         </div>
+        <script type="text/javascript">
+        if ( '${checkOK}' != "") {
+			alert("您的密碼已為您重設為 '**ng**' , 請您登入後至個人資料進行修改!!! ");
+			var xhr1 = new XMLHttpRequest();
+			xhr1.open("GET", "<c:url value='/clearcheckOK' />", true);
+			xhr1.send();
+
+		}
+        </script>
 </body>
 </html>
