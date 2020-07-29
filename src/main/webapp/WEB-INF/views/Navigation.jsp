@@ -85,17 +85,17 @@
 							<div class='c-header__nav__event__bottom__dots'></div>
 						</div></li>
 
-					<li class=c-header__nav__news data-nav=test><a
-						href='Manager'>TSET</a>
-						<div class=c-header__nav__news__bottom>
-							<div class=c-header__nav__news__bottom__dots></div>
-							<div class=c-header__nav__news__bottom__dots></div>
-							<div class=c-header__nav__news__bottom__dots></div>
-							<div class=c-header__nav__news__bottom__dots></div>
-							<div class=c-header__nav__news__bottom__dots></div>
-							<div class=c-header__nav__news__bottom__dots></div>
-							<div class=c-header__nav__news__bottom__dots></div>
-						</div></li>	
+<!-- 					<li class=c-header__nav__news data-nav=test><a -->
+<!-- 						href='Manager'>TSET</a> -->
+<!-- 						<div class=c-header__nav__news__bottom> -->
+<!-- 							<div class=c-header__nav__news__bottom__dots></div> -->
+<!-- 							<div class=c-header__nav__news__bottom__dots></div> -->
+<!-- 							<div class=c-header__nav__news__bottom__dots></div> -->
+<!-- 							<div class=c-header__nav__news__bottom__dots></div> -->
+<!-- 							<div class=c-header__nav__news__bottom__dots></div> -->
+<!-- 							<div class=c-header__nav__news__bottom__dots></div> -->
+<!-- 							<div class=c-header__nav__news__bottom__dots></div> -->
+<!-- 						</div></li>	 -->
 					<c:if test="${!empty LoginOK}">					
 						<li class=c-header__nav__issue data-nav=issue><a href="testCart">購物車</a>
 						<div class='c-header__nav__issue__bottom'>

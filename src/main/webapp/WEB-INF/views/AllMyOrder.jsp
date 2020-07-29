@@ -47,7 +47,7 @@ font-size: 25px;
 
 </head>
 <body>
-<h3 style="font-family:微軟正黑體"><a href="<c:url value='//testCart' />" >回上頁</a></h3>
+<h3 style="font-family:微軟正黑體"><a href="<c:url value='/' />" >回上頁</a></h3>
 <h3 id="title">${memberid.name} 您好，以下是您的訂單：</h3>
 <table>
 <tr>

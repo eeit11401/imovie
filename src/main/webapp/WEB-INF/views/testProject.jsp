@@ -409,7 +409,7 @@ margin-bottom: 20px;
  
 <body>
 	<div id="Header">
-		<a href="<c:url value='/allmyorder' />" ><h3>MyAllOrder</h3></a>
+		<a href="<c:url value='/' />" ><h1 style="color:white;">Imovie</h1></a>
 	</div>
 	
 <!-----------------------------回到頂端按鈕------------------------------------->		

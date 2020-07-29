@@ -201,7 +201,7 @@
 						<div class="col-12 col-lg-12">
 							<div class="card">
 								<div class="card-header" align="center">
-			<h1 style="display:inline">包廂修改測試</h1>
+			<h1 style="display:inline">包廂維護</h1>
 <!-- 			<div class="btn" data-toggle="modal" data-target="#RoomModal" id="AddRoom" onclick="addRoom()"> -->
 <!-- 			   	<i class="material-icons" style="font-size:30px;color:blue;">add_box</i> -->
 <!-- 			</div> -->

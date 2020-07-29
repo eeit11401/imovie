@@ -27,8 +27,8 @@
 											<th>會員圖片</th>
 											<th>會員帳號</th>
 											<th>會員名稱</th>
-											<th>會員性別</th>
-											<th>會員年齡</th>
+<!-- 											<th>會員性別</th> -->
+<!-- 											<th>會員年齡</th> -->
 											<th>會員Email</th>
 											<th>聯絡電話</th>
 											<th>註冊時間</th>
@@ -42,8 +42,8 @@
 											</td>
 											<td>${member.value.memberId}</td>
 											<td>${member.value.name}</td>
-											<td>${member.value.gender}</td>
-											<td>${member.value.birth}</td>
+<%-- 											<td>${member.value.gender}</td> --%>
+<%-- 											<td>${member.value.birth}</td> --%>
 											<td>${member.value.email}</td>
 											<td>${member.value.tel}</td>
 											<td>${member.value.registerTime}</td>

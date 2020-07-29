@@ -8,7 +8,7 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>電影維護</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -212,7 +212,7 @@ window.onload=function (){
 	 <div class="col-12 col-lg-12">
 	   <div class="card">
 	   <div class="card-body" align="center">
-		<h1 style="display:inline">前端電影維護</h1>
+		<h1 style="display:inline">電影維護</h1>
 		<div data-toggle="modal" data-target="#myModal" id="Addmovie" class="btn btn-link" onclick="addMovieIn()">			
 			<img style="color:blue;" src="assets/images/add_icon/add-icon-green.png" class="logo-icon" alt="logo icon"/>新增電影		
 		</div>
