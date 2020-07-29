@@ -13,7 +13,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
+import _00_init.util.GlobalService;
 import _01_register.dao.MemberDao;
 import _01_register.model.MemberBean;
 
@@ -128,5 +128,43 @@ public class MemberDaoImpl_Hibernate implements MemberDao {
 			memberMap.put(memberBean.getPkey(), memberBean);
 		}
 		return memberMap;
+	}
+	@Override
+	public MemberBean checkMailTel(String email, String tel) {
+		MemberBean mb = null;
+		String hql = "FROM MemberBean m WHERE m.email = :email and m.tel = :tel";
+		Session session = factory.getCurrentSession();
+		try {
+			mb = (MemberBean)session.createQuery(hql)
+								.setParameter("email", email)
+								.setParameter("tel", tel)
+								.getSingleResult();
+		} catch(NoResultException ex) {
+			;
+		} catch(NonUniqueResultException ex) {
+			;
+		} 	
+		return mb;
+	}
+	
+	@Override
+	public void updatePassword(MemberBean mb) {
+		System.out.println("------------------------------------------");
+//		String hql = "update MemberBean m set m.password = Do!ng123  ";
+			 Session session = factory.getCurrentSession();
+//			mb.setPassword("Do!ng123");
+			String password = "Do!ng123";
+			password = GlobalService.getMD5Endocing(
+					GlobalService.encryptString(password));
+			mb.setPassword(password);
+//				try {
+//					mb = (MemberBean)session.createQuery(hql)
+//										.getSingleResult();
+//				} catch(NoResultException ex) {
+//					;
+//				} catch(NonUniqueResultException ex) {
+//					;
+//				} 	
+		 session.saveOrUpdate(mb);
 	}
 }

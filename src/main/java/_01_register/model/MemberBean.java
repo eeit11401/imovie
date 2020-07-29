@@ -38,9 +38,26 @@ public class MemberBean implements Serializable {
 	Clob comment;
 	String gender;
 	String birth;
-
+	String invalidCredentials;
 	Double unpaid_amount;
 	String login;
+	String userId;
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getInvalidCredentials() {
+		return invalidCredentials;
+	}
+
+	public void setInvalidCredentials(String invalidCredentials) {
+		this.invalidCredentials = invalidCredentials;
+	}
+
 	@Transient
 	MultipartFile memberMultipartFile;
 	              
@@ -119,6 +136,11 @@ public class MemberBean implements Serializable {
 
 
 	public MemberBean() {
+	}
+	
+	public MemberBean(String email , String tel) {
+		this.email = email;
+		this.tel = tel;
 	}
 
 	public Integer getPkey() {

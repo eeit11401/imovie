@@ -21,5 +21,8 @@ public interface MemberDao {
 	MemberBean get(Integer pkey);
 
 	public Map<Integer, MemberBean> getMemberList();
+	public MemberBean checkMailTel(String email, String tel);
+
+	void updatePassword(MemberBean mb);	
 
 }

@@ -5,10 +5,11 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Timestamp;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import _00_init.util.GlobalService;
@@ -31,13 +34,13 @@ import _01_register.validator.MemberBeanValidator;
 
 @Controller
 @RequestMapping
-
+@SessionAttributes({"checkOK"})
 public class RegisterController {
 	
 	String rootDirectory = "d:\\images";
 	String inputDataForm = "registerForm"; 
 	String inputDataForm2 = "registerForm2"; 
-	
+	String forgetForm = "forgetForm";
 	@Autowired
 	MemberService memberService;
 	
@@ -184,10 +187,15 @@ public class RegisterController {
 		if (pkey != null) {
 			MemberBean memberBean = memberService.get(pkey);
 			model.addAttribute("memberBean", memberBean);
+			System.out.println("@ModelAttribute.getMember()...111");
+
 		} else {
 			MemberBean memberBean = new MemberBean();
 			memberBean.setLogin("false");
 			model.addAttribute("memberBean", memberBean);
+			
+			System.out.println("@ModelAttribute.getMember()...222");
+
 		}
 	}
 	
@@ -198,4 +206,75 @@ public class RegisterController {
 		genderMap.put("F", "Female");
 		model.addAttribute("genderMap", genderMap);
 	}
+	
+	@GetMapping("/updatepwd/pwd")
+	public String getPassword(HttpServletRequest request, Model model,  String email, String tel ) {
+			
+		MemberBean bean = new MemberBean(email, tel);
+
+		model.addAttribute(bean);		
+		return forgetForm;
+	}
+	@GetMapping("/clearcheckOK")
+	public String clearcheckOK(HttpSession session,  Model model, SessionStatus status, HttpServletRequest req) {
+		String name = "";
+		MemberBean memberBean = (MemberBean) session.getAttribute("checkOK");
+		if (memberBean != null) {
+			name = memberBean.getName();
+		}
+//		model.addAttribute("memberName", name);
+		status.setComplete();
+		session.invalidate();
+		return null;
+	}
+	@PostMapping("/updatepwd/pwd")
+	public String checkAccount2(
+//			Imovie/updatepwd/pwd
+			@ModelAttribute("memberBean") MemberBean bean,
+			BindingResult result, Model model,
+			HttpServletRequest request, HttpServletResponse response) {
+//		System.out.println("12315645665");
+//		LoginBeanValidator validator = new LoginBeanValidator();
+//		validator.validate(bean, result);
+//		if (result.hasErrors()) {
+//			System.out.println("44444444444");
+//
+//			return forgetForm;
+//		}
+		System.out.println("333333333333");
+
+		String password =bean.getPassword();
+		MemberBean mb = null;
+		try {
+			// 呼叫 loginService物件的 checkIDPassword()，傳入userid與password兩個參數
+			mb = memberService.checkMailTel(bean.getEmail(), bean.getTel());
+			if (mb != null) {
+				// OK, 登入成功, 將mb物件放入Session範圍內，識別字串為"LoginOK"
+				System.out.println("成功成功成功成功成功成功成功成功");
+				model.addAttribute("checkOK", mb);
+				memberService.updatePassword(mb);
+				System.out.println("成功成功成功成功成功成功成功成功aaaaaaaaaa");
+
+			} else {
+				// NG, 登入失敗, userid與密碼的組合錯誤，放相關的錯誤訊息到 errorMsgMap 之內
+				System.out.println("gGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+//				result.rejectValue("invalidCredentials", "", "該Email不存在或電話錯誤");
+				model.addAttribute("error", "該Email不存在或電話錯誤");
+				return forgetForm;
+			}
+		} catch (RuntimeException ex) {
+			result.rejectValue("userId", "", ex.getMessage());
+			return forgetForm;
+		}
+		HttpSession session = request.getSession();
+//		System.out.println("@PostMapping(\"/login\"), session.isNew()=" + session.isNew() + ", requestURI=" + session.getAttribute("requestURI"));
+//		processCookies(bean, request, response);
+		String nextPath = (String)session.getAttribute("requestURI");
+		if (nextPath == null) {
+			nextPath = request.getContextPath();
+		}
+		model.addAttribute("error", "該Email不存在或電話錯誤");
+		
+		return "redirect: "+ nextPath;
+	}	
 }

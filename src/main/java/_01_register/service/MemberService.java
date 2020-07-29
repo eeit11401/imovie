@@ -12,5 +12,7 @@ public interface MemberService {
 	public void updateMember(MemberBean mb, long sizeInBytes) ;
 	MemberBean get(Integer pkey);
 	Map<Integer, MemberBean> getMemberList();
+	public MemberBean checkMailTel(String email, String tel);	
+	void updatePassword(MemberBean mb);	
 
 }

@@ -21,18 +21,10 @@
 }
 	.abc{
 float:left;
-}
-	.abcd{
-float:center;
 }</style>
 </head>
 <body>
-	<c:set var="funcName" value="LOG" scope="session" />
-	<c:set var="msg" value="登入" />
-	<c:if test="${ ! empty sessionScope.timeOut }">
-		<c:set var="msg"
-			value="<font color='red'>${sessionScope.timeOut}</font>" />
-	</c:if>
+
         <div class="container">
            
             <header>
@@ -45,32 +37,24 @@ float:center;
                     <a class="hiddenanchor" id="tologin"></a>
                     <div id="wrapper">
                         <div id="login" class="animate form">
-							<form:form method="POST" modelAttribute="loginBean">
-                                <h1>登入</h1> 
+							<form:form method="POST" modelAttribute="memberBean">
+                                <h1>忘記密碼</h1> 
                                 <p> 
-                                    <label for="username" class="uname" > 帳號 </label>
-                                    <form:input path="userId" id="username" name="username" required="required" type="text" placeholder="請輸入您的登入帳號"/>
+                                    <label for="username" class="uname" > Email</label>
+                                    <form:input path="email" id="email" name="email" required="required" type="text" placeholder="請輸入您的email"/>
                                 </p>
                                 <p> 
-                                    <label for="password" class="youpasswd"> 密碼 </label>
-                                    <form:input  path="password" id="password" name="password" required="required" type="password" placeholder="請輸入您的登入密碼" /> 
+                                    <label for="tel" class="tel"> tel </label>
+                                    <form:input  path="tel" id="tel" name="tel" required="required" type="text" placeholder="請輸入您的電話" /> 
                                 </p>
-                                <p class="keeplogin"> 
-									<form:checkbox path="rememberMe"  name="loginkeeping" id="loginkeeping" value="loginkeeping" /> 
-									<label for="loginkeeping">記住密碼</label>
-									                                <a href=<c:url value='/updatepwd/pwd' /> class='abc'>忘記密碼</a>
-									
-								</p>
-                                <p class="login button"> 
-                                <form:errors path="invalidCredentials" class="error" />
-                               		<input type="submit" data-dismiss="modal" value="login" >
-                                   <a href="http://cookingfoodsworld.blogspot.in/" target="_blank" ></a>
-								</p>
-
+                                
+							<p class="signin button">
+								<input type="submit" value="送出" />${error}
+							</p>
+							
                                 <p class="change_link">
                                 	<a href=<c:url value='/' /> class='abc'>回首頁</a>
-									還不是會員?
-									<a href="<c:url value='/_01_register/register' />" >加入我們</a>
+									<a href="<c:url value='/_02_login/login' />" class="to_register"> 回到登入畫面 </a>
 								</p>
                             </form:form>
                         </div>

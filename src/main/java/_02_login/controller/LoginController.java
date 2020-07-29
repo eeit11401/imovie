@@ -29,7 +29,7 @@ public class LoginController {
 	
 	String loginForm = "loginandregister";
 	String loginOut = "logout";
-	
+	String forgetForm = "forgetForm";
 	@Autowired
 	MemberService memberService;
 	
@@ -144,4 +144,53 @@ public class LoginController {
 		response.addCookie(cookieRememberMe);
 		
 	}
+	
+//	@GetMapping("/updatepwd/pwd")
+//	public String getPassword(HttpServletRequest request, Model model,  String email, String tel ) {
+//			
+//		MemberBean bean = new MemberBean(email, tel);
+//
+//		model.addAttribute(bean);		
+//		return loginForm;
+//	}
+//	
+//	@PostMapping("/updatepwd/pwd")
+//	public String checkAccount2(
+//			@ModelAttribute("memberBean") MemberBean bean,
+//			BindingResult result, Model model,
+//			HttpServletRequest request, HttpServletResponse response) {
+//		
+//		LoginBeanValidator validator = new LoginBeanValidator();
+//		validator.validate(bean, result);
+//		if (result.hasErrors()) {
+//			return forgetForm;
+//		}
+//		String password =bean.getPassword();
+//		MemberBean mb = null;
+//		try {
+//			// 呼叫 loginService物件的 checkIDPassword()，傳入userid與password兩個參數
+//			mb = memberService.checkMailTel(bean.getEmail(), bean.getTel());
+//			if (mb != null) {
+//				// OK, 登入成功, 將mb物件放入Session範圍內，識別字串為"LoginOK"
+//				model.addAttribute("checkOK", mb);
+//				memberService.updatePassword(mb);
+//			} else {
+//				// NG, 登入失敗, userid與密碼的組合錯誤，放相關的錯誤訊息到 errorMsgMap 之內
+//				result.rejectValue("invalidCredentials", "", "該Email不存在或電話錯誤");
+//				return forgetForm;
+//			}
+//		} catch (RuntimeException ex) {
+//			result.rejectValue("userId", "", ex.getMessage());
+//			return forgetForm;
+//		}
+//		HttpSession session = request.getSession();
+////		System.out.println("@PostMapping(\"/login\"), session.isNew()=" + session.isNew() + ", requestURI=" + session.getAttribute("requestURI"));
+////		processCookies(bean, request, response);
+//		String nextPath = (String)session.getAttribute("requestURI");
+//		if (nextPath == null) {
+//			nextPath = request.getContextPath();
+//		}
+//		return "redirect: ";
+//	}
+
 }

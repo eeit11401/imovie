@@ -68,4 +68,17 @@ public class MemberServiceImpl implements MemberService {
 	public Map<Integer, MemberBean> getMemberList() {
 		return dao.getMemberList();
 	}
+	
+	@Transactional
+	public MemberBean checkMailTel(String email, String tel) {
+		MemberBean mb = null;
+		mb = dao.checkMailTel(email, tel);
+		return mb;
+	}
+	@Transactional
+	@Override
+	public void updatePassword(MemberBean mb) {
+		dao.updatePassword(mb);
+		
+	}
 }
