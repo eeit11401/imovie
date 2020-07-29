@@ -83,7 +83,7 @@ float:center;
         </div>
         <script type="text/javascript">
         if ( '${checkOK}' != "") {
-			alert("您的密碼已為您重設為 '**ng**' , 請您登入後至個人資料進行修改!!! ");
+			alert("您的密碼已為您重設為 'Do!ng123' , 請您登入後至個人資料進行修改!!! ");
 			var xhr1 = new XMLHttpRequest();
 			xhr1.open("GET", "<c:url value='/clearcheckOK' />", true);
 			xhr1.send();
