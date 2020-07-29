@@ -160,6 +160,10 @@ public class RegisterController {
 		MultipartFile productImage = bean.getMemberMultipartFile();
 		String originalFilename = productImage.getOriginalFilename();
 		bean.setFileName(originalFilename);
+		String password = bean.getPassword();
+		password = GlobalService.getMD5Endocing(
+				GlobalService.encryptString(password));
+		bean.setPassword(password);
 		//  建立Blob物件，交由 Hibernate 寫入資料庫
 		if (productImage != null && !productImage.isEmpty() ) {
 			

@@ -112,9 +112,10 @@ float:left;
 									disabled="disabled">
 							</p>
 							<p>
-								<label for="passwordsignup" class="">密碼</label> <input
-									type='password' value='${memberBean.password}'
-									disabled="disabled">
+								<label for="passwordsignup" class="">密碼</label> 								
+								<form:input path="password" id="password"
+									name="usernamesignup" required="required" type="password"
+									value='${memberBean.password}' />
 							</p>
 							<p>
 								<label for="usernamesignup" class="uname">姓名</label>

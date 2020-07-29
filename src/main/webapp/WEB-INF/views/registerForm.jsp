@@ -83,14 +83,14 @@ float:left;
                                     <label for="passwordsignup_confirm" class="youpasswd" >再次確認您的密碼<form:errors path="password1" class='error'/></label>
                                     <form:input path='password1' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="再次輸入您的密碼"/>
                                 </p>
-                                <p>
-<!--                                 	  <label for="passwordsignup" class="">性別:</label> -->
-          							  <form:radiobuttons path="gender" items='${genderMap}'/>
-                                </p>
-                                                                <p> 
-                                    <label for="age" class="youaddr" >年齡 </label>
-                                    <form:input path='birth' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="text" placeholder="輸入您的年齡"/>
-                                </p>
+<!--                                 <p> -->
+<!-- <!--                                 	  <label for="passwordsignup" class="">性別:</label> --> 
+<%--           							  <form:radiobuttons path="gender" items='${genderMap}'/> --%>
+<!--                                 </p> -->
+<!--                                                                 <p>  -->
+<!--                                     <label for="age" class="youaddr" >年齡 </label> -->
+<%--                                     <form:input path='birth' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="text" placeholder="輸入您的年齡"/> --%>
+<!--                                 </p> -->
                                 <p> 
                                     <label for="address" class="youaddr" >地址<form:errors path="address" class='error'/> </label>
                                     <form:input path='address' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="text" placeholder="address"/>
