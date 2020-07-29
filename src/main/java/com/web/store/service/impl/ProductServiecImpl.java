@@ -293,5 +293,35 @@ public class ProductServiecImpl implements ProductServiec {
 	public List<SurveyBean> getSurveyByNo(String orderno) {
 		return productDao.getSurveyByNo(orderno);
 	}
+	
+	@Transactional
+	@Override
+	public Integer getAllMoney() {
+		return productDao.getAllMoney();
+	}
+	
+	@Transactional
+	@Override
+	public Integer getAllMemberQua() {
+		return productDao.getAllMemberQua();
+	}
+	
+	@Transactional
+	@Override
+	public Integer getAllRoomQua() {
+		return productDao.getAllRoomQua();
+	}
+	
+	@Transactional
+	@Override
+	public Integer getAllRateMemberQua() {
+		return productDao.getAllRateMemberQua();
+	}
+	
+	@Transactional
+	@Override
+	public Integer getAllStar() {
+		return productDao.getAllStar();
+	}
 
 }

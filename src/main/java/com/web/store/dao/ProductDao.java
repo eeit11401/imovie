@@ -86,4 +86,9 @@ public interface ProductDao {
 	String getPercenstByMId(int movieId);
 	String getMovieNameById(int movieId);
 	List<SurveyBean> getSurveyByNo(String orderno);
+	Integer getAllMoney();   //全部訂單總金額
+	Integer getAllMemberQua(); //全部會員人數
+	Integer getAllRoomQua();   //全部包廂數(不重複)
+	Integer getAllRateMemberQua();  //全部評分人數
+	Integer getAllStar(); //全部評分總分數
 }

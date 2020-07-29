@@ -39,6 +39,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.web.store.model.CartOrderBean;
 import com.web.store.model.RoomBean;
 import com.web.store.model.SurveyBean;
+import com.web.store.service.ProductServiec;
 
 import web.room.service.RoomService;
 
@@ -48,6 +49,8 @@ public class IMoveController {
 	
 	@Autowired
 	RoomService service;
+	@Autowired
+	ProductServiec serviceP;
 	
 	@Autowired
 	ServletContext context;
@@ -58,6 +61,16 @@ public class IMoveController {
 		model.addAttribute("CartOrderBean",order);
 		Map<Integer,SurveyBean> survey = service.getSurveyBean();
 		model.addAttribute("SurveyBean",survey);
+		Integer AllMoney = serviceP.getAllMoney();   //全部訂單總金額
+		Integer AllMemberQua = serviceP.getAllMemberQua(); //全部會員人數
+		Integer AllRoomQua = serviceP.getAllRoomQua();   //全部訂單數(不重複)
+		Integer AllRateMemberQua = serviceP.getAllRateMemberQua();  //全部評分人數
+		Integer AllStar = serviceP.getAllStar(); //全部評分總分數
+		model.addAttribute("AllMoney",AllMoney);
+		model.addAttribute("AllMemberQua",AllMemberQua);
+		model.addAttribute("AllRoomQua",AllRoomQua);
+		model.addAttribute("AllRateMemberQua",AllRateMemberQua);
+		model.addAttribute("AllStar",AllStar);
 		return "Manager/index";
 	}
 	@GetMapping("/ManagerTest")//包廂測試畫面，有拉資料表的內容

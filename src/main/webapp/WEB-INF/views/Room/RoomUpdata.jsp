@@ -209,7 +209,7 @@
 				<img style="color:blue;" src="assets/images/add_icon/add-icon-green.png" class="logo-icon" alt="logo icon"/>新增包廂			
 			</div>
 			<div class="table-responsive">
-			<table id="roomTable" class="table align-items-center">
+			<table id="roomTable" class="table align-items-center" style="font-size:20px;">
 				<tr style="font-size:20px;" class="thead-dark">
 					<th>RoomID</th>
 					<th>圖片</th>
